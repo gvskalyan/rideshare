@@ -1,2 +1,2 @@
-# rideshare
+# Rideshare
 Software Engineering Project
