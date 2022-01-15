@@ -11,5 +11,5 @@ The project aims to provide a web application for people to better share rides b
  ## Team Members
   - Dheeraj Rao Mamillapalli
   - Venkata Sai Kalyan Guntupalli
-  - Pramod Kumar Varma
+  - Pramod Kumar Varma Manthena
   - Ruiyang Li
