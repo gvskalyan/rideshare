@@ -9,7 +9,7 @@ The project aims to provide a web application for people to better share rides b
   - [Golang](https://go.dev)
 
  ## Team Members
-  - Dheeraj Rao Mamillapalli
+  - Dheeraj Kumar Mamillapalli
   - Venkata Sai Kalyan Guntupalli
   - Pramod Kumar Varma Manthena
   - Ruiyang Li
