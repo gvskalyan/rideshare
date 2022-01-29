@@ -2,13 +2,23 @@ package main
 
 import (
 	"auth/routes"
+	"fmt"
 	"log"
 	"net/http"
+	"os"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	e := godotenv.Load()
 
-	port := "8080"
+	if e != nil {
+		log.Fatal("Error loading .env file")
+	}
+	fmt.Println(e)
+
+	port := os.Getenv("PORT")
 
 	// Handle routes
 	http.Handle("/", routes.Handlers())
