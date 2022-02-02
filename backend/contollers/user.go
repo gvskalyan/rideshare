@@ -86,8 +86,6 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	user := &models.User{}
 
 	json.NewDecoder(r.Body).Decode(user)
-	gender := user.Gender
-	location := user.City
 	pass, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	if err != nil {
 		fmt.Println(err)
@@ -98,9 +96,6 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	user.Password = string(pass)
-	user.Gender = string(gender)
-	user.City = string(location)
-
 	createdUser := db.Create(user)
 	var errMessage = createdUser.Error
 
@@ -109,18 +104,6 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 	json.NewEncoder(w).Encode(createdUser)
 }
-
-// type User struct {
-// 	gorm.Model
-
-// 	Name        string
-// 	Password    string `json:"Password"`
-// 	Email       string `gorm:"type:varchar(100);unique_index"`
-// 	DOB         string `json:"DOB"`
-// 	Gender      string `json:"Gender"`
-// 	PhoneNumber string `json:"PhoneNumber"`
-// 	City        string `json:"City"`
-// }
 
 //FetchUser function
 func FetchUsers(w http.ResponseWriter, r *http.Request) {
