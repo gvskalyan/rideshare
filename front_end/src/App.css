@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 *{
   margin: 0;
   padding: 0;
@@ -14,6 +15,10 @@ body{
   font-size: 22px;
   font-family:Georgia, 'Times New Roman', Times, serif;
  
+=======
+.App {
+  text-align: center;
+>>>>>>> Stashed changes
 }
 
 .App-logo {
