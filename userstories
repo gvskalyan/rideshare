@@ -1,0 +1,79 @@
+LOGIN PAGE
+
+Login
+User must provide userName and userPassword and hit login.
+On succesful validation, user is redirected to the home page.
+If the credentials are invalid, an error message is displayed - "Please check your credentials"
+
+Register
+New users, can avail the "register" button functionality to create login account.
+On hitting register potential user is supposed to provide following data.
+	userId - randomly generated unique string
+	userName
+	userPassword
+	userMail
+	userDOB
+	userSex
+	userPhoneNumber
+	userCity
+When user clicks on "submit" button, the fields are validated from their database values and checked for discrepencies like existing userName.
+If the create account data is valid, user is redirected to home page, else error messages are displayed after each field.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+PUBLISH A RIDE
+
+Story Description:
+Logged in users are able to publish a ride from home/publishaRide page
+They are supposed to provide following data is to be entered
+	Start location
+	From City (dropdown)
+	To City (dropdown)
+	Destination location
+	Price per seat
+	
+	Start time
+	End time
+	Total ride duration
+	Seats Available
+
+	Pets allowed
+	Car model
+	Car type
+	Notes
+On hitting publish button, the values are pushed to database and "Your ride has been successfully published" message is displayed to the user.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SEARCH FOR  A RIDE
+
+Logged in users are able to search a ride from home/searchforaride page
+They are supposed to select "fromcity" and "tocity" from list of cities displayed in dropdown menu (this dropdown contains the list of all validated cities across Florida), date and number of travellers and hit search button
+On clicking seach, user is taken to "listOfRides" page, where the available rides data is displayed.
+Available rides results is in the cards format, each card consisting of the following data
+	Driver name
+	From City
+	To City
+	Date
+	Price
+	Gender Icon
+On clicking a specific card, user is redirected to another page - "rideDetails" consists of following data.
+	Driver name
+	Start location
+	From City
+	To City
+	Destination location
+	Price
+	Gender Icon
+
+	Start time
+	End time
+	Total ride duration
+
+	Phone number
+	Pets allowed
+	Car model
+	Car type
+	Notes
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
