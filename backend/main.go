@@ -1,7 +1,7 @@
 package main
 
 import (
-	"auth/routes"
+	"backend/routes"
 	"fmt"
 	"log"
 	"net/http"
