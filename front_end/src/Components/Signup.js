@@ -12,8 +12,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { StaticRouter } from 'react-router-dom/server';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Link from './Link';
 
 
 

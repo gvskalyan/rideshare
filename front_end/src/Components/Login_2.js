@@ -8,11 +8,9 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Link from './Link';
 
 function Copyright(props) {
   return (
@@ -29,7 +27,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-function App() {
+function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -113,5 +111,4 @@ function App() {
   );
 }
 
-export default App;
-//export default Copyright;
+export default Login;
