@@ -105,14 +105,6 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(createdUser)
 }
 
-//FetchUser function
-func FetchUsers(w http.ResponseWriter, r *http.Request) {
-	var users []models.User
-	db.Preload("auths").Find(&users)
-
-	json.NewEncoder(w).Encode(users)
-}
-
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	user := &models.User{}
 	params := mux.Vars(r)
