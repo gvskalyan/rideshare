@@ -13,6 +13,8 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+type Exception models.Exception
+
 type ErrorResponse struct {
 	Err string
 }
@@ -132,10 +134,24 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode("User deleted")
 }
 
-func GetUser(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	var id = params["id"]
+func GetUserRow(w http.ResponseWriter, r *http.Request) (models.User, error) {
+	header, err := r.Cookie("jwt")
 	var user models.User
-	db.First(&user, id)
-	json.NewEncoder(w).Encode(&user)
+	if err != nil {
+		json.NewEncoder(w).Encode(Exception{Message: err.Error()})
+		return user, err
+	}
+	tk := &models.Token{}
+	token, _ := jwt.ParseWithClaims(header.Value, tk, nil)
+	claims := token.Claims.(*models.Token)
+
+	db.Where("id = ?", claims.Issuer).First(&user)
+	return user, nil
+}
+
+func GetUser(w http.ResponseWriter, r *http.Request) {
+	user, err := GetUserRow(w, r)
+	if err == nil {
+		json.NewEncoder(w).Encode(&user)
+	}
 }
