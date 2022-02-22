@@ -139,3 +139,17 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	db.First(&user, id)
 	json.NewEncoder(w).Encode(&user)
 }
+
+func PostRide(w http.ResponseWriter, r *http.Request) {
+	rideDetails := &models.RideDetails{}
+
+	json.NewDecoder(r.Body).Decode(rideDetails)
+	createdDetails := db.Create(rideDetails)
+	var errMessage = createdDetails.Error
+
+	if createdDetails.Error != nil {
+		fmt.Println(errMessage)
+	}
+	json.NewEncoder(w).Encode(createdDetails)
+
+}
