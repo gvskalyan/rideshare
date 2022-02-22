@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import SignUp from "./Signup"
 
 function Copyright(props) {
   return (
@@ -98,7 +99,7 @@ function Login() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/signup" variant="body2" color="inherit">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
