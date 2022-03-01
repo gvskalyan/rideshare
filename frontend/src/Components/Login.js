@@ -6,7 +6,7 @@ import Find from "./Find";
 import Post from "./Post";
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom"
 import NavBar from "./NavBar"
-import Global from "./About"
+import Global from "./Home"
 import { useHistory } from 'react-router-dom';
 
 
@@ -26,8 +26,8 @@ export default function Login() {
             <>
                 <Router>
                     <Switch>
-                        <Route exact path="/about" component={Global} />
-                        <Redirect to="/about" />
+                        <Route exact path="/About" component={Global} />
+                        <Redirect to="/About" />
                     </Switch>
                 </Router>
             </>
@@ -56,7 +56,7 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button block size="lg" type="submit" disabled={!validateForm()} onClick={()=>{history.push("/Signup");
+        <Button block size="lg" type="submit" disabled={!validateForm()} onClick={()=>{history.push("/About");
         }}>
           Login
         </Button>
