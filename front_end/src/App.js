@@ -1,7 +1,7 @@
 import React from "react";
 import Find from "./Components/Find";
 import Post from "./Components/Post";
-import {BrowserRouter as Router, Switch, Routes, Route} from "react-router-dom"
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import "./Components/Home.css";
 import NavBar from "./Components/NavBar"
 import Login from "./Components/Login_2"

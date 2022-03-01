@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from 'react'
-import "./About.css";
+import "./Home.css";
 
 function About(){
     return (
