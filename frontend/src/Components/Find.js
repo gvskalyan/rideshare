@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
+import "./Find.css";
 import Select from 'react-select'
-import {Button} from "reactstrap";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import JSONDATA from "./MOCK_DATA.json";
-import Axios from 'axios';
+
 import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react-dom';
 
 const options = [
@@ -66,6 +64,7 @@ class MyComponent extends Component{
   }
 
   render(){
+    
     return(
       <>
         <h1 className="display-4" style={{color:"#24292e"}}> Find a Ride! </h1>         
