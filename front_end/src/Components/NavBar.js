@@ -13,8 +13,8 @@ function NavBar()
 
             <ul className="nav-menu">
                 <li className="nav-item">
-                    <NavLink exact to="/Login" activeClassName="active" className="nav-links">
-                        Login
+                    <NavLink exact to="/about" activeClassName="active" className="nav-links">
+                        About Us
                     </NavLink>
                 </li>
                 <li className="nav-item">
