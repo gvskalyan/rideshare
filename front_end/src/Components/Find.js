@@ -70,7 +70,7 @@ class MyComponent extends Component{
         <h1 className="display-4" style={{color:"#24292e"}}> Find a Ride! </h1>         
         <br/>
         <div>
-          <form onSubmit={this.handleSubmit}>
+          <form class="finding" onSubmit={this.handleSubmit}>
             <label> From:
               <Select name="from" options={options} value={this.state.from} onChange={this.handleFromChange} />
             </label><br></br>

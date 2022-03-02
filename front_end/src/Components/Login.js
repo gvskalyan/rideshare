@@ -2,11 +2,8 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Home.css";
-import Find from "./Find";
-import Post from "./Post";
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom"
-import NavBar from "./NavBar"
-import Global from "./Home"
+import Global from "./About"
 import { useHistory } from 'react-router-dom';
 
 
@@ -56,7 +53,7 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button block size="lg" type="submit" disabled={!validateForm()} onClick={()=>{history.push("/About");
+        <Button block size="lg" type="submit" disabled={!validateForm()} onClick={()=>{history.push("/about");
         }}>
           Login
         </Button>
