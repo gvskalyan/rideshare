@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"auth/models"
-	"auth/utils"
+	"backend/models"
+	"backend/utils"
 	"encoding/json"
 	"fmt"
 	"net/http"
