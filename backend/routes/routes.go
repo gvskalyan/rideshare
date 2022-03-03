@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"auth/controllers"
-	"auth/utils/auth"
+	"backend/controllers"
+	"backend/utils/auth"
 	"net/http"
 
 	"github.com/gorilla/mux"
