@@ -8,7 +8,7 @@
     
 }
 h1{
-    margin-top: 40px;
+    margin-top: 60px;
     text-align: center;
 }
 h2{
@@ -26,10 +26,6 @@ h2{
     
    
 }
-
-.input(
-    width: 50%;
-)
 
 .top{
     background-color: black;
@@ -52,7 +48,7 @@ th{
     position: relative;
    /* color: white;*/
 }
-
+    
 .table td,
 .table th{
     padding: 0.75rem;
