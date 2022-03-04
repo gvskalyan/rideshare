@@ -16,7 +16,6 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 // import component
 import Copyright from './Copyright'
-import { setCacheNameDetails } from 'workbox-core';
 
 
 
@@ -47,7 +46,7 @@ function Login({ setToken }) {
     const token = await loginUser({
       email,
       password
-    });
+    });                                         
     setToken(token);
   }
 
@@ -98,7 +97,6 @@ function Login({ setToken }) {
               label="Remember me"
             />
             <Button
-              href="/about"
               type="submit"
               fullWidth
               variant="contained"
