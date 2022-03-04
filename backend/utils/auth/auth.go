@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"auth/models"
+	"backend/models"
 	"context"
 	"encoding/json"
 	"net/http"
