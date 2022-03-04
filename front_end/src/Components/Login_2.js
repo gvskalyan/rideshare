@@ -1,4 +1,7 @@
-import * as React from 'react';
+// import React
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+// import MUI
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,21 +14,41 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+// import component
 import Copyright from './Copyright'
+
 
 
 const theme = createTheme();
 
-function Login() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+
+async function loginUser(credentials) {
+  return fetch('http://localhost:8080/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(credentials)
+  })
+    .then(data => data.json())
+ }
+
+
+
+function Login({ setToken }) {
+
+  //  create a local state to capture the Username and Password.
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const token = await loginUser({
+      email,
+      password
+    });                                         
+    setToken(token);
+  }
 
   return (
     
@@ -56,6 +79,7 @@ function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={e => setEmail(e.target.value)}
             />
             <TextField
               margin="normal"
@@ -66,13 +90,13 @@ function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={e => setPassword(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
             <Button
-              href="/"
               type="submit"
               fullWidth
               variant="contained"
@@ -99,5 +123,10 @@ function Login() {
     </ThemeProvider>
   );
 }
+
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired
+}
+
 
 export default Login;

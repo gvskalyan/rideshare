@@ -161,7 +161,6 @@ export default function SignUp() {
                 <Button
                   to="/"
                   component={Link} 
-                  noLinkStyle 
                   type="submit"
                   fullWidth
                   variant="contained"
