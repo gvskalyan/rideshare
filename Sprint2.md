@@ -26,3 +26,18 @@ A new webpage is built that takes inputs from the logged in user to post the rid
 - After cloning the repository, "run cd frontend"
 - run "npm start"
 
+### Front end video demo
+ 
+https://youtu.be/cw5Rml9S5kc
+
+## Backend
+### Initializing steps
+
+- Install the dependencies using `go install`
+- Create a table named `postride` in postgres.
+- Check the .env file present in backend for specific user setting.
+
+### Command to start backend server
+
+- cd backend
+- ```gin -i  --appPort 8081 --port 8080```
