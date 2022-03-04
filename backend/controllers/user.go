@@ -1,11 +1,12 @@
 package controllers
 
 import (
-	"auth/models"
-	"auth/utils"
+	"backend/models"
+	"backend/utils"
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
@@ -41,18 +42,19 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(resp)
 		return
 	}
-	resp := FindOne(user.Email, user.Password)
+	resp := FindOne(user.Email, user.Password, w)
 	json.NewEncoder(w).Encode(resp)
 }
 
-func FindOne(email, password string) map[string]interface{} {
+func FindOne(email, password string, w http.ResponseWriter) map[string]interface{} {
 	user := &models.User{}
 
 	if err := db.Where("Email = ?", email).First(user).Error; err != nil {
 		var resp = map[string]interface{}{"status": false, "message": "Email address not found"}
 		return resp
 	}
-	expiresAt := time.Now().Add(time.Minute * 100000).Unix()
+	// expiresAt := time.Now().Add(time.Hour * 24).Unix()
+	expires := time.Now().Add(time.Hour * 24)
 
 	errf := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
 	if errf != nil && errf == bcrypt.ErrMismatchedHashAndPassword { //Password does not match!
@@ -60,25 +62,27 @@ func FindOne(email, password string) map[string]interface{} {
 		return resp
 	}
 
-	tk := &models.Token{
-		UserID: user.ID,
-		Name:   user.Name,
-		Email:  user.Email,
-		StandardClaims: &jwt.StandardClaims{
-			ExpiresAt: expiresAt,
-		},
-	}
-
-	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
+	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), jwt.StandardClaims{
+		Issuer:    strconv.Itoa(int(user.ID)),
+		ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
+	})
 
 	tokenString, error := token.SignedString([]byte("secret"))
 	if error != nil {
 		fmt.Println(error)
 	}
 
+	cookie := &http.Cookie{
+		Name:     "jwt",
+		Value:    tokenString,
+		Expires:  expires,
+		HttpOnly: true,
+	}
+
 	var resp = map[string]interface{}{"status": false, "message": "logged in"}
 	resp["token"] = tokenString //Store the token in the response
 	resp["user"] = user
+	http.SetCookie(w, cookie)
 	return resp
 }
 
@@ -105,14 +109,6 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(errMessage)
 	}
 	json.NewEncoder(w).Encode(createdUser)
-}
-
-//FetchUser function
-func FetchUsers(w http.ResponseWriter, r *http.Request) {
-	var users []models.User
-	db.Preload("auths").Find(&users)
-
-	json.NewEncoder(w).Encode(users)
 }
 
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
@@ -154,4 +150,29 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	if err == nil {
 		json.NewEncoder(w).Encode(&user)
 	}
+}
+
+func PostRide(w http.ResponseWriter, r *http.Request) {
+	rideDetails := &models.RideDetails{}
+
+	json.NewDecoder(r.Body).Decode(rideDetails)
+	createdDetails := db.Create(rideDetails)
+	var errMessage = createdDetails.Error
+
+	if createdDetails.Error != nil {
+		fmt.Println(errMessage)
+	}
+	json.NewEncoder(w).Encode(createdDetails)
+
+func Logout(w http.ResponseWriter, r *http.Request) {
+	cookie := &http.Cookie{
+		Name:     "jwt",
+		Value:    "",
+		Expires:  time.Now().Add(-time.Hour),
+		HttpOnly: true,
+	}
+
+	http.SetCookie(w, cookie)
+	var resp = map[string]interface{}{"message": "logged out success"}
+	json.NewEncoder(w).Encode(resp)
 }

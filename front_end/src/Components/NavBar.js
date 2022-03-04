@@ -7,14 +7,14 @@ function NavBar()
     return<>
     <nav className="navbar">
         <div className="nav-container">
-            <NavLink exact to="/" className="nav-logo">
+            <NavLink exact to="/about" className="nav-logo">
                 RideShare
             </NavLink>
 
             <ul className="nav-menu">
                 <li className="nav-item">
-                    <NavLink exact to="/" activeClassName="active" className="nav-links">
-                        About
+                    <NavLink exact to="/about" activeClassName="active" className="nav-links">
+                        About Us
                     </NavLink>
                 </li>
                 <li className="nav-item">

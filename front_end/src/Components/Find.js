@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
+import "./Find.css";
 import Select from 'react-select'
-import {Button} from "reactstrap";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import JSONDATA from "./MOCK_DATA.json";
-import Axios from 'axios';
+
 import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react-dom';
 
 const options = [
@@ -66,32 +64,33 @@ class MyComponent extends Component{
   }
 
   render(){
+    
     return(
       <>
         <h1 className="display-4" style={{color:"#24292e"}}> Find a Ride! </h1>         
-        <br></br>
-        <form onSubmit={this.handleSubmit}>
-          <div><label>
-            From: </label></div>
-            <Select name="from" options={options} value={this.state.from} onChange={this.handleFromChange} />
-          <br></br>
-          
-          <div><label>
-            To: </label></div>
-            <Select name="to" options={options} value={this.state.to} onChange={this.handleToChange} />
-          <br></br>
+        <br/>
+        <div>
+          <form class="finding" onSubmit={this.handleSubmit}>
+            <label> From:
+              <Select name="from" options={options} value={this.state.from} onChange={this.handleFromChange} />
+            </label><br></br>
+            
+            <label> To: 
+              <Select name="to" options={options} value={this.state.to} onChange={this.handleToChange} />
+            </label><br></br>
 
-          <div><label>
-            Date: <br></br>
-            <input type="date" name="date" value={this.state.date} onChange={this.handleDateChange} />
-          </label></div>
-          <br></br>
+            <div><label>
+              Date: <br></br>
+              <input type="date" name="date" value={this.state.date} onChange={this.handleDateChange} />
+            </label></div>
+            <br></br>
 
-          <div>
-            <input type="submit" color="primary mt-3" value="Find" />
-          </div>
+            <div>
+              <input type="submit" color="primary mt-3" value="Find" />
+            </div>
 
-        </form>
+          </form>
+        </div>
       </>
     );
   }

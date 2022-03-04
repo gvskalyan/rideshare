@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"auth/models"
+	"backend/models"
 	"fmt"
 	"log"
 	"os"

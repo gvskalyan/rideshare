@@ -13,6 +13,10 @@ npm install @mui/material @emotion/react @emotion/styled @mui/styled-engine-sc s
 This will automatically update your package.json dependencies.
 more information: https://mui.com/getting-started/installation/
 
+ ## To run react
+1. cd frontend
+2. npm start
+
  ## Technologies Involved
   - [React](https://reactjs.org/)
   - [Golang](https://go.dev)
