@@ -45,6 +45,6 @@ func ConnectDB() *gorm.DB {
 
 	db.AutoMigrate(
 		&models.RideDetails{})
-	fmt.Println("Successfully connected!", db)
+	fmt.Println("Successfully connected!")
 	return db
 }

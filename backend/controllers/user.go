@@ -26,10 +26,6 @@ type error interface {
 
 var db = utils.ConnectDB()
 
-func MagaAPI(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("i am here")
-}
-
 func TestAPI(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("API live and kicking"))
 }
@@ -38,8 +34,9 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	user := &models.User{}
 	err := json.NewDecoder(r.Body).Decode(user)
 	if err != nil {
-		var resp = map[string]interface{}{"status": false, "message": "Invalid request"}
+		var resp = map[string]interface{}{"status": "false", "message": "Invalid request"}
 		json.NewEncoder(w).Encode(resp)
+		// w.WriteHeader(http.StatusForbidden)
 		return
 	}
 	resp := FindOne(user.Email, user.Password, w)
