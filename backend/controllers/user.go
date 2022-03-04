@@ -137,3 +137,16 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	db.First(&user, id)
 	json.NewEncoder(w).Encode(&user)
 }
+
+func Logout(w http.ResponseWriter, r *http.Request) {
+	cookie := &http.Cookie{
+		Name:     "jwt",
+		Value:    "",
+		Expires:  time.Now().Add(-time.Hour),
+		HttpOnly: true,
+	}
+
+	http.SetCookie(w, cookie)
+	var resp = map[string]interface{}{"message": "logged out success"}
+	json.NewEncoder(w).Encode(resp)
+}
