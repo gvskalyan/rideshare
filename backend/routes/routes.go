@@ -2,7 +2,6 @@ package routes
 
 import (
 	"backend/controllers"
-	"backend/utils/auth"
 
 	"github.com/gorilla/mux"
 )
@@ -18,11 +17,11 @@ func Handlers() *mux.Router {
 	r.HandleFunc("/login", controllers.Login).Methods("POST")
 	r.HandleFunc("/delete", controllers.DeleteUser).Methods("DELETE")
 	r.HandleFunc("/logout", controllers.Logout).Methods("POST")
+	r.HandleFunc("/postaride", controllers.PostRide).Methods("POST")
+	r.HandleFunc("/searchrides", controllers.SearchRides).Methods("POST")
 
 	// Auth route
 	s := r.PathPrefix("/auth").Subrouter()
-	s.Use(auth.JwtVerify)
-	s.HandleFunc("/user", controllers.FetchUsers).Methods("GET")
 	s.HandleFunc("/user", controllers.GetUser).Methods("GET")
 	s.HandleFunc("/user", controllers.UpdateUser).Methods("PUT")
 	return r
