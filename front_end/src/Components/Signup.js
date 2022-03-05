@@ -150,7 +150,7 @@ export default function SignUp() {
                   <TextField
                     required
                     fullWidth
-                    name="re-enter password"
+                    name="reEnterPassword"
                     label="re-enter Password"
                     type="password"
                     id="rpassword"
