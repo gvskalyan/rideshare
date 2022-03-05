@@ -22,12 +22,13 @@ func App() {
 
 	// Handle routes
 	http.Handle("/", routes.Handlers())
-
 	// serve
 	log.Printf("Server up on port '%s'", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
+
 }
 
 func main() {
 	App()
+
 }
