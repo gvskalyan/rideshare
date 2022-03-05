@@ -5,12 +5,12 @@ import (
 	"backend/utils"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"strconv"
 	"time"
 
-	jwt "github.com/dgrijalva/jwt-go"
-	"github.com/gorilla/mux"
+	jwt "github.com/golang-jwt/jwt"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -112,22 +112,24 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
-	user := &models.User{}
-	params := mux.Vars(r)
-	var id = params["id"]
-	db.First(&user, id)
-	json.NewDecoder(r.Body).Decode(user)
-	db.Save(&user)
-	json.NewEncoder(w).Encode(&user)
+	user, err := GetUserRow(w, r)
+	if err == nil {
+		json.NewDecoder(r.Body).Decode(&user)
+		fmt.Println(r.Body, user)
+		db.Save(&user)
+		json.NewEncoder(w).Encode(&user)
+	}
 }
 
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	var id = params["id"]
-	var user models.User
-	db.First(&user, id)
-	db.Delete(&user)
-	json.NewEncoder(w).Encode("User deleted")
+	Logout(w, r)
+	user, err := GetUserRow(w, r)
+	if err == nil {
+		json.NewDecoder(r.Body).Decode(&user)
+		fmt.Println(r.Body, user)
+		db.Delete(&user)
+		json.NewEncoder(w).Encode("User deleted")
+	}
 }
 
 func GetUserRow(w http.ResponseWriter, r *http.Request) (models.User, error) {
@@ -152,18 +154,6 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func PostRide(w http.ResponseWriter, r *http.Request) {
-	rideDetails := &models.RideDetails{}
-
-	json.NewDecoder(r.Body).Decode(rideDetails)
-	createdDetails := db.Create(rideDetails)
-	var errMessage = createdDetails.Error
-
-	if createdDetails.Error != nil {
-		fmt.Println(errMessage)
-	}
-	json.NewEncoder(w).Encode(createdDetails)
-
 func Logout(w http.ResponseWriter, r *http.Request) {
 	cookie := &http.Cookie{
 		Name:     "jwt",
@@ -175,4 +165,60 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, cookie)
 	var resp = map[string]interface{}{"message": "logged out success"}
 	json.NewEncoder(w).Encode(resp)
+}
+
+func PostRide(w http.ResponseWriter, r *http.Request) {
+
+	header, _ := r.Cookie("jwt")
+
+	tk := &models.Token{}
+	token, _ := jwt.ParseWithClaims(header.Value, tk, nil)
+	claims := token.Claims.(*models.Token)
+	fmt.Println(claims.Issuer)
+
+	rideDetails := &models.RideDetails{}
+	rideDetails.UserId, _ = strconv.Atoi(claims.Issuer)
+
+	var data map[string]interface{}
+	body, _ := io.ReadAll(r.Body)
+	err := json.Unmarshal([]byte(string(body)), &data)
+	if err != nil {
+		panic(err)
+	}
+
+	startTime, _ := time.Parse("2006-01-02 15:04:05", data["StartTime"].(string))
+	endTime, _ := time.Parse("2006-01-02 15:04:05", data["EndTime"].(string))
+
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
+	rideDetails.ToStartTime = startTime
+	rideDetails.ToEndTime = endTime
+	json.Unmarshal([]byte(string(body)), &rideDetails)
+	createdDetails := db.Create(rideDetails)
+	var errMessage = createdDetails.Error
+	if createdDetails.Error != nil {
+		fmt.Println(errMessage)
+	}
+	var resp = map[string]interface{}{"message": "Ride has been successfully posted"}
+	json.NewEncoder(w).Encode(resp)
+}
+
+func SearchRides(w http.ResponseWriter, r *http.Request) {
+
+	var rides []models.RideDetails
+
+	var data map[string]interface{}
+	body, _ := io.ReadAll(r.Body)
+	err := json.Unmarshal([]byte(string(body)), &data)
+	if err != nil {
+		panic(err)
+	}
+	searchDetails := db.Where("from_city = ? AND to_city = ?", data["FromCity"], data["ToCity"]).Order("to_start_time desc").Find(&rides)
+
+	var errMessage = searchDetails.Error
+	if searchDetails.Error != nil {
+		fmt.Println(errMessage)
+	}
+	json.NewEncoder(w).Encode(searchDetails)
 }
