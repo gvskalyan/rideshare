@@ -80,8 +80,8 @@ func FindOne(email, password string) map[string]interface{} {
 	return resp
 }
 
-//CreateUser function -- create a new user
-func CreateUser(w http.ResponseWriter, r *http.Request) {
+//CreateUser function -- create a new user d-method
+func CreatedUser(w http.ResponseWriter, r *http.Request) {
 
 	user := &models.User{}
 
