@@ -7,7 +7,7 @@ import Global from "./About"
 import { useHistory } from 'react-router-dom';
 
 
-export default function Login() {
+export default function LoginOldVersion() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 

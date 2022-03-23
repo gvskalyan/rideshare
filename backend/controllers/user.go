@@ -5,13 +5,16 @@ import (
 	"backend/utils"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
+	"strconv"
 	"time"
 
-	jwt "github.com/dgrijalva/jwt-go"
-	"github.com/gorilla/mux"
+	jwt "github.com/golang-jwt/jwt"
 	"golang.org/x/crypto/bcrypt"
 )
+
+type Exception models.Exception
 
 type ErrorResponse struct {
 	Err string
@@ -23,10 +26,6 @@ type error interface {
 
 var db = utils.ConnectDB()
 
-func MagaAPI(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("i am here")
-}
-
 func TestAPI(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("API live and kicking"))
 }
@@ -35,22 +34,24 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	user := &models.User{}
 	err := json.NewDecoder(r.Body).Decode(user)
 	if err != nil {
-		var resp = map[string]interface{}{"status": false, "message": "Invalid request"}
+		var resp = map[string]interface{}{"status": "false", "message": "Invalid request"}
 		json.NewEncoder(w).Encode(resp)
+		// w.WriteHeader(http.StatusForbidden)
 		return
 	}
-	resp := FindOne(user.Email, user.Password)
+	resp := FindOne(user.Email, user.Password, w)
 	json.NewEncoder(w).Encode(resp)
 }
 
-func FindOne(email, password string) map[string]interface{} {
+func FindOne(email, password string, w http.ResponseWriter) map[string]interface{} {
 	user := &models.User{}
 
 	if err := db.Where("Email = ?", email).First(user).Error; err != nil {
 		var resp = map[string]interface{}{"status": false, "message": "Email address not found"}
 		return resp
 	}
-	expiresAt := time.Now().Add(time.Minute * 100000).Unix()
+	// expiresAt := time.Now().Add(time.Hour * 24).Unix()
+	expires := time.Now().Add(time.Hour * 24)
 
 	errf := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
 	if errf != nil && errf == bcrypt.ErrMismatchedHashAndPassword { //Password does not match!
@@ -58,25 +59,27 @@ func FindOne(email, password string) map[string]interface{} {
 		return resp
 	}
 
-	tk := &models.Token{
-		UserID: user.ID,
-		Name:   user.Name,
-		Email:  user.Email,
-		StandardClaims: &jwt.StandardClaims{
-			ExpiresAt: expiresAt,
-		},
-	}
-
-	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
+	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), jwt.StandardClaims{
+		Issuer:    strconv.Itoa(int(user.ID)),
+		ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
+	})
 
 	tokenString, error := token.SignedString([]byte("secret"))
 	if error != nil {
 		fmt.Println(error)
 	}
 
+	cookie := &http.Cookie{
+		Name:     "jwt",
+		Value:    tokenString,
+		Expires:  expires,
+		HttpOnly: true,
+	}
+
 	var resp = map[string]interface{}{"status": false, "message": "logged in"}
 	resp["token"] = tokenString //Store the token in the response
 	resp["user"] = user
+	http.SetCookie(w, cookie)
 	return resp
 }
 
@@ -105,39 +108,116 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(createdUser)
 }
 
-//FetchUser function
-func FetchUsers(w http.ResponseWriter, r *http.Request) {
-	var users []models.User
-	db.Preload("auths").Find(&users)
-
-	json.NewEncoder(w).Encode(users)
-}
-
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
-	user := &models.User{}
-	params := mux.Vars(r)
-	var id = params["id"]
-	db.First(&user, id)
-	json.NewDecoder(r.Body).Decode(user)
-	db.Save(&user)
-	json.NewEncoder(w).Encode(&user)
+	user, err := GetUserRow(w, r)
+	if err == nil {
+		json.NewDecoder(r.Body).Decode(&user)
+		fmt.Println(r.Body, user)
+		db.Save(&user)
+		json.NewEncoder(w).Encode(&user)
+	}
 }
 
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	var id = params["id"]
+	Logout(w, r)
+	user, err := GetUserRow(w, r)
+	if err == nil {
+		json.NewDecoder(r.Body).Decode(&user)
+		fmt.Println(r.Body, user)
+		db.Delete(&user)
+		json.NewEncoder(w).Encode("User deleted")
+	}
+}
+
+func GetUserRow(w http.ResponseWriter, r *http.Request) (models.User, error) {
+	header, err := r.Cookie("jwt")
 	var user models.User
-	db.First(&user, id)
-	db.Delete(&user)
-	json.NewEncoder(w).Encode("User deleted")
+	if err != nil {
+		json.NewEncoder(w).Encode(Exception{Message: err.Error()})
+		return user, err
+	}
+	tk := &models.Token{}
+	token, _ := jwt.ParseWithClaims(header.Value, tk, nil)
+	claims := token.Claims.(*models.Token)
+
+	db.Where("id = ?", claims.Issuer).First(&user)
+	return user, nil
 }
 
 func GetUser(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	var id = params["id"]
-	var user models.User
-	db.First(&user, id)
-	json.NewEncoder(w).Encode(&user)
+	user, err := GetUserRow(w, r)
+	if err == nil {
+		json.NewEncoder(w).Encode(&user)
+	}
+}
+
+func Logout(w http.ResponseWriter, r *http.Request) {
+	cookie := &http.Cookie{
+		Name:     "jwt",
+		Value:    "",
+		Expires:  time.Now().Add(-time.Hour),
+		HttpOnly: true,
+	}
+
+	http.SetCookie(w, cookie)
+	var resp = map[string]interface{}{"message": "logged out success"}
+	json.NewEncoder(w).Encode(resp)
+}
+
+func PostRide(w http.ResponseWriter, r *http.Request) {
+
+	header, _ := r.Cookie("jwt")
+
+	tk := &models.Token{}
+	token, _ := jwt.ParseWithClaims(header.Value, tk, nil)
+	claims := token.Claims.(*models.Token)
+	fmt.Println(claims.Issuer)
+
+	rideDetails := &models.RideDetails{}
+	rideDetails.UserId, _ = strconv.Atoi(claims.Issuer)
+
+	var data map[string]interface{}
+	body, _ := io.ReadAll(r.Body)
+	err := json.Unmarshal([]byte(string(body)), &data)
+	if err != nil {
+		panic(err)
+	}
+
+	startTime, _ := time.Parse("2006-01-02 15:04:05", data["StartTime"].(string))
+	endTime, _ := time.Parse("2006-01-02 15:04:05", data["EndTime"].(string))
+
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
+	rideDetails.ToStartTime = startTime
+	rideDetails.ToEndTime = endTime
+	json.Unmarshal([]byte(string(body)), &rideDetails)
+	createdDetails := db.Create(rideDetails)
+	var errMessage = createdDetails.Error
+	if createdDetails.Error != nil {
+		fmt.Println(errMessage)
+	}
+	var resp = map[string]interface{}{"message": "Ride has been successfully posted"}
+	json.NewEncoder(w).Encode(resp)
+}
+
+func SearchRides(w http.ResponseWriter, r *http.Request) {
+
+	var rides []models.RideDetails
+
+	var data map[string]interface{}
+	body, _ := io.ReadAll(r.Body)
+	err := json.Unmarshal([]byte(string(body)), &data)
+	if err != nil {
+		panic(err)
+	}
+	searchDetails := db.Where("from_city = ? AND to_city = ?", data["FromCity"], data["ToCity"]).Order("to_start_time desc").Find(&rides)
+
+	var errMessage = searchDetails.Error
+	if searchDetails.Error != nil {
+		fmt.Println(errMessage)
+	}
+	json.NewEncoder(w).Encode(searchDetails)
 }
 
 func SendConfirmationMail(w http.ResponseWriter, r *http.Request) {
