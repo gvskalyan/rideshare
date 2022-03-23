@@ -22,8 +22,12 @@ more information: https://mui.com/getting-started/installation/
   - [Golang](https://go.dev)
 
  ## Team Members
+ 
+ Backend Developers
   - Dheeraj Kumar Mamillapalli
   - Venkata Sai Kalyan Guntupalli
+
+ Frontend Developers
   - Pramod Kumar Varma Manthena
   - Ruiyang Li
 
