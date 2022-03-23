@@ -17,7 +17,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	http.SetCookie(w, cookie)
-	var resp = map[string]interface{}{"message": "logged out  rrr success"}
+	var resp = map[string]interface{}{}
 	json.NewEncoder(w).Encode(resp)
 
 	user, err := GetUserRow(w, r)
@@ -25,6 +25,6 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 		json.NewDecoder(r.Body).Decode(&user)
 		fmt.Println(r.Body, user)
 		db.Delete(&user)
-		json.NewEncoder(w).Encode("User deleted")
+		json.NewEncoder(w).Encode("User has been deleted successfully")
 	}
 }
