@@ -9,7 +9,6 @@ import (
 
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	//Logout(w, r) functionality
-
 	cookie := &http.Cookie{
 		Name:     "jwt",
 		Value:    "",
@@ -18,7 +17,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	http.SetCookie(w, cookie)
-	var resp = map[string]interface{}{"message": "logged out success"}
+	var resp = map[string]interface{}{"message": "logged out  rrr success"}
 	json.NewEncoder(w).Encode(resp)
 
 	user, err := GetUserRow(w, r)
