@@ -19,42 +19,48 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import { useNavigate } from 'react-router-dom';
+import { useState } from "react"
 import data from './data/Apis'
 
 
 const theme = createTheme();
 
 export default function SignUp() {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [gender, setGender] = useState('male');
+  const [city, setCity] = useState('');
+  const [dob, setDob] = useState(new Date('2014-08-18T21:11:54'));
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phonenumber, setPhonenumber] = useState('');
+
+  const formatDate = (date) => {
+    return ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/'
+        + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear();
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const datas = new FormData(event.currentTarget);
+
+    const dateFormatted = formatDate(dob);
+
     const user = `{
-      "email": "rrr1234@gmail.com",
-      "password": "rrr123",
-      "gender": "male",
-      "city": "tampa",
-      "dob": "12/12/2012",
-      "name": "kalyang",
-      "phonenumber": "351-352-352"
+      "email": "${email}",
+      "password": "${password}",
+      "gender": "${gender}",
+      "city": "${city}",
+      "dob": "${dateFormatted}",
+      "name": "${firstName} ${lastName}",
+      "phonenumber": "${phonenumber}"
     }`;
 
     data.signup(user).then(res => {
-      console.log('Success');
+      alert("User Registered Successfully");
     });
-
-    console.log()
-    // eslint-disable-next-line no-console
-    console.log({
-      email: datas.get('email'),
-      password: datas.get('password'),
-    });
-  };
-  
-  // Handle date picker
-  const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
-
-  const handleChange = (newValue) => {
-    setValue(newValue);
   };
 
   return (
@@ -84,6 +90,8 @@ export default function SignUp() {
                     required
                     fullWidth
                     id="firstName"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     label="First Name"
                     autoFocus
                   />
@@ -95,6 +103,8 @@ export default function SignUp() {
                       id="lastName"
                       label="Last Name"
                       name="lastName"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
                       autoComplete="family-name"
                     />
                   </Grid>
@@ -105,6 +115,8 @@ export default function SignUp() {
                       row
                       aria-labelledby="demo-radio-buttons-group-label"
                       defaultValue="male"
+                      value={gender}
+                      onChange={(e) => setGender(e.target.value)}
                       name="radio-buttons-group"
                     >
                       <FormControlLabel value="male" control={<Radio />} label="Male" />
@@ -117,8 +129,8 @@ export default function SignUp() {
                   <DesktopDatePicker
                     label="Date of Birth"
                     inputFormat="MM/dd/yyyy"
-                    value={value}
-                    onChange={handleChange}
+                    value={dob}
+                    onChange={(e) => setDob(e.target.value)}
                     renderInput={(params) => <TextField {...params} />}
                   />
                 </Grid>
@@ -129,6 +141,8 @@ export default function SignUp() {
                     id="city"
                     label="City"
                     name="city"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
                     autoComplete="city"
                   />
                 </Grid>
@@ -139,6 +153,8 @@ export default function SignUp() {
                       id="email"
                       label="Email Address"
                       name="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       autoComplete="email"
                     />
                   </Grid>
@@ -147,6 +163,8 @@ export default function SignUp() {
                     required
                     fullWidth
                     id="phone"
+                    value={phonenumber}
+                    onChange={(e) => setPhonenumber(e.target.value)}
                     label="Phone number"
                     name="phone"
                     autoComplete="phone"
@@ -160,6 +178,8 @@ export default function SignUp() {
                       label="Password"
                       type="password"
                       id="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       autoComplete="new-password"
                     />
                   </Grid>
