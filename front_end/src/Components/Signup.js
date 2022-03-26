@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -18,6 +19,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import data from './data/Apis'
 
 
 const theme = createTheme();
@@ -25,11 +27,26 @@ const theme = createTheme();
 export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const datas = new FormData(event.currentTarget);
+    const user = `{
+      "email": "rrr1234@gmail.com",
+      "password": "rrr123",
+      "gender": "male",
+      "city": "tampa",
+      "dob": "12/12/2012",
+      "name": "kalyang",
+      "phonenumber": "351-352-352"
+    }`;
+
+    data.signup(user).then(res => {
+      console.log('Success');
+    });
+
+    console.log()
     // eslint-disable-next-line no-console
     console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+      email: datas.get('email'),
+      password: datas.get('password'),
     });
   };
   
@@ -159,8 +176,6 @@ export default function SignUp() {
                 </Grid>
               </Grid>
                 <Button
-                  to="/"
-                  component={Link} 
                   type="submit"
                   fullWidth
                   variant="contained"
