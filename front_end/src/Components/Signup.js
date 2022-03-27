@@ -22,7 +22,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react"
 import data from './data/Apis'
-
+import SnackBar from "./SnackBar";
 
 const theme = createTheme();
 
@@ -37,6 +37,21 @@ export default function SignUp() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phonenumber, setPhonenumber] = useState('');
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const OpenAlert = (message) => {
+    setMessage(message);
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const formatDate = (date) => {
     return ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/'
@@ -59,13 +74,17 @@ export default function SignUp() {
     }`;
 
     data.signup(user).then(res => {
-      alert("User Registered Successfully");
+      OpenAlert("User Registered Successfully");
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
     });
   };
 
   return (
     <LocalizationProvider dateAdapter={DateAdapter}>
       <ThemeProvider theme={theme}>
+        <SnackBar open={open} handleClose={handleClose} message={message}/>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box
