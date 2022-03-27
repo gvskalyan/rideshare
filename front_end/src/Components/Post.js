@@ -3,6 +3,9 @@ import "./Find.css";
 import Select from 'react-select'
 import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import gettingin from "./assets/gettingin.jpg"
+import styled from "styled-components"
+
 
 import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react-dom';
 
@@ -78,10 +81,14 @@ class MyComponent extends Component{
   render(){
     
     return(
-      <>
-        <h1 className="display-4" style={{color:"#24292e"}}> Post a Ride! </h1>         
+      <Section>
+        <div className="background">
+          <img src={gettingin} alt="" />
+        </div>
+        <div className='FindPageContent'>
+        <h1 className="display-4" style={{color:'white'}}> Post a Ride! </h1>         
         <br/>
-        <div>
+
           <form class="posting" onSubmit={this.handleSubmit}>
             <label> From:
               <Select name="from" options={options} value={this.state.from} onChange={this.handleFromChange} />
@@ -107,9 +114,82 @@ class MyComponent extends Component{
 
           </form>
         </div>
-      </>
+      </Section>
     );
   }
 }
 
 export default MyComponent
+
+const Section = styled.section`
+position: relative;
+  width: 100%;
+  height: 100%;
+  .background {
+    img {
+      height: 15%;
+      width: 100%;
+      filter: brightness(60%);
+    }
+  }
+  .FindPageContent {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 3;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    
+    .posting {
+      margin: 0 auto;
+      box-sizing: border-box;
+      padding: 2rem;
+      padding-left: 12.5rem;
+      border-radius: 1rem;
+      width: 40%;
+      background-color: rgba(0, 0, 0, 0.6);
+      border: 4px solid rgb(255, 255, 255, 0.6);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      .finding-label{
+        color:white;
+      }
+    input {
+      background-color: white;
+          border: none;
+          text-align: center;
+          color: black;
+          &[type="date"] {
+            padding-left: 3rem;
+          }
+          &::placeholder {
+            color: black;
+          }
+          &:focus {
+            outline: none;
+          }
+    }   
+  }
+    .title {
+      color: white;
+      h1 {
+        color: white;
+        margin-top: 0rem;
+        font-size: 3rem;
+        letter-spacing: 0.2rem;
+      }
+      p {
+        text-align: center;
+        padding: 0 15vw;
+        margin-top: 0.5rem;
+        font-size: 1.2rem;
+      }
+    }
+  }
+`;
