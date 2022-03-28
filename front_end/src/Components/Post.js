@@ -98,7 +98,7 @@ class MyComponent extends Component{
           <img src={gettingin} alt="" />
         </div>
         <div className='FindPageContent'>
-        <h1 className="display-4" style={{color:'white'}}> Post a Ride! </h1>         
+        <h1 className="display-4" style={{color:'white'}}> POST A RIDE! </h1>         
         <br/>
 
           <form class="posting" onSubmit={this.handleSubmit}>
