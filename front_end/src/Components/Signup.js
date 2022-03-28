@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -18,31 +19,72 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-
+import { useNavigate } from 'react-router-dom';
+import { useState } from "react"
+import data from './data/Apis'
+import SnackBar from "./SnackBar";
 
 const theme = createTheme();
 
 export default function SignUp() {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [gender, setGender] = useState('male');
+  const [city, setCity] = useState('');
+  const [dob, setDob] = useState(new Date('2014-08-18T21:11:54'));
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phonenumber, setPhonenumber] = useState('');
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const OpenAlert = (message) => {
+    setMessage(message);
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const formatDate = (date) => {
+    return ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/'
+        + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear();
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-  
-  // Handle date picker
-  const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
 
-  const handleChange = (newValue) => {
-    setValue(newValue);
+    const dateFormatted = formatDate(dob);
+
+    const user = `{
+      "email": "${email}",
+      "password": "${password}",
+      "gender": "${gender}",
+      "city": "${city}",
+      "dob": "${dateFormatted}",
+      "name": "${firstName} ${lastName}",
+      "phonenumber": "${phonenumber}"
+    }`;
+
+    data.signup(user).then(res => {
+      OpenAlert("User Registered Successfully");
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+    });
   };
 
   return (
     <LocalizationProvider dateAdapter={DateAdapter}>
       <ThemeProvider theme={theme}>
+        <SnackBar open={open} handleClose={handleClose} message={message}/>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box
@@ -67,6 +109,8 @@ export default function SignUp() {
                     required
                     fullWidth
                     id="firstName"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     label="First Name"
                     autoFocus
                   />
@@ -78,6 +122,8 @@ export default function SignUp() {
                       id="lastName"
                       label="Last Name"
                       name="lastName"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
                       autoComplete="family-name"
                     />
                   </Grid>
@@ -88,6 +134,8 @@ export default function SignUp() {
                       row
                       aria-labelledby="demo-radio-buttons-group-label"
                       defaultValue="male"
+                      value={gender}
+                      onChange={(e) => setGender(e.target.value)}
                       name="radio-buttons-group"
                     >
                       <FormControlLabel value="male" control={<Radio />} label="Male" />
@@ -100,8 +148,8 @@ export default function SignUp() {
                   <DesktopDatePicker
                     label="Date of Birth"
                     inputFormat="MM/dd/yyyy"
-                    value={value}
-                    onChange={handleChange}
+                    value={dob}
+                    onChange={(e) => setDob(e.target.value)}
                     renderInput={(params) => <TextField {...params} />}
                   />
                 </Grid>
@@ -112,6 +160,8 @@ export default function SignUp() {
                     id="city"
                     label="City"
                     name="city"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
                     autoComplete="city"
                   />
                 </Grid>
@@ -122,6 +172,8 @@ export default function SignUp() {
                       id="email"
                       label="Email Address"
                       name="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       autoComplete="email"
                     />
                   </Grid>
@@ -130,6 +182,8 @@ export default function SignUp() {
                     required
                     fullWidth
                     id="phone"
+                    value={phonenumber}
+                    onChange={(e) => setPhonenumber(e.target.value)}
                     label="Phone number"
                     name="phone"
                     autoComplete="phone"
@@ -143,6 +197,8 @@ export default function SignUp() {
                       label="Password"
                       type="password"
                       id="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       autoComplete="new-password"
                     />
                   </Grid>
@@ -159,8 +215,6 @@ export default function SignUp() {
                 </Grid>
               </Grid>
                 <Button
-                  to="/"
-                  component={Link} 
                   type="submit"
                   fullWidth
                   variant="contained"
