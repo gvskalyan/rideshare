@@ -61,21 +61,33 @@ class MyComponent extends Component{
     })
   }
 
-   handleSubmit = (event) => {
+  handleSubmit = (event) => {
     event.preventDefault();
-    alert(`${this.state.from.value} ${this.state.to.value} ${this.state.date} ${this.state.capacity.value}`)
-    //axios.get('http://awesomeserver/users.username')
-   // .then((response)=>{
-    //  this.setState({})
-   // })
-   
-   fetch("./MOCK_DATA.json")
-    .then((res) => res.json())
-    .then((data) => {
-      this.setState({
-        from: data
-      })
-    })
+//    alert(`${this.state.from.value} ${this.state.to.value} ${this.state.date} ${this.state.capacity.value}`)
+      
+      const ride = `{
+        "Name" : "",
+        "StartLocation": "",
+        "FromCity": "${this.state.from.value}",
+        "ToCity": "${this.state.to.value}",
+        "DestLocation": "",
+        "Price": "",
+        "StartTime": "",
+        "EndTime" : "",
+        "RideDuration" : "",
+        "SeatAvailable": "${this.state.capacity.value}",
+        "PetsAllowed": "",
+        "carModel": "",
+        "carType": "",
+        "AddlNotes": "",
+        "PhoneNumber": ""
+      }`;
+      /*data.post(ride).then(res => {
+      OpenAlert("Posted Successfully");
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+    });*/
   }
 
   render(){
@@ -90,23 +102,60 @@ class MyComponent extends Component{
         <br/>
 
           <form class="posting" onSubmit={this.handleSubmit}>
-            <label> From:
+
+            <label class="la"> Name: <br></br>
+              <input type="text" name="name" id="name" ></input>
+            </label><br/>
+
+            <label class="la"> Starting Location:
+              <input type="text" name="fromLoc" id="fromLoc" ></input>
+            </label><br/>
+
+            <label class="la"> From:
               <Select name="from" options={options} value={this.state.from} onChange={this.handleFromChange} />
             </label><br></br>
             
-            <label> To: 
+            <label class="la"> To: 
               <Select name="to" options={options} value={this.state.to} onChange={this.handleToChange} />
             </label><br></br>
 
-            <div><label>
-              Date: <br></br>
-              <input type="date" name="date" value={this.state.date} onChange={this.handleDateChange} />
-            </label></div>
-            <br></br>
+            <label class="la"> Destination Location:
+              <input type="text" name="destLoc" id="destLoc" ></input>
+            </label><br/>
 
-            <label> Capacity: 
+            <label class="la"> Price of a seat:
+              <input type="number" name="price" id="price" ></input>
+            </label><br/>
+
+            <label class="la"> Start Time:
+              <input type="datetime-local" name="startTime" id="startTime" ></input>
+            </label><br/>
+
+            <label class="la"> End Time:
+              <input type="datetime-local" name="endTime" id="endTime" ></input>
+            </label><br/>
+
+            <label class="la"> Duration:
+              <input type="number" name="price" id="price" ></input>
+            </label><br/>
+
+            <label class="la"> Capacity: 
               <Select name="Capacity" options={capAvail} value={this.state.capacity} onChange={this.handleCapChange} />
             </label><br></br>
+
+            <label class="la"> Pets Allowed?: &nbsp;
+              <input type="radio" name="pets" id="pets" value="yes"/><label>Yes</label>
+              &nbsp; &nbsp;
+              <input type="radio" name="pets" id="pets" value="no"/><label>No</label>
+            </label><br/>
+
+            <label class="la"> Car Model:
+              <input type="text" name="carModel" id="carModel" ></input>
+            </label><br/>
+
+            <label class="la"> Car Type:
+              <input type="text" name="cartype" id="carType" ></input>
+            </label><br/>
 
             <div>
               <input type="submit" color="primary mt-3" value="Find" />
@@ -127,8 +176,8 @@ position: relative;
   height: 100%;
   .background {
     img {
-      height: 15%;
-      width: 100%;
+      height: 100%;
+      width: 215%;
       filter: brightness(60%);
     }
   }
@@ -157,6 +206,9 @@ position: relative;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
+      .la{
+        color:white;
+      }
       .finding-label{
         color:white;
       }
