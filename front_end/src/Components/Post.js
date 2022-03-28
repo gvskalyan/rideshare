@@ -157,12 +157,6 @@ class MyComponent extends Component{
               <input type="text" name="cartype" id="carType" ></input>
             </label><br/>
 
-            <div><label class="la">
-              Date: <br></br>
-              <input type="date" name="date" value={this.state.date} onChange={this.handleDateChange} />
-            </label></div>
-            <br></br>
-
             <div>
               <input type="submit" color="primary mt-3" value="Find" />
             </div>

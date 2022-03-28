@@ -86,7 +86,7 @@ class MyComponent extends Component{
 
             <label>
               Date: <br></br>
-              <input type="date" name="date" value={this.state.date} onChange={this.handleDateChange} />
+              <input type="datetime-local" name="date" value={this.state.date} onChange={this.handleDateChange} />
             </label>
             <br></br>
 
