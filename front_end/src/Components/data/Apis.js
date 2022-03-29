@@ -1,4 +1,4 @@
-const SERVER_URL = 'http://localhost:8080'
+const SERVER_URL = 'http://localhost:8081'
 const VERSION = '/v1'
 
 const ENDPOINTS = {
@@ -9,7 +9,8 @@ const ENDPOINTS = {
     createComment: () => '/comments/create',
     login: () => '/users/login',
     register: () => '/users/register',
-    getPostById: (postId) => `/posts/getOne/${postId}`
+    getPostById: (postId) => `/posts/getOne/${postId}`,
+    postaride: () => '/Post'
 }
 
 const getRequest = (url, resolve, reject) => {
@@ -78,6 +79,11 @@ const data = {
     signup: (signupData) => new Promise((resolve, reject) => {
         const url = `${ENDPOINTS.signup()}`
         postRequest(url, signupData, resolve, reject)
+    }),
+
+    postaride: (postData) => new Promise((resolve,reject) => {
+        const url = `${ENDPOINTS.postaride()}`
+        postRequest(url, postData, resolve, reject)
     })
 }
 
