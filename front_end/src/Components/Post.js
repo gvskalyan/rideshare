@@ -5,9 +5,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import gettingin from "./assets/gettingin.jpg"
 import styled from "styled-components"
-
-
+import data from './data/Apis'
+import SnackBar from "./SnackBar";
 import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react-dom';
+
+const OpenAlert = (message) => {
+};
 
 const options = [
   { value: 'gainesville', label: 'Gainesville' },
@@ -26,18 +29,45 @@ const capAvail = [
     { value: '4', label: '4' },
     ]
 
+const petsAllow = [
+  { value: 'yes', label: 'Yes'},
+  { value: 'no', label: 'No'}
+]
+
 class MyComponent extends Component{
 
   constructor(props){
     super(props);
     this.state = {
+      name:'',
+      sLoc:'',
       from:'',
       to:'',
-      date:'',
-      capacity:''
+      dLoc:'',
+      price:'',
+      sTime:'',
+      dTime:'',
+      duration:'',
+      capacity:'',
+      pets:'',
+      cmodel:'',
+      ctype:'',
+      adnotes:'',
+      phnumber:''
     };
   }
   
+  handleNameChange = (Name)=>{
+      this.setState({
+        name: Name.target.value
+      });
+  }
+
+  handlesLocChange = (event)=>{
+    this.setState({
+      sLoc: event.target.value
+    });
+}
 
   handleFromChange = (selectedOption) => {
     this.setState({
@@ -50,44 +80,99 @@ class MyComponent extends Component{
       to: selectedOption
     })
   }
+  handledLocChange = (event)=>{
+    this.setState({
+      dLoc: event.target.value
+    });
+  }
+
+  handlePriceChange = (event)=>{
+    this.setState({
+      price: event.target.value
+    })
+  }
+
+  handlesTimeChange = (event) =>{
+    this.setState({
+      sTime: event.target.value
+    })
+  }
+
+  handledTimeChange = (event)=>{
+    this.setState({
+      dTime: event.target.value
+    })
+  }
+
+  handlesDurationChange = (event)=>{
+    this.setState({
+      duration: event.target.value
+    })
+  }
+
   handleCapChange = (selectedOption) => {
     this.setState({
       capacity: selectedOption
     })
   }
-  handleDateChange = (event) => {
+
+  handlePetsChange = (selectedOption) => {
     this.setState({
-      date: event.target.value
+      pets: selectedOption
+    })
+  }
+
+  handlecModelChange = (event) => {
+    this.setState({
+      cmodel: event.target.value
+    })
+  }
+
+  handlecTypeChange = (event) => {
+    this.setState({
+      ctype: event.target.value
+    })
+  }
+
+  handleadNotesChange = (event) => {
+    this.setState({
+      adnotes: event.target.value
+    })
+  }
+
+  handlephNumChange = (event) => {
+    this.setState({
+      phnumber: event.target.value
     })
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
-//    alert(`${this.state.from.value} ${this.state.to.value} ${this.state.date} ${this.state.capacity.value}`)
+    alert(`Here: ${this.state.name} ${this.state.sLoc} ${this.state.from.value} ${this.state.to.value} ${this.state.dLoc} ${this.state.price} ${this.state.sTime} ${this.state.dTime} ${this.state.duration} ${this.state.capacity.value} ${this.state.pets.value} ${this.state.cmodel} ${this.state.ctype}`)
       
       const ride = `{
-        "Name" : "",
-        "StartLocation": "",
+        "Name": "${this.state.name}",
+        "StartLocation": "${this.state.sLoc}",
         "FromCity": "${this.state.from.value}",
         "ToCity": "${this.state.to.value}",
-        "DestLocation": "",
-        "Price": "",
-        "StartTime": "",
-        "EndTime" : "",
-        "RideDuration" : "",
+        "DestLocation": "${this.state.dLoc}",
+        "Price": "${this.state.price}",
+        "StartTime": "${this.state.sTime}",
+        "EndTime" : "${this.state.dTime}",
+        "RideDuration" : "${this.state.duration}",
         "SeatAvailable": "${this.state.capacity.value}",
-        "PetsAllowed": "",
-        "carModel": "",
-        "carType": "",
-        "AddlNotes": "",
-        "PhoneNumber": ""
+        "PetsAllowed": "${this.state.pets.value}",
+        "carModel": "${this.state.cmodel}",
+        "carType": "${this.state.ctype}",
+        "AddlNotes": "${this.state.adnotes}",
+        "PhoneNumber": "${this.state.phnumber}"
       }`;
-      /*data.post(ride).then(res => {
+      data.post(ride).then(res => {
       OpenAlert("Posted Successfully");
-      setTimeout(() => {
+      /*setTimeout(() => {
         navigate("/");
-      }, 3000);
-    });*/
+      }, 3000);*/
+    });
   }
 
   render(){
@@ -98,67 +183,73 @@ class MyComponent extends Component{
           <img src={gettingin} alt="" />
         </div>
         <div className='FindPageContent'>
-        <h1 className="display-4" style={{color:'white'}}> Post a Ride! </h1>         
+        <h1 className="display-4" style={{color:'white'}}> POST A RIDE! </h1>         
         <br/>
 
           <form class="posting" onSubmit={this.handleSubmit}>
 
-            <label class="la"> Name: <br></br>
-              <input type="text" name="name" id="name" ></input>
+            <label class="la"> Name: <br/>
+              <input type="text" name="name" id="name" value={this.state.name} onChange={this.handleNameChange}></input>
             </label><br/>
 
             <label class="la"> Starting Location:
-              <input type="text" name="fromLoc" id="fromLoc" ></input>
+              <input type="text" name="fromLoc" id="fromLoc" value={this.state.sLoc} onChange={this.handlesLocChange}></input>
             </label><br/>
 
-            <label class="la"> From:
-              <Select name="from" options={options} value={this.state.from} onChange={this.handleFromChange} />
-            </label><br></br>
+            <label class="la"> From:</label><br/>
+              <Select class="opt" name="from" options={options} value={this.state.from} onChange={this.handleFromChange} />
+            <br/>
             
-            <label class="la"> To: 
+            <label class="la"> To: </label><br/>
               <Select name="to" options={options} value={this.state.to} onChange={this.handleToChange} />
-            </label><br></br>
+            <br/>
 
             <label class="la"> Destination Location:
-              <input type="text" name="destLoc" id="destLoc" ></input>
+              <input type="text" name="destLoc" id="destLoc" value={this.state.dLoc} onChange={this.handledLocChange}></input>
             </label><br/>
 
             <label class="la"> Price of a seat:
-              <input type="number" name="price" id="price" ></input>
+              <input type="number" name="price" id="price" value={this.state.price} onChange={this.handlePriceChange}></input>
             </label><br/>
 
             <label class="la"> Start Time:
-              <input type="datetime-local" name="startTime" id="startTime" ></input>
+              <input type="datetime-local" name="startTime" id="startTime" value={this.state.sTime} onChange={this.handlesTimeChange}></input>
             </label><br/>
 
             <label class="la"> End Time:
-              <input type="datetime-local" name="endTime" id="endTime" ></input>
+              <input type="datetime-local" name="endTime" id="endTime" value={this.state.dTime} onChange={this.handledTimeChange}></input>
             </label><br/>
 
             <label class="la"> Duration:
-              <input type="number" name="price" id="price" ></input>
+              <input type="number" name="duration" id="duration" value={this.state.duration} onChange={this.handlesDurationChange}></input>
             </label><br/>
 
-            <label class="la"> Capacity: 
-              <Select name="Capacity" options={capAvail} value={this.state.capacity} onChange={this.handleCapChange} />
-            </label><br></br>
+            <label class="la"> Capacity: </label><br/>
+              <Select name="Capacity" options={capAvail} value={this.state.cap} onChange={this.handleCapChange}/>
+            <br/>
 
-            <label class="la"> Pets Allowed?: &nbsp;
-              <input type="radio" name="pets" id="pets" value="yes"/><label>Yes</label>
-              &nbsp; &nbsp;
-              <input type="radio" name="pets" id="pets" value="no"/><label>No</label>
-            </label><br/>
+            <label class="la"> Pets Allowed?: </label><br/>
+              <Select name="pets" options={petsAllow} value={this.state.pets} onChange={this.handlePetsChange}/>
+            <br/>
 
             <label class="la"> Car Model:
-              <input type="text" name="carModel" id="carModel" ></input>
+              <input type="text" name="carModel" id="carModel" value={this.state.cModel} onChange={this.handlecModelChange}></input>
             </label><br/>
 
             <label class="la"> Car Type:
-              <input type="text" name="cartype" id="carType" ></input>
+              <input type="text" name="cartype" id="carType" value={this.state.cType} onChange={this.handlecTypeChange}></input>
+            </label><br/>
+
+            <label class="la"> Additional Notes:
+              <input type="text" name="adnotes" id="adnotes" value={this.state.adnotes} onChange={this.handleadNotesChange}></input>
+            </label><br/>
+
+            <label class="la"> Phone Number:
+              <input type="tel" id="phone" name="phone" value={this.state.phNum} onChange={this.handlephNumChange} pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
             </label><br/>
 
             <div>
-              <input type="submit" color="primary mt-3" value="Find" />
+              <input type="submit" color="primary mt-3" value="Post the Ride" />
             </div>
 
           </form>
@@ -177,7 +268,7 @@ position: relative;
   .background {
     img {
       height: 100%;
-      width: 215%;
+      width: 245%;
       filter: brightness(60%);
     }
   }
@@ -197,8 +288,7 @@ position: relative;
     .posting {
       margin: 0 auto;
       box-sizing: border-box;
-      padding: 2rem;
-      padding-left: 12.5rem;
+      padding-left: 11rem;
       border-radius: 1rem;
       width: 40%;
       background-color: rgba(0, 0, 0, 0.6);
@@ -226,7 +316,7 @@ position: relative;
           &:focus {
             outline: none;
           }
-    }   
+    }
   }
     .title {
       color: white;
