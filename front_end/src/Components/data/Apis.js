@@ -7,10 +7,11 @@ const ENDPOINTS = {
     createPost: () => '/posts/create',
     getCommentsOfPost: (postId) => `/comments/getAll/${postId}`,
     createComment: () => '/comments/create',
-    login: () => '/',
+    login: () => '/login',
     register: () => '/users/register',
     getPostById: (postId) => `/posts/getOne/${postId}`,
-    postaride: () => '/Post'
+    postaride: () => '/Post',
+    getUser: () => '/auth/user'
 }
 
 const getRequest = (url, resolve, reject) => {
@@ -71,7 +72,7 @@ const data = {
     }),
 
     login: (loginData) => new Promise((resolve, reject) => {
-        const url = `${SERVER_URL}${VERSION}${ENDPOINTS.login()}`
+        const url = `${ENDPOINTS.login()}`
         console.log(url);
         postRequest(url, loginData, resolve, reject)
     }),
@@ -84,6 +85,11 @@ const data = {
     postaride: (postData) => new Promise((resolve,reject) => {
         const url = `${ENDPOINTS.postaride()}`
         postRequest(url, postData, resolve, reject)
+    }),
+
+    getUser: () => new Promise((resolve,reject) => {
+        const url = `${ENDPOINTS.getUser()}`
+        getRequest(url, resolve, reject)
     })
 }
 

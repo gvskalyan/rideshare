@@ -1,16 +1,14 @@
 import React from "react"
 import { Navbar,  NavLink } from "react-router-dom"
 import "./NavBar.css"
+import {isUserLoggedIn} from "./session/SessionHandler";
 
 function NavBar()
 {
-    return<>
-    <nav className="navbar">
-        <div className="nav-container">
-            <NavLink exact to="/about" className="nav-logo">
-                RideShare
-            </NavLink>
+    const loggedIn = isUserLoggedIn();
 
+    const navMenu = () => {
+        return <>
             <ul className="nav-menu">
                 <li className="nav-item">
                     <NavLink exact to="/about" activeClassName="active" className="nav-links">
@@ -33,6 +31,16 @@ function NavBar()
                     </NavLink>
                 </li>
             </ul>
+        </>
+    }
+
+    return<>
+    <nav className="navbar">
+        <div className="nav-container">
+            <NavLink exact to="/about" className="nav-logo">
+                RideShare
+            </NavLink>
+            {loggedIn ? navMenu() : ""}
         </div>
     </nav>
     </>;  
