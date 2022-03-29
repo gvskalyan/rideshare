@@ -76,7 +76,7 @@ export default function SignUp() {
     data.signup(user).then(res => {
       OpenAlert("User Registered Successfully");
       setTimeout(() => {
-        navigate("/");
+        navigate("/login");
       }, 3000);
     });
   };
