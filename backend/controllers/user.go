@@ -219,3 +219,17 @@ func SearchRides(w http.ResponseWriter, r *http.Request) {
 	}
 	json.NewEncoder(w).Encode(searchDetails)
 }
+
+func SendConfirmationMail(w http.ResponseWriter, r *http.Request) {
+
+	user, err := GetUserRow(w, r)
+
+	ConfirmationEmailHandler(user.Email)
+
+	if err == nil {
+		var resp = map[string]interface{}{"message": "Ride message has been successfully sent"}
+		json.NewEncoder(w).Encode(resp)
+		// json.NewEncoder(w).Encode(&user)
+	}
+
+}
