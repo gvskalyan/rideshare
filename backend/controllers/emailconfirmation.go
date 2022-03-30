@@ -14,7 +14,7 @@ func ConfirmationEmailHandler(mailid string) {
 		panic("Error loading .env file")
 	}
 	msg := gomail.NewMessage()
-	fromMail = os.Getenv("FromEMailAddress")
+	fromMail := os.Getenv("FromEMailAddress")
 	msg.SetHeader("From", fromMail)
 	msg.SetHeader("To", mailid)
 	msg.SetHeader("Subject", "RideShare Booked Ride details")
