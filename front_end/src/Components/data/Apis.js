@@ -1,4 +1,4 @@
-const SERVER_URL = 'http://localhost:8081'
+const SERVER_URL = 'http://localhost:8080'
 const VERSION = '/v1'
 
 const ENDPOINTS = {
@@ -82,9 +82,9 @@ const data = {
         postRequest(url, signupData, resolve, reject)
     }),
 
-    postaride: (postData) => new Promise((resolve,reject) => {
+    postaride: (ride) => new Promise((resolve,reject) => {
         const url = `${ENDPOINTS.postaride()}`
-        postRequest(url, postData, resolve, reject)
+        postRequest(url, ride, resolve, reject)
     }),
 
     getUser: () => new Promise((resolve,reject) => {
