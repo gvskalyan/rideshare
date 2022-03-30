@@ -1,23 +1,27 @@
 import React, { useEffect, useState} from 'react'
 import gettingin from "./assets/gettingin.jpg"
 import styled from "styled-components"
+import NavBarCommon from "./NavBar_Common";
 function About(){
     return (
-        <Section id="hero">
-      <div className="background">
-        <img src={gettingin} alt="" />
-      </div>
-      <div className="content">
-        <div className="title">
-          <h1>ABOUT US</h1>
-          <p>
-          RideShare makes travel more convinient and affordable to the users. 
-          If you are travelling with a few empty seats, we will try to make your trip a bit profitable
-          by finding you some good company.
-          </p>
+        <div>
+          <NavBarCommon />
+          <Section id="hero">
+            <div className="background">
+              <img src={gettingin} alt="" />
+            </div>
+            <div className="content">
+              <div className="title">
+                <h1>ABOUT US</h1>
+                <p>
+                  RideShare makes travel more convinient and affordable to the users.
+                  If you are travelling with a few empty seats, we will try to make your trip a bit profitable
+                  by finding you some good company.
+                </p>
+              </div>
+            </div>
+          </Section>
         </div>
-      </div>
-    </Section>
   );
 }
 
