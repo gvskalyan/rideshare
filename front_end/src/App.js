@@ -8,6 +8,7 @@ import SignUp from "./Components/Signup"
 import About from "./Components/About"
 import Home from './Components/Home'
 import Profile from './Components/Profile'
+import UserWelcome from './Components/UserWelcome'
 import {isUserLoggedIn} from "./Components/session/SessionHandler";
 
 function RequireAuth({ children }) {
@@ -67,6 +68,14 @@ function App() {
                 element={
                     <RequireAuth>
                         <Profile />
+                    </RequireAuth>
+                }
+            />
+            <Route
+                path="/userwelcome"
+                element={
+                    <RequireAuth>
+                        <UserWelcome />
                     </RequireAuth>
                 }
             />
