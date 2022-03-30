@@ -3,7 +3,6 @@ import Find from "./Components/Find"
 import Post from "./Components/Post"
 import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom"
 import "./Components/Home.css"
-import NavBar from "./Components/NavBar"
 import Login from "./Components/Login_2"
 import SignUp from "./Components/Signup"
 import About from "./Components/About"
@@ -14,12 +13,10 @@ function RequireAuth({ children }) {
     return isUserLoggedIn() ? children : <Navigate to="/login" replace />;
 }
 
-
 function App() {
 
     return (
     <Router>
-        <NavBar/>
         <div>
           <Routes>
             <Route exact path="/signup" element={<SignUp />} />

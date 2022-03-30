@@ -1,5 +1,5 @@
-
 import * as React from 'react';
+import {useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,20 +9,19 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import DateAdapter from '@mui/lab/AdapterDateFns';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import Copyright from './Copyright'
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import { useNavigate } from 'react-router-dom';
-import { useState } from "react"
 import data from './data/Apis'
 import SnackBar from "./SnackBar";
+import NavBar_Login from "./NavBar_Login";
 
 const theme = createTheme();
 
@@ -82,158 +81,162 @@ export default function SignUp() {
   };
 
   return (
-    <LocalizationProvider dateAdapter={DateAdapter}>
-      <ThemeProvider theme={theme}>
-        <SnackBar open={open} handleClose={handleClose} message={message}/>
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign up
-            </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    autoComplete="given-name"
-                    name="firstName"
-                    required
-                    fullWidth
-                    id="firstName"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    label="First Name"
-                    autoFocus
-                  />
-                </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      required
-                      fullWidth
-                      id="lastName"
-                      label="Last Name"
-                      name="lastName"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                      autoComplete="family-name"
-                    />
+      <div>
+        <NavBar_Login />
+        <br/>
+        <LocalizationProvider dateAdapter={DateAdapter}>
+          <ThemeProvider theme={theme}>
+            <SnackBar open={open} handleClose={handleClose} message={message}/>
+            <Container component="main" maxWidth="xs">
+              <CssBaseline />
+              <Box
+                  sx={{
+                    marginTop: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  }}
+              >
+                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                  Sign up
+                </Typography>
+                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                          autoComplete="given-name"
+                          name="firstName"
+                          required
+                          fullWidth
+                          id="firstName"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                          label="First Name"
+                          autoFocus
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                          required
+                          fullWidth
+                          id="lastName"
+                          label="Last Name"
+                          name="lastName"
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                          autoComplete="family-name"
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <FormControl>
+                        <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+                        <RadioGroup
+                            row
+                            aria-labelledby="demo-radio-buttons-group-label"
+                            defaultValue="male"
+                            value={gender}
+                            onChange={(e) => setGender(e.target.value)}
+                            name="radio-buttons-group"
+                        >
+                          <FormControlLabel value="male" control={<Radio />} label="Male" />
+                          <FormControlLabel value="Female" control={<Radio />} label="Female" />
+                          <FormControlLabel value="other" control={<Radio />} label="Other" />
+                        </RadioGroup>
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <DesktopDatePicker
+                          label="Date of Birth"
+                          inputFormat="MM/dd/yyyy"
+                          value={dob}
+                          onChange={(e) => setDob(e.target.value)}
+                          renderInput={(params) => <TextField {...params} />}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                          required
+                          fullWidth
+                          id="city"
+                          label="City"
+                          name="city"
+                          value={city}
+                          onChange={(e) => setCity(e.target.value)}
+                          autoComplete="city"
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                          required
+                          fullWidth
+                          id="email"
+                          label="Email Address"
+                          name="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          autoComplete="email"
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                          required
+                          fullWidth
+                          id="phone"
+                          value={phonenumber}
+                          onChange={(e) => setPhonenumber(e.target.value)}
+                          label="Phone number"
+                          name="phone"
+                          autoComplete="phone"
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                          required
+                          fullWidth
+                          name="password"
+                          label="Password"
+                          type="password"
+                          id="password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          autoComplete="new-password"
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                          required
+                          fullWidth
+                          name="reEnterPassword"
+                          label="re-enter Password"
+                          type="password"
+                          id="rpassword"
+                          autoComplete="new-password"
+                      />
+                    </Grid>
                   </Grid>
-                <Grid item xs={12}>
-                  <FormControl>
-                    <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
-                    <RadioGroup
-                      row
-                      aria-labelledby="demo-radio-buttons-group-label"
-                      defaultValue="male"
-                      value={gender}
-                      onChange={(e) => setGender(e.target.value)}
-                      name="radio-buttons-group"
-                    >
-                      <FormControlLabel value="male" control={<Radio />} label="Male" />
-                      <FormControlLabel value="Female" control={<Radio />} label="Female" />
-                      <FormControlLabel value="other" control={<Radio />} label="Other" />
-                    </RadioGroup>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                  <DesktopDatePicker
-                    label="Date of Birth"
-                    inputFormat="MM/dd/yyyy"
-                    value={dob}
-                    onChange={(e) => setDob(e.target.value)}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="city"
-                    label="City"
-                    name="city"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    autoComplete="city"
-                  />
-                </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      required
+                  <Button
+                      type="submit"
                       fullWidth
-                      id="email"
-                      label="Email Address"
-                      name="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      autoComplete="email"
-                    />
+                      variant="contained"
+                      sx={{ mt: 13, mb: 12 }}
+                  >
+                    Sign Up
+                  </Button>
+                  <Grid container justifyContent="flex-end">
+                    <Grid item>
+                      <Link to="/login" variant="body2">
+                        Already have an account? Sign in
+                      </Link>
+                    </Grid>
                   </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="phone"
-                    value={phonenumber}
-                    onChange={(e) => setPhonenumber(e.target.value)}
-                    label="Phone number"
-                    name="phone"
-                    autoComplete="phone"
-                  />
-                </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      required
-                      fullWidth
-                      name="password"
-                      label="Password"
-                      type="password"
-                      id="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      autoComplete="new-password"
-                    />
-                  </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="reEnterPassword"
-                    label="re-enter Password"
-                    type="password"
-                    id="rpassword"
-                    autoComplete="new-password"
-                  />                
-                </Grid>
-              </Grid>
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 13, mb: 12 }}
-                >
-                  Sign Up
-                </Button>
-              <Grid container justifyContent="flex-end">
-                <Grid item>
-                  <Link to="/login" variant="body2">
-                    Already have an account? Sign in
-                  </Link>
-                </Grid>
-              </Grid>
-            </Box>
-          </Box>
-          <Copyright sx={{ mt: 5 }} />
-        </Container>
-      </ThemeProvider>
-    </LocalizationProvider>
+                </Box>
+              </Box>
+              <Copyright sx={{ mt: 5 }} />
+            </Container>
+          </ThemeProvider>
+        </LocalizationProvider>
+      </div>
   );
 }

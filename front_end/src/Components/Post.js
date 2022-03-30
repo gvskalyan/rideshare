@@ -9,8 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import data from './data/Apis'
 import SnackBar from "./SnackBar";
 import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react-dom';
+import NavBarCommon from "./NavBar_Common";
 
-const OpenAlert = (message) => {
+const OpenAlert = (m) => {
 };
 
 
@@ -56,7 +57,9 @@ class MyComponent extends Component{
       cmodel:'',
       ctype:'',
       adnotes:'',
-      phnumber:''
+      phnumber:'',
+      open:'',
+      message:''
     };
   }
   
@@ -171,10 +174,9 @@ class MyComponent extends Component{
         "PhoneNumber": "${this.state.phnumber}"
       }`;
       data.postaride(ride).then(res => {
-        OpenAlert("Posted Successfully");
-        setTimeout(() => {
-          useNavigate("/Find");
-        }, 3000);
+        alert("Posted Successfully");
+        window.location = 'About';
+
     });
   }
 
@@ -182,6 +184,9 @@ class MyComponent extends Component{
     
     return(
       <Section>
+        <div>
+          <NavBarCommon />
+        </div>
         <div className="background">
           <img src={gettingin} alt="" />
         </div>
@@ -270,12 +275,14 @@ position: relative;
   height: 100%;
   .background {
     img {
+      margin-top: 0.01rem;
       height: 100%;
       width: 245%;
       filter: brightness(60%);
     }
   }
   .FindPageContent {
+    margin-top: 12rem;
     height: 100%;
     width: 100%;
     position: absolute;
@@ -291,7 +298,8 @@ position: relative;
     .posting {
       margin: 0 auto;
       box-sizing: border-box;
-      padding-left: 15rem;
+      padding: 2rem;
+      padding-left: 11rem;
       border-radius: 1rem;
       width: 40%;
       background-color: rgba(0, 0, 0, 0.6);

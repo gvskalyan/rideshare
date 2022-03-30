@@ -4,6 +4,8 @@ import gettingin from "./assets/gettingin.jpg"
 import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from "styled-components"
+import NavBarCommon from "./NavBar_Common";
+
 
 
 import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react-dom';
@@ -69,6 +71,10 @@ class MyComponent extends Component{
     
     return(
       <Section>
+        <div>
+          <NavBarCommon />
+        </div>
+        
         <div className="background">
           <img src={gettingin} alt="" />
         </div>
@@ -108,12 +114,14 @@ position: relative;
   height: 100%;
   .background {
     img {
+      margin-top: 0.01rem;
       height: 15%;
       width: 100%;
       filter: brightness(60%);
     }
   }
   .FindPageContent {
+    margin-top: 6rem;
     height: 100%;
     width: 100%;
     position: absolute;
