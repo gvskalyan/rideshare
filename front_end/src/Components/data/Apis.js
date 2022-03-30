@@ -10,7 +10,7 @@ const ENDPOINTS = {
     login: () => '/login',
     register: () => '/users/register',
     getPostById: (postId) => `/posts/getOne/${postId}`,
-    postaride: () => '/Post',
+    postaride: () => '/postaride',
     getUser: () => '/auth/user'
 }
 

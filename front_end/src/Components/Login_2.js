@@ -48,7 +48,7 @@ function Login() {
       data.getUser().then(response => {
         setUserDetails(response);
         setTimeout(() => {
-          navigate("/home");
+          navigate("/About");
         }, 3000);
       })
     });

@@ -5,12 +5,16 @@ import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import gettingin from "./assets/gettingin.jpg"
 import styled from "styled-components"
+import { useNavigate } from 'react-router-dom';
 import data from './data/Apis'
 import SnackBar from "./SnackBar";
 import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react-dom';
+import NavBarCommon from "./NavBar_Common";
 
-const OpenAlert = (message) => {
+const OpenAlert = (m) => {
 };
+
+
 
 const options = [
   { value: 'gainesville', label: 'Gainesville' },
@@ -53,7 +57,9 @@ class MyComponent extends Component{
       cmodel:'',
       ctype:'',
       adnotes:'',
-      phnumber:''
+      phnumber:'',
+      open:'',
+      message:''
     };
   }
   
@@ -148,7 +154,7 @@ class MyComponent extends Component{
 
   handleSubmit = (event) => {
     event.preventDefault();
-    alert(`Here: ${this.state.name} ${this.state.sLoc} ${this.state.from.value} ${this.state.to.value} ${this.state.dLoc} ${this.state.price} ${this.state.sTime} ${this.state.dTime} ${this.state.duration} ${this.state.capacity.value} ${this.state.pets.value} ${this.state.cmodel} ${this.state.ctype}`)
+    //alert(`Here: ${this.state.name} ${this.state.sLoc} ${this.state.from.value} ${this.state.to.value} ${this.state.dLoc} ${this.state.price} ${this.state.sTime} ${this.state.dTime} ${this.state.duration} ${this.state.capacity.value} ${this.state.pets.value} ${this.state.cmodel} ${this.state.ctype}`)
       
       const ride = `{
         "Name": "${this.state.name}",
@@ -167,11 +173,9 @@ class MyComponent extends Component{
         "AddlNotes": "${this.state.adnotes}",
         "PhoneNumber": "${this.state.phnumber}"
       }`;
-      data.post(ride).then(res => {
-      OpenAlert("Posted Successfully");
-      /*setTimeout(() => {
-        navigate("/");
-      }, 3000);*/
+      data.postaride(ride).then(res => {
+        alert("Posted Successfully");
+        window.location = 'About';
     });
   }
 
@@ -179,6 +183,9 @@ class MyComponent extends Component{
     
     return(
       <Section>
+        <div>
+          <NavBarCommon />
+        </div>
         <div className="background">
           <img src={gettingin} alt="" />
         </div>
@@ -267,12 +274,14 @@ position: relative;
   height: 100%;
   .background {
     img {
+      margin-top: 0.01rem;
       height: 100%;
       width: 245%;
       filter: brightness(60%);
     }
   }
   .FindPageContent {
+    margin-top: 12rem;
     height: 100%;
     width: 100%;
     position: absolute;
@@ -288,6 +297,7 @@ position: relative;
     .posting {
       margin: 0 auto;
       box-sizing: border-box;
+      padding: 2rem;
       padding-left: 11rem;
       border-radius: 1rem;
       width: 40%;
