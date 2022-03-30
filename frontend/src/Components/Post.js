@@ -270,7 +270,7 @@ class MyComponent extends Component{
 export default MyComponent
 
 const Section = styled.section`
-position: relative;
+  position: relative;
   width: 100%;
   height: 100%;
   .background {
@@ -329,20 +329,20 @@ position: relative;
           }
     }
   }
-    .title {
+  .title {
+    color: white;
+    h1 {
       color: white;
-      h1 {
-        color: white;
-        margin-top: 0rem;
-        font-size: 3rem;
-        letter-spacing: 0.2rem;
-      }
-      p {
-        text-align: center;
-        padding: 0 15vw;
-        margin-top: 0.5rem;
-        font-size: 1.2rem;
-      }
+      margin-top: 0rem;
+      font-size: 3rem;
+      letter-spacing: 0.2rem;
     }
+    p {
+      text-align: center;
+      padding: 0 15vw;
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+    }
+  }
   }
 `;
