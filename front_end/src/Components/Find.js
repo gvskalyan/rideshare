@@ -76,19 +76,18 @@ class MyComponent extends Component{
         <h1 className="display-4" style={{color:'white'}}> FIND A RIDE! </h1>         
         <br/>
           <form class="finding" onSubmit={this.handleSubmit}>
-            <label stlye="color:white"> From:
+            <label class="la"> From:</label> <br/>
               <Select name="from" options={options} value={this.state.from} onChange={this.handleFromChange} />
-            </label><br></br>
-            
-            <label> To: 
-              <Select name="to" options={options} value={this.state.to} onChange={this.handleToChange} />
-            </label><br></br>
-
-            <label>
-              Date: <br></br>
-              <input type="date" name="date" value={this.state.date} onChange={this.handleDateChange} />
-            </label>
             <br></br>
+            
+            <label class="la"> To: </label> <br/>
+              <Select name="to" options={options} value={this.state.to} onChange={this.handleToChange} />
+            <br></br>
+
+            <label class="la"> Date: </label> <br/>
+              <input type="datetime-local" name="date" value={this.state.date} onChange={this.handleDateChange} />
+            
+            <br/>
 
               <input type="submit" color="primary mt-3" value="Find" />
 
@@ -131,7 +130,7 @@ position: relative;
       margin: 0 auto;
       box-sizing: border-box;
       padding: 2rem;
-      padding-left: 12.5rem;
+      padding-left: 13.5rem;
       border-radius: 1rem;
       width: 40%;
       background-color: rgba(0, 0, 0, 0.6);
@@ -140,6 +139,9 @@ position: relative;
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
       .finding-label{
+        color:white;
+      }
+      .la{
         color:white;
       }
     input {
