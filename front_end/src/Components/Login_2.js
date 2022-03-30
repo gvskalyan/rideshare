@@ -14,40 +14,45 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import data from './data/Apis'
 // import component
 import Copyright from './Copyright'
+import {setAccessToken, setUserDetails, setUserToken} from "./session/SessionHandler";
 
 
 
 const theme = createTheme();
 
-
-async function loginUser(credentials) {
-  return fetch('http://localhost:8080/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(credentials)
-  })
-    .then(data => data.json())
- }
-
-
-
-function Login({ setToken }) {
-
+function Login() {
+  const navigate = useNavigate();
   //  create a local state to capture the Username and Password.
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('');
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    const token = await loginUser({
-      email,
-      password
-    });                                         
-    setToken(token);
+  const OpenAlert = (message) => {
+    setMessage(message);
+    setOpen(true);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const token = `{
+      "email":"${email}",
+      "password":"${password}"
+    }`
+    data.login(token).then(res => {
+      OpenAlert("Login Successfully");
+      setAccessToken(res.token);
+      data.getUser().then(response => {
+        setUserDetails(response);
+        setTimeout(() => {
+          navigate("/home");
+        }, 3000);
+      })
+    });
   }
 
   return (
@@ -98,7 +103,6 @@ function Login({ setToken }) {
             />
             <Button
               type="submit"
-              name="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
@@ -124,10 +128,5 @@ function Login({ setToken }) {
     </ThemeProvider>
   );
 }
-
-Login.propTypes = {
-  setToken: PropTypes.func.isRequired
-}
-
 
 export default Login;
