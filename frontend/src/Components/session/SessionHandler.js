@@ -38,3 +38,7 @@ export const clearUserAccessToken = () => {
 export const getUserAccessToken = () => {
     return localStorage.getItem(KEYS.accessToken)
 }
+
+export const getKeyUser = () => {
+    return localStorage.getItem(KEYS.user)
+}

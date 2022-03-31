@@ -11,7 +11,8 @@ const ENDPOINTS = {
     register: () => '/users/register',
     getPostById: (postId) => `/posts/getOne/${postId}`,
     postaride: () => '/postaride',
-    getUser: () => '/auth/user'
+    getUser: () => '/auth/user',
+    logout: () => '/logout'
 }
 
 const getRequest = (url, resolve, reject) => {
@@ -90,6 +91,11 @@ const data = {
     getUser: () => new Promise((resolve,reject) => {
         const url = `${ENDPOINTS.getUser()}`
         getRequest(url, resolve, reject)
+    }),
+
+    logout: () => new Promise((resolve,reject) =>{
+        const url = `${ENDPOINTS.logout()}`
+        postRequest(url, resolve, reject)
     }),
 
     userDetails: (token) => new Promise((resolve,reject) => {

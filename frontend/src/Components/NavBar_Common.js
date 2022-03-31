@@ -11,8 +11,8 @@ function NavBarCommon() {
                 </NavLink>
                 <ul className="nav-menu">
                     <li className="nav-item">
-                        <NavLink exact to="/about" activeClassName="active" className="nav-links">
-                            About Us
+                        <NavLink exact to="/UserWelcome" activeClassName="active" className="nav-links">
+                            Home
                         </NavLink>
                     </li>
                     <li className="nav-item">
