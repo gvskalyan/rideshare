@@ -7,6 +7,8 @@ import Login from "./Components/Login_2"
 import SignUp from "./Components/Signup"
 import About from "./Components/About"
 import Home from './Components/Home'
+import Profile from './Components/Profile'
+import UserWelcome from './Components/UserWelcome'
 import {isUserLoggedIn} from "./Components/session/SessionHandler";
 
 function RequireAuth({ children }) {
@@ -25,7 +27,7 @@ function App() {
                 path="/"
                 element={
                     <RequireAuth>
-                        <Home />
+                        <About />
                     </RequireAuth>
                 }
             />
@@ -58,6 +60,22 @@ function App() {
                 element={
                     <RequireAuth>
                         <About />
+                    </RequireAuth>
+                }
+            />
+            <Route
+                path="/profile"
+                element={
+                    <RequireAuth>
+                        <Profile />
+                    </RequireAuth>
+                }
+            />
+            <Route
+                path="/userwelcome"
+                element={
+                    <RequireAuth>
+                        <UserWelcome />
                     </RequireAuth>
                 }
             />

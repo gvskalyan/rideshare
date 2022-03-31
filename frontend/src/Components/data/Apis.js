@@ -90,6 +90,11 @@ const data = {
     getUser: () => new Promise((resolve,reject) => {
         const url = `${ENDPOINTS.getUser()}`
         getRequest(url, resolve, reject)
+    }),
+
+    userDetails: (token) => new Promise((resolve,reject) => {
+        const url = `${ENDPOINTS.user()}`
+        getRequest(url, token, resolve, reject)
     })
 }
 

@@ -270,7 +270,7 @@ class MyComponent extends Component{
 export default MyComponent
 
 const Section = styled.section`
-position: relative;
+  position: relative;
   width: 100%;
   height: 100%;
   .background {
@@ -282,7 +282,7 @@ position: relative;
     }
   }
   .FindPageContent {
-    margin-top: 12rem;
+    margin-top: 0rem;
     height: 100%;
     width: 100%;
     position: absolute;
@@ -297,9 +297,10 @@ position: relative;
     
     .posting {
       margin: 0 auto;
+      display:flex;
       box-sizing: border-box;
       padding: 2rem;
-      padding-left: 11rem;
+      padding-left: 15.5rem;
       border-radius: 1rem;
       width: 40%;
       background-color: rgba(0, 0, 0, 0.6);
@@ -329,20 +330,20 @@ position: relative;
           }
     }
   }
-    .title {
+  .title {
+    color: white;
+    h1 {
       color: white;
-      h1 {
-        color: white;
-        margin-top: 0rem;
-        font-size: 3rem;
-        letter-spacing: 0.2rem;
-      }
-      p {
-        text-align: center;
-        padding: 0 15vw;
-        margin-top: 0.5rem;
-        font-size: 1.2rem;
-      }
+      margin-top: 0rem;
+      font-size: 3rem;
+      letter-spacing: 0.2rem;
     }
+    p {
+      text-align: center;
+      padding: 0 15vw;
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+    }
+  }
   }
 `;
