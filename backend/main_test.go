@@ -203,13 +203,12 @@ func test_booking_mail_confirmation(t *testing.T) {
 
 func TestAllcases(t *testing.T) {
 
-	db := testdb_setup("test.db")
-	fmt.Print(db)
+	testdb_setup("test.db")
 
 	test_user_registration(t)
 	test_user_login(t)
 	test_user_login_fail(t)
 	test_post_a_ride(t)
 	test_search_rides(t)
-
+	test_booking_mail_confirmation(t)
 }
