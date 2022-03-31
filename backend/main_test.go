@@ -194,6 +194,38 @@ func test_search_rides(t *testing.T) {
 	assert.Equal(t, 200, w.Code)
 }
 
+func test_booking_ride(t *testing.T) {
+
+	w := httptest.NewRecorder()
+
+	var jsonStr = []byte(`{	        
+	"FromCity":      "Gainesville",
+	"ToCity":      "Tampa",
+	"StartTime"      : "2022-02-01 08:10:00",
+	"EndTime"        : "2022-02-05 08:10:22"}`)
+
+	cookie := &http.Cookie{
+		Name:     "jwt",
+		Value:    token,
+		Expires:  time.Now().Add(time.Hour),
+		HttpOnly: true,
+	}
+	req, _ := http.NewRequest(http.MethodPost, "/bookride", bytes.NewBuffer(jsonStr))
+	req.Header.Set("X-Custom-Header", "myvalue")
+	req.Header.Set("Content-Type", "application/json")
+	req.AddCookie(cookie)
+
+	controllers.BookRide(w, req)
+	res := w.Result()
+	defer res.Body.Close()
+	_, err := ioutil.ReadAll(res.Body)
+
+	if err != nil {
+		t.Errorf("expected error to be nil got %v", err)
+	}
+	assert.Equal(t, 200, w.Code)
+}
+
 func test_booking_mail_confirmation(t *testing.T) {
 	returnValue := controllers.ConfirmationEmailHandler("ridesharemail@yahoo.com")
 	if strings.Contains(returnValue, "error") {
