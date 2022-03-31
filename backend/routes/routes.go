@@ -35,5 +35,6 @@ func Handlers() *mux.Router {
 	s := r.PathPrefix("/auth").Subrouter()
 	s.HandleFunc("/user", controllers.GetUser).Methods("GET")
 	s.HandleFunc("/user", controllers.UpdateUser).Methods("PUT")
+	cors(r)
 	return r
 }

@@ -171,7 +171,7 @@ func PostRide(w http.ResponseWriter, r *http.Request) {
 	tk := &models.Token{}
 	token, _ := jwt.ParseWithClaims(header.Value, tk, nil)
 	claims := token.Claims.(*models.Token)
-	fmt.Println(claims.Issuer)
+	// fmt.Println(claims.Issuer)
 
 	rideDetails := &models.RideDetails{}
 	rideDetails.UserId, _ = strconv.Atoi(claims.Issuer)
@@ -218,4 +218,18 @@ func SearchRides(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(errMessage)
 	}
 	json.NewEncoder(w).Encode(searchDetails)
+}
+
+func SendConfirmationMail(w http.ResponseWriter, r *http.Request) {
+
+	user, err := GetUserRow(w, r)
+
+	ConfirmationEmailHandler(user.Email)
+
+	if err == nil {
+		var resp = map[string]interface{}{"message": "Ride message has been successfully sent"}
+		json.NewEncoder(w).Encode(resp)
+		// json.NewEncoder(w).Encode(&user)
+	}
+
 }
