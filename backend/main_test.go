@@ -194,6 +194,13 @@ func test_search_rides(t *testing.T) {
 	assert.Equal(t, 200, w.Code)
 }
 
+func test_booking_mail_confirmation(t *testing.T) {
+	returnValue := controllers.ConfirmationEmailHandler("ridesharemail@yahoo.com")
+	if strings.Contains(returnValue, "error") {
+		t.Fail()
+	}
+}
+
 func TestAllcases(t *testing.T) {
 
 	db := testdb_setup("test.db")
