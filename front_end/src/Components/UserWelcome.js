@@ -27,11 +27,14 @@ function Profile(){
     return(
         <Section>
             <NavBarCommon />
+            <div className="background">
+                <img src={gettingin} alt="" />
+            </div>
             <div className="WelcomePage">
-                <h1> WELCOME, USER-NAME! </h1>
-                <br/>
-                <h3> What can we help you with today? </h3>
-                <br/>
+                <h1 style={{color:'white'}}> WELCOME, USER-NAME! </h1>
+                <br/> <br/>
+                <h3 style={{color:'white'}}> What can we help you with today? </h3>
+                <br/> <br/>
                 <Button onClick={navigateToFind}>Find a Ride</Button>
                 &nbsp; &nbsp;
                 <Button onClick={navigateToPost}>Post a Ride</Button>
@@ -39,6 +42,7 @@ function Profile(){
         </Section>
     );
 }
+
 
 export default Profile;
 
@@ -57,7 +61,15 @@ const Section = styled.section`
     width: 100%;
     height: 100%;
     .WelcomePage{
-        margin-top: 10rem;
+        .background {
+            img {
+              margin-top: 0.01rem;
+              height: 100%;
+              width: 245%;
+              filter: brightness(50%);
+            }
+          }
+        margin-top: 13rem;
         height: 100%;
         width: 100%;
         position: absolute;
@@ -67,16 +79,11 @@ const Section = styled.section`
         justify-content: center;
         align-items: center;
         gap: 1rem;
-        .button {
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-          }
+        .title{
+            h1{
+
+            }
+        }
     }
     
 `;

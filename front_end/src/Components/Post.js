@@ -282,7 +282,7 @@ const Section = styled.section`
     }
   }
   .FindPageContent {
-    margin-top: 12rem;
+    margin-top: 0rem;
     height: 100%;
     width: 100%;
     position: absolute;
@@ -297,9 +297,10 @@ const Section = styled.section`
     
     .posting {
       margin: 0 auto;
+      display:flex;
       box-sizing: border-box;
       padding: 2rem;
-      padding-left: 11rem;
+      padding-left: 15.5rem;
       border-radius: 1rem;
       width: 40%;
       background-color: rgba(0, 0, 0, 0.6);
