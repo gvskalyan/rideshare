@@ -10,8 +10,8 @@ import (
 type RideDetails struct {
 	gorm.Model
 	Name           string `json:"Name"`
-	FromCity       string `json:"fromCity"`
 	StartLocation  string `json:"startLocation"`
+	FromCity       string `json:"fromCity"`
 	ToCity         string `json:"toCity"`
 	DestLocation   string `json:"destLocation"`
 	Price          uint   `json:"priceperseat"`
