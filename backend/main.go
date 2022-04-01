@@ -10,7 +10,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func main() {
+func App() {
 	e := godotenv.Load()
 
 	if e != nil {
@@ -22,8 +22,13 @@ func main() {
 
 	// Handle routes
 	http.Handle("/", routes.Handlers())
-
 	// serve
 	log.Printf("Server up on port '%s'", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
+
+}
+
+func main() {
+	App()
+
 }
