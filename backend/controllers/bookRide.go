@@ -3,7 +3,10 @@ package controllers
 import (
 	"backend/models"
 	"encoding/json"
+	"fmt"
+	"io"
 	"net/http"
+	"strconv"
 
 	jwt "github.com/golang-jwt/jwt"
 	//"golang.org/x/crypto/bcrypt"
@@ -18,6 +21,24 @@ func BookRide(w http.ResponseWriter, r *http.Request) {
 	tk := &models.Token{}
 	token, _ := jwt.ParseWithClaims(header.Value, tk, nil)
 	claims := token.Claims.(*models.Token)
+	fmt.Println(claims.Issuer)
+
+	bookDetails := &models.BookingDetails{}
+	bookDetails.UserId, _ = strconv.Atoi(claims.Issuer)
+
+	var data map[string]interface{}
+	body, _ := io.ReadAll(r.Body)
+	err := json.Unmarshal([]byte(string(body)), &data)
+	if err != nil {
+		panic(err)
+	}
+
+	json.Unmarshal([]byte(string(body)), &bookDetails)
+	createdDetails := db.Create(bookDetails)
+	var errMessage = createdDetails.Error
+	if createdDetails.Error != nil {
+		fmt.Println(errMessage)
+	}
 
 	//var bookedrides []models.BookingDetails
 	//updateStatus := db.Update("Status = 1 where name = "kalyan" ", data["RideID"]).Find(&bookedrides)
