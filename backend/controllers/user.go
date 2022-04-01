@@ -15,10 +15,6 @@ import (
 )
 
 type Exception models.Exception
-<<<<<<< HEAD
-=======
-
->>>>>>> 7f348274d82185a98df5086bc710b87328a47fbc
 type ErrorResponse struct {
 	Err string
 }
@@ -122,40 +118,8 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-<<<<<<< HEAD
 func GetUserRow(w http.ResponseWriter, r *http.Request) (models.User, error) {
 	header, err := r.Cookie("jwt")
-	var user models.User
-	if err != nil {
-		json.NewEncoder(w).Encode(Exception{Message: err.Error()})
-		return user, err
-	}
-	tk := &models.Token{}
-	token, _ := jwt.ParseWithClaims(header.Value, tk, nil)
-	claims := token.Claims.(*models.Token)
-
-	db.Where("id = ?", claims.Issuer).First(&user)
-	return user, nil
-}
-
-func Deluser(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	var id = params["id"]
-=======
-func DeleteUser(w http.ResponseWriter, r *http.Request) {
-	Logout(w, r)
-	user, err := GetUserRow(w, r)
-	if err == nil {
-		json.NewDecoder(r.Body).Decode(&user)
-		fmt.Println(r.Body, user)
-		db.Delete(&user)
-		json.NewEncoder(w).Encode("User deleted")
-	}
-}
-
-func GetUserRow(w http.ResponseWriter, r *http.Request) (models.User, error) {
-	header, err := r.Cookie("jwt")
->>>>>>> 7f348274d82185a98df5086bc710b87328a47fbc
 	var user models.User
 	if err != nil {
 		json.NewEncoder(w).Encode(Exception{Message: err.Error()})
@@ -174,19 +138,6 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	if err == nil {
 		json.NewEncoder(w).Encode(&user)
 	}
-}
-
-func Logout(w http.ResponseWriter, r *http.Request) {
-	cookie := &http.Cookie{
-		Name:     "jwt",
-		Value:    "",
-		Expires:  time.Now().Add(-time.Hour),
-		HttpOnly: true,
-	}
-
-	http.SetCookie(w, cookie)
-	var resp = map[string]interface{}{"message": "logged out success"}
-	json.NewEncoder(w).Encode(resp)
 }
 
 func PostRide(w http.ResponseWriter, r *http.Request) {
