@@ -33,7 +33,8 @@ func TestAPI(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("API live and kicking"))
 }
 
-func Login(w http.ResponseWriter, r *http.Request) {
+//This method is refactored to login.go in controllers
+func Signin(w http.ResponseWriter, r *http.Request) {
 	user := &models.User{}
 	err := json.NewDecoder(r.Body).Decode(user)
 	if err != nil {
