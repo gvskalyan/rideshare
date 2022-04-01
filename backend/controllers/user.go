@@ -15,7 +15,10 @@ import (
 )
 
 type Exception models.Exception
+<<<<<<< HEAD
+=======
 
+>>>>>>> 7f348274d82185a98df5086bc710b87328a47fbc
 type ErrorResponse struct {
 	Err string
 }
@@ -118,6 +121,26 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+<<<<<<< HEAD
+func GetUserRow(w http.ResponseWriter, r *http.Request) (models.User, error) {
+	header, err := r.Cookie("jwt")
+	var user models.User
+	if err != nil {
+		json.NewEncoder(w).Encode(Exception{Message: err.Error()})
+		return user, err
+	}
+	tk := &models.Token{}
+	token, _ := jwt.ParseWithClaims(header.Value, tk, nil)
+	claims := token.Claims.(*models.Token)
+
+	db.Where("id = ?", claims.Issuer).First(&user)
+	return user, nil
+}
+
+func Deluser(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	var id = params["id"]
+=======
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	Logout(w, r)
 	user, err := GetUserRow(w, r)
@@ -131,6 +154,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 
 func GetUserRow(w http.ResponseWriter, r *http.Request) (models.User, error) {
 	header, err := r.Cookie("jwt")
+>>>>>>> 7f348274d82185a98df5086bc710b87328a47fbc
 	var user models.User
 	if err != nil {
 		json.NewEncoder(w).Encode(Exception{Message: err.Error()})
