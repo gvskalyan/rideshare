@@ -1,6 +1,7 @@
 const KEYS = {
     user: 'user',
-    accessToken: 'accessToken'
+    accessToken: 'accessToken',
+    jwt: 'jwt'
 }
 
 export const isUserLoggedIn = () => {
@@ -29,6 +30,7 @@ export const getCurrentUserSession = () => {
 
 export const setAccessToken = (accessToken) => {
     localStorage.setItem(KEYS.accessToken, accessToken)
+    localStorage.setItem(KEYS.jwt, accessToken)
 }
 
 export const clearUserAccessToken = () => {
