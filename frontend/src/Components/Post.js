@@ -14,7 +14,9 @@ import NavBarCommon from "./NavBar_Common";
 const OpenAlert = (m) => {
 };
 
-
+const formatTime = (date) =>{
+  return date.substring(0,10) + ' ' + date.substring(11, date.length) + ':00'
+}
 
 const options = [
   { value: 'gainesville', label: 'Gainesville' },
@@ -62,6 +64,8 @@ class MyComponent extends Component{
       message:''
     };
   }
+
+  
   
   handleNameChange = (Name)=>{
       this.setState({
@@ -155,6 +159,7 @@ class MyComponent extends Component{
   handleSubmit = (event) => {
     event.preventDefault();
     //alert(`Here: ${this.state.name} ${this.state.sLoc} ${this.state.from.value} ${this.state.to.value} ${this.state.dLoc} ${this.state.price} ${this.state.sTime} ${this.state.dTime} ${this.state.duration} ${this.state.capacity.value} ${this.state.pets.value} ${this.state.cmodel} ${this.state.ctype}`)
+    //alert(`Here: Start: ${formatTime(this.state.sTime)} End: ${this.state.dTime}`)
       
       const ride = `{
         "Name": "${this.state.name}",
@@ -163,8 +168,8 @@ class MyComponent extends Component{
         "ToCity": "${this.state.to.value}",
         "DestLocation": "${this.state.dLoc}",
         "Price": "${this.state.price}",
-        "StartTime": "${this.state.sTime}",
-        "EndTime" : "${this.state.dTime}",
+        "StartTime": "${formatTime(this.state.sTime)}",
+        "EndTime" : "${formatTime(this.state.dTime)}",
         "RideDuration" : "${this.state.duration}",
         "SeatAvailable": "${this.state.capacity.value}",
         "PetsAllowed": "${this.state.pets.value}",
