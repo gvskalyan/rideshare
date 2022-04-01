@@ -8,7 +8,7 @@ import styled from "styled-components"
 import { useNavigate } from 'react-router-dom';
 import data from './data/Apis'
 import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react-dom';
-import {getUserAccessToken} from "./session/SessionHandler";
+import {userLogOut, getUserAccessToken} from "./session/SessionHandler";
 import NavBarCommon from "./NavBar_Common";
 import {useState} from 'react';
 
@@ -26,13 +26,9 @@ function Profile(){
 
     const loggingOut = (event) => {
         event.preventDefault();
-
-        data.logout().then(res => {
-            OpenAlert("Logged Out Successfully");
-            setTimeout(() => {
-                navigate("/login");
-            }, 3000);
-        });
+        userLogOut();
+        alert("Log out successfully");
+        window.location = 'Login'
       }
 
     return(
