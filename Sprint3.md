@@ -2,7 +2,7 @@
 
 [Demo Link]()
 
-## Frontend -
+## Frontend
 - Made functionalities available to users only upon login.
 - Added a user specific welcome page.
 - User provided data to post the rides has been successfully sent to the database.
@@ -33,8 +33,6 @@
 
 
 ## Backend
-
----
 
 ### Work Done
 
