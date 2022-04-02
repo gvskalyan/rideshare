@@ -85,6 +85,10 @@ class MyComponent extends Component {
         return strTime;
     }
 
+    bookRide =  (ride) => {
+        alert("Ride Booked");
+    }
+
     render() {
 
         return (
@@ -121,7 +125,7 @@ class MyComponent extends Component {
                         </form>
                     </div>
                 </Section>
-                <List sx={{width: '100%', bgcolor: 'background.paper'}}>
+                <List align="center" sx={{width: '100%', bgcolor: 'background.paper'}}>
                     <ListSubheader
                         inset
                     >
@@ -150,7 +154,7 @@ class MyComponent extends Component {
                                             <br/>
                                             Price Per Seat - {ride.priceperseat}$
                                             <br/>
-                                            <Button variant="outlined" align="right">Book Ride</Button>
+                                            <Button variant="outlined" align="right" onClick={this.bookRide}>Book Ride</Button>
                                         </React.Fragment>
                                     }
                                 />
