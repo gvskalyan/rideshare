@@ -9,6 +9,7 @@ import data from "./data/Apis";
 import {Divider, IconButton, List, ListItem, ListItemAvatar, ListItemText, ListSubheader} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
+import {getKeyUser} from "./session/SessionHandler";
 
 const options = [
     {value: 'gainesville', label: 'Gainesville'},
@@ -85,7 +86,13 @@ class MyComponent extends Component {
     }
 
     bookRide =  (ride) => {
-        alert("Ride Booked");
+        const user = JSON.parse(getKeyUser());
+        const booking = `{
+            "RideID": "${ride.ID}",
+            "UserMail": "${user.Email}",
+            "Phone": "${user.PhoneNumber}"
+        }`;
+        alert("Ride booked");
     }
 
     render() {
@@ -153,7 +160,7 @@ class MyComponent extends Component {
                                             <br/>
                                             Price Per Seat - {ride.priceperseat}$
                                             <br/>
-                                            <Button variant="outlined" align="right" onClick={this.bookRide}>Book Ride</Button>
+                                            <Button variant="outlined" align="right" onClick={() => this.bookRide(ride)}>Book Ride</Button>
                                         </React.Fragment>
                                     }
                                 />
