@@ -1,6 +1,6 @@
 # Sprint 3 Outline and Documentation
 
-[Demo Link]()
+[Demo Link](https://drive.google.com/file/d/1Hu11sRQE4jfyNQIaQYKHiTj67Ag_t78F/view?usp=sharing)
 
 ## Frontend
 - Made functionalities available to users only upon login.
@@ -14,8 +14,6 @@
 - After cloning the repository, "run cd frontend"
 - run "npm start"
 
-
-### Frontend Demo : https://drive.google.com/file/d/1Hu11sRQE4jfyNQIaQYKHiTj67Ag_t78F/view?usp=sharing
 
 ### Screenshots for frontend 
 1. Login page 
