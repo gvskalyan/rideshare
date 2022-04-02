@@ -57,7 +57,6 @@ class MyComponent extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        alert(`${this.state.from.value} ${this.state.to.value} ${this.state.date}`)
 
         const search = `{
         "FromCity": "${this.state.from.value}",
