@@ -3,14 +3,11 @@ const VERSION = '/v1'
 
 const ENDPOINTS = {
     signup: () => '/signup',
-    getAllPostsOfUser: (userId) => `/posts/getAll/${userId}`,
-    createPost: () => '/posts/create',
-    getCommentsOfPost: (postId) => `/comments/getAll/${postId}`,
-    createComment: () => '/comments/create',
     login: () => '/login',
     register: () => '/users/register',
     getPostById: (postId) => `/posts/getOne/${postId}`,
     postaride: () => '/postaride',
+    searcharide: () => '/searcharide',
     getUser: () => '/auth/user',
     logout: () => '/logout'
 }
@@ -101,7 +98,12 @@ const data = {
     userDetails: (token) => new Promise((resolve,reject) => {
         const url = `${ENDPOINTS.user()}`
         getRequest(url, token, resolve, reject)
-    })
+    }),
+
+    searcharide: (searchData) => new Promise((resolve,reject) => {
+        const url = `${ENDPOINTS.searcharide()}`
+        postRequest(url, searchData, resolve, reject)
+    }),
 }
 
 export default data
