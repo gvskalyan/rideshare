@@ -40,21 +40,53 @@
 - Implement Booking ride confirmation to mail 
 - Write unit tests to the above features and add
 - Plan ride details response and db details
-- Optimize the backend code
-- 
+- Optimize the existing backend code
+
+### Explanation
+
+- We introduced one of the important features, the book ride feature. With this an authorized user can book a ride from a list of all available rides.
+- BookaRide API enables the user to book a ride, given that ride is available. The user is displayed a Booking ID and confirmation message on a successful booking.
+- To implement this functionality we had added a Status field in the RideDetails table. This “Status“ value will be ‘0’ by default. If the user books the particular ride using “bookaRide” api this Status value will be changed to 1 indicating the ride is booked. Thereby this particular ride is not visible to the user to book. To enable this a few changes had been made in the searchRides api such that rideDetails with “Status” value ”1” are not sent in the API response.
+- We had also introduced the rideHistory API which returns a list of all the past and future rides booked by that particular user.
+- We made changes to the previously deployed unittest to validate the newly created methods.
 
 ### Initializing steps
 
+- Install the dependencies using `go install`
 - Create a table named `postride` in postgres.
 - Check the .env file present in backend for specific user setting.
-### Steps to Run
+### Command to start backend server
 
 - cd backend
 - ```gin -i  --appPort 8081 --port 8080```
 
+### bookaRide API 
 
+<strong> Target URL </strong> - localhost:8081/bookaRide
+<strong> Request method  </strong> - POST
 
-### To Do
+#### Request
+```
+{
+"RideID": "213", "UsereMail":"rideshare-test@gmail.com", "Phone":"8125262243"
+}
+```
+
+#### Response
+```
+{
+    "BookingID": 171,
+    "CreatedAt": "2022-04-01T18:12:52.136105-04:00", "UpdatedAt": "2022-04-01T18:12:52.136105-04:00", "DeletedAt": null,
+    "RideId":213,
+    “userMail”: “rideshare-test@gmail.com”, “Phone”: “8125262243”
+    "fromCity": "Gainesville",
+    "toCity": "Tampa",
+    "priceperseat": 0,   
+    "ToStartTime": "2022-02-01T03:10:50-05:00" 
+}
+```
+
+### To Do - Roadmap
 
 - Create User profile (Feature)
 - Make the return response in backend API more informative.
