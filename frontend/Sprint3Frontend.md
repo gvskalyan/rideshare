@@ -26,3 +26,5 @@
 <img width="1728" alt="Screen Shot 2022-04-01 at 8 52 57 PM" src="https://user-images.githubusercontent.com/64024449/161357707-cf410b1d-31d5-49d9-8902-e69be0d34d89.png">
 7. Profile page
 <img width="1728" alt="Screen Shot 2022-04-01 at 8 53 14 PM" src="https://user-images.githubusercontent.com/64024449/161357722-457e75c4-7926-430e-a83e-d5f84b18ff2a.png">
+8. Test result
+<img width="1728" alt="Screen Shot 2022-04-01 at 8 53 14 PM" src="https://user-images.githubusercontent.com/34689959/161361025-3027a77d-a448-45eb-b0ff-dadf9fc2f8c6.png">
