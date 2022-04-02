@@ -23,7 +23,7 @@ more information: https://mui.com/getting-started/installation/
 1. cd frontend
 2. npm start
 
- ## TO start backend server
+ ## To start backend server
 
 ```gin -i  --appPort 8081 --port 8080```
 

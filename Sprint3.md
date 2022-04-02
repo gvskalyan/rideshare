@@ -41,13 +41,12 @@
 - Write unit tests to the above features and add
 - Plan ride details response and db details
 - Optimize the backend code
-- 
 
 ### Initializing steps
 
 - Create a table named `postride` in postgres.
 - Check the .env file present in backend for specific user setting.
-### Steps to Run
+### Command to start backend server
 
 - cd backend
 - ```gin -i  --appPort 8081 --port 8080```
