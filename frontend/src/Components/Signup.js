@@ -119,14 +119,16 @@ export default function SignUp() {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <TextField
+                          autoComplete="family-name"
+                          name="lastName"
                           required
                           fullWidth
                           id="lastName"
-                          label="Last Name"
-                          name="lastName"
                           value={lastName}
                           onChange={(e) => setLastName(e.target.value)}
-                          autoComplete="family-name"
+                          label="Last Name"
+                          autoFocus
+                          
                       />
                     </Grid>
                     <Grid item xs={12}>
