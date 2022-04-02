@@ -24,15 +24,11 @@ function Profile(){
         setOpen(true);
       };
 
-    const loggingOut = (event) => {
+      const loggingOut = (event) => {
         event.preventDefault();
-
-        data.logout().then(res => {
-            OpenAlert("Logged Out Successfully");
-            setTimeout(() => {
-                navigate("/login");
-            }, 3000);
-        });
+        userLogOut();
+        alert("Log out successfully");
+        window.location = 'Login'
       }
 
     return(
