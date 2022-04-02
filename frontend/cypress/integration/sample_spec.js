@@ -1,6 +1,6 @@
 
   describe('LoginToSignUp', () => {
-    it.skip('Login/Logout', () => {
+    it('Login/Logout', () => {
       //Don't have an acccount
       cy.visit('http://localhost:3000/login')    
       cy.contains('Don\'t have an account? Sign Up').click()
@@ -10,7 +10,7 @@
 
 
 
-    it.skip('SignUp', () => {    
+    it('SignUp', () => {    
       cy.visit('http://localhost:3000/signup')
       //SignUp
       cy.get('input[name=firstName]')
@@ -44,7 +44,7 @@
 
 
 
-    it.skip('Login', () => {
+    it('Login', () => {
       cy.visit('http://localhost:3000/login')
       cy.get('input[name=email]')
         .type('{selectall}{backspace}test@gmail.com')
@@ -57,7 +57,7 @@
       cy.url().should('include', '/About')
     })
 
-    it.skip('NavBar', () => {
+    it('NavBar', () => {
       cy.visit('http://localhost:3000/login')
       cy.get('input[name=email]')
         .type('{selectall}{backspace}test@gmail.com')
@@ -87,9 +87,30 @@
         .type('{selectall}{backspace}password')
       cy.contains('Sign In').click()
       cy.contains('Find a Ride').click()
+      cy.get('select[name="from"]').select('Gainesville').should('have.value', 'Gainesville')
+      cy.get('select[name="to"]').select('Gainesville').should('have.value', 'Gainesville')
+    })
 
-      cy.get('#from.finding').select('Gainesville').should('have.value', 'Gainesville')
-      cy.get('#to.finding').select('Gainesville').should('have.value', 'Gainesville')
 
+    it('PostingaRide', () => {
+      cy.visit('http://localhost:3000/login')
+      cy.get('input[name=email]')
+        .type('{selectall}{backspace}test@gmail.com')
+      cy.get('input[name=password]')
+        .type('{selectall}{backspace}password')
+      cy.contains('Sign In').click()
+      cy.contains('Post a Ride').click()
+      cy.get('name').select('Gainesville').should('have.value', 'Gainesville')
+      cy.get('from').select('Gainesville').should('have.value', 'Gainesville')
+      cy.get('to').select('Gainesville').should('have.value', 'Gainesville')
+      cy.get('Destination Location:').type('Home').should('have.value', 'Home')
+      cy.get('Price of a seat::').type('11').should('have.value', '11')
+      cy.get('Duration:').type('11').should('have.value', '11')
+      cy.get('Capacity:').type('2').should('have.value', '2')
+      cy.get('Pets Allowed?:').select('yes').should('have.value', 'yes')
+      cy.get('Car Model:').select('Porche').should('have.value', 'Porche')
+      cy.get('Car Type:').select('tractor').should('have.value', 'tractor')
+      cy.get('Additional Notes').select('speed all the way please').should('have.value', 'speed all the way please')
+      cy.get('Phone Number:').select('911').should('have.value', '911')
     })
 })

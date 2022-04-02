@@ -83,11 +83,11 @@ class MyComponent extends Component{
         <br/>
           <form class="finding" onSubmit={this.handleSubmit}>
             <label class="la"> From:</label> <br/>
-              <Select id="from" options={options} value={this.state.from} onChange={this.handleFromChange} />
+              <Select name = 'from' id="from" options={options} value={this.state.from} onChange={this.handleFromChange} />
             <br></br>
             
             <label class="la"> To: </label> <br/>
-              <Select id="to" options={options} value={this.state.to} onChange={this.handleToChange} />
+              <Select name = 'to' id="to" options={options} value={this.state.to} onChange={this.handleToChange} />
             <br></br>
 
             <label class="la"> Date: </label> <br/>
