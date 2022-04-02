@@ -26,10 +26,12 @@ func Handlers() *mux.Router {
 	// r.HandleFunc("/api", controllers.TestAPI).Methods("GET")
 	r.HandleFunc("/signup", controllers.CreateUser).Methods("POST")
 	r.HandleFunc("/login", controllers.Login).Methods("POST")
-	r.HandleFunc("/delete", controllers.DeleteUser).Methods("DELETE")
+	r.HandleFunc("/deleteUser", controllers.DeleteUser).Methods("DELETE")
 	r.HandleFunc("/logout", controllers.Logout).Methods("POST")
-	r.HandleFunc("/postaride", controllers.PostRide).Methods("POST")
-	r.HandleFunc("/searchrides", controllers.SearchRides).Methods("POST")
+	r.HandleFunc("/postaride", controllers.PostARide).Methods("POST")
+	r.HandleFunc("/searcharide", controllers.SearchARide).Methods("POST")
+
+	//r.HandleFunc("/bookride", controllers.BookRide).Methods("POST")
 
 	// Auth route
 	s := r.PathPrefix("/auth").Subrouter()

@@ -15,7 +15,6 @@ import (
 )
 
 type Exception models.Exception
-
 type ErrorResponse struct {
 	Err string
 }
@@ -30,7 +29,8 @@ func TestAPI(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("API live and kicking"))
 }
 
-func Login(w http.ResponseWriter, r *http.Request) {
+//This method is refactored to login.go in controllers
+func Signin(w http.ResponseWriter, r *http.Request) {
 	user := &models.User{}
 	err := json.NewDecoder(r.Body).Decode(user)
 	if err != nil {
@@ -83,8 +83,8 @@ func FindOne(email, password string, w http.ResponseWriter) map[string]interface
 	return resp
 }
 
-//CreateUser function -- create a new user
-func CreateUser(w http.ResponseWriter, r *http.Request) {
+//CreateUser function -- create a new user d-method
+func CreatedUser(w http.ResponseWriter, r *http.Request) {
 
 	user := &models.User{}
 
@@ -118,17 +118,6 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func DeleteUser(w http.ResponseWriter, r *http.Request) {
-	Logout(w, r)
-	user, err := GetUserRow(w, r)
-	if err == nil {
-		json.NewDecoder(r.Body).Decode(&user)
-		fmt.Println(r.Body, user)
-		db.Delete(&user)
-		json.NewEncoder(w).Encode("User deleted")
-	}
-}
-
 func GetUserRow(w http.ResponseWriter, r *http.Request) (models.User, error) {
 	header, err := r.Cookie("jwt")
 	var user models.User
@@ -149,19 +138,6 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	if err == nil {
 		json.NewEncoder(w).Encode(&user)
 	}
-}
-
-func Logout(w http.ResponseWriter, r *http.Request) {
-	cookie := &http.Cookie{
-		Name:     "jwt",
-		Value:    "",
-		Expires:  time.Now().Add(-time.Hour),
-		HttpOnly: true,
-	}
-
-	http.SetCookie(w, cookie)
-	var resp = map[string]interface{}{"message": "logged out success"}
-	json.NewEncoder(w).Encode(resp)
 }
 
 func PostRide(w http.ResponseWriter, r *http.Request) {

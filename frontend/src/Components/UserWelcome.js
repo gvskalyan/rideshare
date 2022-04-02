@@ -12,10 +12,16 @@ import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from 'react-dom';
 import {getUserAccessToken} from "./session/SessionHandler";
 import NavBarCommon from "./NavBar_Common";
 import { withRouter } from "react-router-dom";
+import { useState, useEffect } from 'react'
+import {getKeyUser, setUserDetails} from "./session/SessionHandler";
 
 
 function Profile(){
-    const [token, setToken] = getUserAccessToken()
+    const [token, setToken] = getUserAccessToken(); 
+    const [keyuser, setKeyUser] = useState(getKeyUser());
+    //const [advice, setAdvice] = useState("");
+    var nameData = JSON.parse(keyuser);
+
     let navigate = useNavigate();
     const navigateToFind = () => {
         navigate("/Find", { replace: true });
@@ -31,7 +37,15 @@ function Profile(){
                 <img src={gettingin} alt="" />
             </div>
             <div className="WelcomePage">
-                <h1 style={{color:'white'}}> WELCOME, USER-NAME! </h1>
+                <h1 style={{color:'white'}}> WELCOME, {nameData.Name}! </h1>
+                
+                <br/> <br/>
+                <h3 style={{color:'white'}}>
+                  RideShare makes travel more convinient and affordable to the users. <br/>
+                  Searching for a ride or a companion? We could offer you hassle-free trips <br/>
+                  If you are travelling with a few empty seats, we will try to make your trip <br/> a bit profitable
+                  by finding you some good company.
+                </h3>
                 <br/> <br/>
                 <h3 style={{color:'white'}}> What can we help you with today? </h3>
                 <br/> <br/>
@@ -56,19 +70,21 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+
 const Section = styled.section`
     position: relative;
     width: 100%;
     height: 100%;
+
+    h1{
+        text-transform: uppercase;
+    }
+    .background {
+        img{
+            filter: brightness(60%);
+        }
+    }
     .WelcomePage{
-        .background {
-            img {
-              margin-top: 0.01rem;
-              height: 100%;
-              width: 245%;
-              filter: brightness(50%);
-            }
-          }
         margin-top: 13rem;
         height: 100%;
         width: 100%;
@@ -80,7 +96,13 @@ const Section = styled.section`
         align-items: center;
         gap: 1rem;
         .title{
-            h1{
+
+            p {
+                text-align: center;
+                padding: 0 15vw;
+                margin-top: 0.5rem;
+                font-size: 1.2rem;
+              }
 
             }
         }

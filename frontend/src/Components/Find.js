@@ -83,11 +83,11 @@ class MyComponent extends Component{
         <br/>
           <form class="finding" onSubmit={this.handleSubmit}>
             <label class="la"> From:</label> <br/>
-              <Select name="from" options={options} value={this.state.from} onChange={this.handleFromChange} />
+              <Select name = 'from' id="from" options={options} value={this.state.from} onChange={this.handleFromChange} />
             <br></br>
             
             <label class="la"> To: </label> <br/>
-              <Select name="to" options={options} value={this.state.to} onChange={this.handleToChange} />
+              <Select name = 'to' id="to" options={options} value={this.state.to} onChange={this.handleToChange} />
             <br></br>
 
             <label class="la"> Date: </label> <br/>
@@ -115,13 +115,12 @@ position: relative;
   .background {
     img {
       margin-top: 0.01rem;
-      height: 15%;
-      width: 100%;
+      height: 100%;
       filter: brightness(60%);
     }
   }
   .FindPageContent {
-    margin-top: 6rem;
+    margin-top: 2rem;
     height: 100%;
     width: 100%;
     position: absolute;
@@ -138,7 +137,7 @@ position: relative;
       margin: 0 auto;
       box-sizing: border-box;
       padding: 2rem;
-      padding-left: 13.5rem;
+      padding-left: 15rem;
       border-radius: 1rem;
       width: 40%;
       background-color: rgba(0, 0, 0, 0.6);
