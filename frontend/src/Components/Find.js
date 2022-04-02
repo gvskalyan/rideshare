@@ -86,7 +86,7 @@ class MyComponent extends Component {
     }
 
     bookRide =  (ride) => {
-        const user = getKeyUser();
+        const user = JSON.parse(getKeyUser());
         const booking = `{
             "RideID": "${ride.ID}",
             "UserMail": "${user.Email}",
