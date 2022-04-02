@@ -65,6 +65,26 @@
 <strong> Target URL </strong> - localhost:8081/bookaRide
 <strong> Request method  </strong> - POST
 
+#### Request
+```
+{
+"RideID": "213", "UsereMail":"rideshare-test@gmail.com", "Phone":"8125262243"
+}
+```
+
+#### Response
+```
+{
+    "BookingID": 171,
+    "CreatedAt": "2022-04-01T18:12:52.136105-04:00", "UpdatedAt": "2022-04-01T18:12:52.136105-04:00", "DeletedAt": null,
+    "RideId":213,
+    “userMail”: “rideshare-test@gmail.com”, “Phone”: “8125262243”
+    "fromCity": "Gainesville",
+    "toCity": "Tampa",
+    "priceperseat": 0,   
+    "ToStartTime": "2022-02-01T03:10:50-05:00" 
+}
+```
 
 ### To Do - Roadmap
 
