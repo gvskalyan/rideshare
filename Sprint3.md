@@ -1,6 +1,7 @@
 # Sprint 3 Outline and Documentation
 
 [Demo Link](https://drive.google.com/file/d/1Hu11sRQE4jfyNQIaQYKHiTj67Ag_t78F/view?usp=sharing)
+[Sprint 3 Task Board](https://github.com/gvskalyan/rideshare/projects/3)
 
 ## Frontend
 - Made functionalities available to users only upon login.
