@@ -47,9 +47,9 @@ func BookRide(w http.ResponseWriter, r *http.Request) {
 	//	if updateStatus.Error != nil {
 	//		fmt.Println(erMessage)
 	//	}
-	//var usr models.RideDetails
+	var usr models.RideDetails
 	//int st1 := 1
-	//db.Where("set status = ? where id = ?", st1 , data["ToCity"]).First(&usr)
+	db.Model(usr).Where("id = ?", data["RideID"]).Update("status", "1")
 
 	var resp = map[string]interface{}{"message": "Ride has been successfully booked"}
 	json.NewEncoder(w).Encode(resp)
