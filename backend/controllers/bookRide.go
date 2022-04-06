@@ -40,9 +40,6 @@ func BookRide(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(errMessage)
 	}
 
-	//var bookedrides []models.BookingDetails
-	//updateStatus := db.Update("Status = 1 where name = "kalyan" ", data["RideID"]).Find(&bookedrides)
-
 	//	var erMessage = updateStatus.Error
 	//	if updateStatus.Error != nil {
 	//		fmt.Println(erMessage)
