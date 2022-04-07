@@ -9,10 +9,7 @@ import (
 	"strconv"
 
 	jwt "github.com/golang-jwt/jwt"
-	//"golang.org/x/crypto/bcrypt"
 )
-
-//var db2 = utils.ConnectDB()
 
 func BookRide(w http.ResponseWriter, r *http.Request) {
 
@@ -40,12 +37,7 @@ func BookRide(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(errMessage)
 	}
 
-	//	var erMessage = updateStatus.Error
-	//	if updateStatus.Error != nil {
-	//		fmt.Println(erMessage)
-	//	}
 	var usr models.RideDetails
-	//int st1 := 1
 	db.Model(usr).Where("id = ?", data["RideID"]).Update("status", "1")
 
 	var resp = map[string]interface{}{"message": "Ride has been successfully booked"}
