@@ -14,5 +14,5 @@ type BookingDetails struct {
 	Id1       uint   `json:"id1"`
 	UserId    int
 	//Email     string `gorm:"type:varchar(100);unique_index"`
-	//Status int //on successful booking set status as 1.
+	Status int //on successful booking set status as 1.
 }
