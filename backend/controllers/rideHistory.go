@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"backend/models"
+	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -25,4 +26,23 @@ func RideHistory(w http.ResponseWriter, r *http.Request) {
 	// fmt.Println(rows)
 
 	var rides []string
+
+	// defer rows.Close()
+	for rows.Next() {
+		var ride_id string
+		rows.Scan(&ride_id)
+		rides = append(rides, ride_id)
+	}
+
+	var resp = map[string]interface{}{"Ride Ids": rides}
+	fmt.Println(resp)
+	// fmt.Println(reflect.TypeOf(rides), rides[0])
+
+	var ridedetails []models.RideDetails
+	fmt.Println(ridedetails)
+
+	fmt.Println("yes")
+	db.Table("ride_details").Where("ride_id IN (?)", rides).Find(&ridedetails)
+	json.NewEncoder(w).Encode(ridedetails)
+
 }
