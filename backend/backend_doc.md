@@ -8,11 +8,11 @@
 
 - [signup](#1-signup)
 - [login](#2-login)
-- [logout]
-- [user]
-- [delete]
-- [postaRide]
-- [searchRides]
+- [logout](#3-logout)
+- [user](#4-user)
+- [delete](#5-delete)
+- [postaRide](#6-postaride)
+- [searchRides](#)
 - [bookaRide]
 - [rideHistory]
 
@@ -62,5 +62,46 @@ in the database.
  - 
 
 ### 3) logout
+
+
+### 4) user
+
+#### Description:
+
+- Method: GET
+- Once the user is logged in successfully an active JSONWebToken is generated. This API retrieves the user details such as Name, Email, Password(encrypted format), Gender, City, DateofBirth, PhoneNumber using the web token.
+
+#### Sample Request and Response:
+
+- 
+
+### 5) delete
+
+#### Description:
+
+- Method: DELETE
+- This API is used to delete all the data of the existing user from the database records.
+- This action is performed using JSONWebToken
+
+#### Sample Request and Response:
+
+- 
+
+### 6) postaRide
+#### Description:
+
+-  Method: POST
+-  This API is used to “post a ride” details by the users.
+-  Users must be logged in to use this PostARide functionality
+
+#### Acceptance Criteria:
+
+-  For Posting a ride the following fields must be provided by the user: <em>name, startLocation, fromCity, toCity, destLocation, priceperSeat, duration, seatsAvailable, petsAllowed, carModel, carType, addlNotes, phoneNumber.</em>
+- Once all the inputs are properly entered by the user, the API throws a confirmation message: <em>“Ride has been Successfully Posted.”</em>
+
+#### Sample Request and Response:
+
+- 
+
 
 
