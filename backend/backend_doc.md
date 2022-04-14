@@ -12,7 +12,7 @@
 - [user](#4-user)
 - [delete](#5-delete)
 - [postaRide](#6-postaride)
-- [searchRides](#)
+- [searchRides](#7-searchrides)
 - [bookaRide]
 - [rideHistory]
 
@@ -103,5 +103,22 @@ in the database.
 
 - 
 
+### 7) searchRides
+#### Description:
 
+- Method: POST
+- Using this API, users can get the available rides.
+- To search for available rides fromCity , toCity and startDate, time must be provided.
+
+
+#### Acceptance Criteria:
+
+- The API should throw an error message whenever any of the above mentioned required
+parameters aren’t specified.
+- Whenever a request is sent the API should send a response with the list of available rides in the specified routes with details : name, startLocation, fromCity, toCity, destLocation, priceperSeat, duration, seatsAvailable, petsAllowed, carModel, carType, addlNotes, phoneNumber.
+
+
+#### Sample Request and Response:
+
+- 
 
