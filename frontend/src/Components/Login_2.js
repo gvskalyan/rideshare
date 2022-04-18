@@ -156,8 +156,7 @@ const Section = styled.section`
   height: 100%;
   .background {
     img {
-      height: 15%;
-      width: 100%;
+      height: 100%;
       filter: brightness(60%);
     }
   }
@@ -174,10 +173,6 @@ const Section = styled.section`
     align-items: center;
     gap: 1rem;
     color: white;
-
-      .TextField{
-
-      }
   }
 `;
 
