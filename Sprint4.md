@@ -1,10 +1,10 @@
 
 # Sprint 4
 
-# Application Description
+## Application Description
 
 
-## Work Done / Deliverables
+### Work Done / Deliverables
 
 - Implement Booking History (Feature)
 - CI/CD pipeline that evaluates the code integrity and provides platform for timed deployment.
@@ -16,11 +16,18 @@
 - Cypress tests for frontend code.
 - Modify backend code so that it is compatible with frontend request and response values.
 
+## Demo Video
 
 
+## Frontend
+
+### Cypress Test Video
 
 
-# Backend
+## Backend
+
+### API Documentation link
+
 
 ## Documentation
 
