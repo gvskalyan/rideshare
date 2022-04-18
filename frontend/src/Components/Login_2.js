@@ -16,6 +16,8 @@ import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {useNavigate} from 'react-router-dom';
 import data from './data/Apis'
 // import component
+import gettingin from "./assets/gettingin.jpg"
+import styled from "styled-components"
 import Copyright from './Copyright'
 import {setAccessToken, setUserDetails} from "./session/SessionHandler";
 import NavBar_Login from "./NavBar_Login";
@@ -55,8 +57,14 @@ function Login() {
   }
 
   return (
+      
       <div>
         <NavBar_Login />
+        <Section id="hero">
+        <div className = "background">
+          <img src={gettingin} />
+        </div>
+        <div className="content">
         <br/>
         <ThemeProvider theme={theme}>
           <Container component="main" maxWidth="xs">
@@ -72,7 +80,7 @@ function Login() {
               <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               </Avatar>
               <Typography component="h1" variant="h5">
-                Sign in
+                Please Sign in for Access
               </Typography>
               <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                 <TextField
@@ -84,6 +92,10 @@ function Login() {
                     name="email"
                     autoComplete="email"
                     autoFocus
+                    sx={{ input: { color: 'white' } }}
+                    InputLabelProps={{
+                      style: { color: '#fff' },
+                    }}
                     onChange={e => setEmail(e.target.value)}
                 />
                 <TextField
@@ -95,10 +107,14 @@ function Login() {
                     type="password"
                     id="password"
                     autoComplete="current-password"
+                    sx={{ input: { color: 'white' } }}
+                    InputLabelProps={{
+                      style: { color: '#fff' },
+                    }}
                     onChange={e => setPassword(e.target.value)}
                 />
                 <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
+                    control={<Checkbox value="remember" color="secondary" />}
                     label="Remember me"
                 />
                 <Button
@@ -126,8 +142,42 @@ function Login() {
             <Copyright sx={{ mt: 8, mb: 4 }} />
           </Container>
         </ThemeProvider>
+        </div>
+        </Section>
       </div>
   );
 }
 
 export default Login;
+
+const Section = styled.section`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  .background {
+    img {
+      height: 100%;
+      filter: brightness(60%);
+    }
+  }
+  .content {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 3;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+  }
+`;
+
+const styles = theme => ({
+  multilineColor:{
+      color:'red'
+  }
+});
