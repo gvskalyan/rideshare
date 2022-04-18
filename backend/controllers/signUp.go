@@ -9,8 +9,6 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-//var db2 = utils.ConnectDB()
-
 func CreateUser(w http.ResponseWriter, r *http.Request) {
 
 	user := &models.User{}
