@@ -28,8 +28,4 @@
 
 ### API Documentation link
 
-
-## Documentation
-
-Backend documentation is available in the [link]()
-
+Backend API documentation is available in the [link](backend/backend_doc.md)
