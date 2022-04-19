@@ -6,10 +6,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from "styled-components"
 import NavBarCommon from "./NavBar_Common";
 import data from "./data/Apis";
-import {Divider, IconButton, List, ListItem, ListItemAvatar, ListItemText, ListSubheader} from "@mui/material";
-import Avatar from "@mui/material/Avatar";
+import {CardActions, CardContent} from "@mui/material";
 import Button from "@mui/material/Button";
 import {getKeyUser} from "./session/SessionHandler";
+import Typography from "@mui/material/Typography";
+import {Card} from "reactstrap";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 
 const options = [
     {value: 'gainesville', label: 'Gainesville'},
@@ -85,7 +88,7 @@ class MyComponent extends Component {
         return strTime;
     }
 
-    bookRide =  (ride) => {
+    bookRide = (ride) => {
         const user = JSON.parse(getKeyUser());
         const booking = `{
             "RideID": "${ride.ID}",
@@ -96,6 +99,30 @@ class MyComponent extends Component {
     }
 
     render() {
+
+        const card = (
+            <React.Fragment>
+                <CardContent>
+                    <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
+                        Word of the Day
+                    </Typography>
+                    <Typography variant="h5" component="div">
+                        benevolent
+                    </Typography>
+                    <Typography sx={{mb: 1.5}} color="text.secondary">
+                        adjective
+                    </Typography>
+                    <Typography variant="body2">
+                        well meaning and kindly.
+                        <br/>
+                        {'"a benevolent smile"'}
+                    </Typography>
+                </CardContent>
+                <CardActions>
+                    <Button size="small">Learn More</Button>
+                </CardActions>
+            </React.Fragment>
+        );
 
         return (
             <div>
@@ -131,27 +158,24 @@ class MyComponent extends Component {
                         </form>
                     </div>
                 </Section>
-                <List align="center" sx={{width: '100%', bgcolor: 'background.paper'}}>
-                    <ListSubheader
-                        inset
-                    >
-                        <h2> Search Results: </h2>
-                    </ListSubheader>
+                <Container maxWidth="lg">
+                    <h2> Search Results: </h2>
+                    <br/>
                     {this.state.rides.map((ride) => (
-                        <div key={ride.ID}>
-                            <ListItem alignItems="center"
-                                      secondaryAction={
-                                          <IconButton edge="end">
-                                              <CommentIcon/>
-                                          </IconButton>
-                                      }>
-                                <ListItemAvatar>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg"/>
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary={ride.Name}
-                                    secondary={
-                                        <React.Fragment>
+                        <Box mb={1} key={ride.ID}>
+                            <Card variant="outlined">
+                                <React.Fragment>
+                                    <CardContent>
+                                        <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
+                                            Word of the Day
+                                        </Typography>
+                                        <Typography variant="h5" component="div">
+                                            {ride.Name}
+                                        </Typography>
+                                        <Typography sx={{mb: 1.5}} color="text.secondary">
+                                            adjective
+                                        </Typography>
+                                        <Typography variant="body2">
                                             Start Time - {this.getTime(ride.ToStartTime)}
                                             <br/>
                                             End Time - {this.getTime(ride.ToEndTime)}
@@ -160,17 +184,20 @@ class MyComponent extends Component {
                                             <br/>
                                             Price Per Seat - {ride.priceperseat}$
                                             <br/>
-                                            <Button variant="outlined" align="right" onClick={() => this.bookRide(ride)}>Book Ride</Button>
-                                        </React.Fragment>
-                                    }
-                                />
-                            </ListItem>
-                            <Divider variant="inset" component="li"/>
-                        </div>
+                                            <Button variant="outlined" align="right"
+                                                    onClick={() => this.bookRide(ride)}>Book Ride</Button>
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Button size="small">Learn More</Button>
+                                    </CardActions>
+                                </React.Fragment>
+                            </Card>
+                        </Box>
                     ))}
 
-
-                </List>
+                </Container>
+                <br/>
             </div>
         );
     }
