@@ -6,13 +6,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from "styled-components"
 import NavBarCommon from "./NavBar_Common";
 import data from "./data/Apis";
-import {CardActions, CardContent} from "@mui/material";
+import {CardActions, CardContent, IconButton} from "@mui/material";
 import Button from "@mui/material/Button";
 import {getKeyUser} from "./session/SessionHandler";
 import Typography from "@mui/material/Typography";
-import {Card} from "reactstrap";
+import {Card, CardHeader} from "reactstrap";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const options = [
     {value: 'gainesville', label: 'Gainesville'},
@@ -158,40 +160,43 @@ class MyComponent extends Component {
                         </form>
                     </div>
                 </Section>
-                <Container maxWidth="lg">
+                <Container maxWidth="md">
                     <h2> Search Results: </h2>
                     <br/>
                     {this.state.rides.map((ride) => (
                         <Box mb={1} key={ride.ID}>
-                            <Card variant="outlined">
-                                <React.Fragment>
-                                    <CardContent>
-                                        <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
-                                            Word of the Day
-                                        </Typography>
-                                        <Typography variant="h5" component="div">
-                                            {ride.Name}
-                                        </Typography>
-                                        <Typography sx={{mb: 1.5}} color="text.secondary">
-                                            adjective
-                                        </Typography>
-                                        <Typography variant="body2">
-                                            Start Time - {this.getTime(ride.ToStartTime)}
-                                            <br/>
-                                            End Time - {this.getTime(ride.ToEndTime)}
-                                            <br/>
-                                            Seats Left - {ride.seatsAvailable}
-                                            <br/>
-                                            Price Per Seat - {ride.priceperseat}$
-                                            <br/>
-                                            <Button variant="outlined" align="right"
-                                                    onClick={() => this.bookRide(ride)}>Book Ride</Button>
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button size="small">Learn More</Button>
-                                    </CardActions>
-                                </React.Fragment>
+                            <Card sx={{ maxWidth: 345 }}>
+                                <CardHeader
+                                    avatar={
+                                        <Avatar aria-label="recipe">
+                                            R
+                                        </Avatar>
+                                    }
+                                    action={
+                                        <IconButton aria-label="settings">
+                                            <MoreVertIcon />
+                                        </IconButton>
+                                    }
+                                    title="Shrimp and Chorizo Paella"
+                                    subheader="September 14, 2016"
+                                />
+                                <CardContent>
+                                    <Typography variant="h5" component="div">
+                                        {ride.Name}
+                                    </Typography>
+                                    <Typography sx={{mb: 1}} color="text.secondary">
+                                        ${ride.priceperseat}
+                                    </Typography>
+                                    <Typography variant="body2">
+                                        Start Time - {this.getTime(ride.ToStartTime)}
+                                        <br/>
+                                        End Time - {this.getTime(ride.ToEndTime)}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Button variant="outlined" sx={{marginLeft: "auto"}}
+                                            onClick={() => this.bookRide(ride)}>Book Ride</Button>
+                                </CardActions>
                             </Card>
                         </Box>
                     ))}
