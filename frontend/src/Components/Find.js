@@ -15,6 +15,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import SnackBar from "./SnackBar";
 
 const options = [
     {value: 'gainesville', label: 'Gainesville'},
@@ -38,7 +39,9 @@ class MyComponent extends Component {
             from: '',
             to: '',
             date: '',
-            rides: []
+            rides: [],
+            open: false,
+            message: '',
         };
     }
 
@@ -63,12 +66,15 @@ class MyComponent extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        this.searchRide();
+    }
 
+    searchRide = () => {
         const search = `{
         "FromCity": "${this.state.from.value}",
         "ToCity": "${this.state.to.value}",
         "StartTime": "${this.state.date}"
-    }`;
+        }`;
 
         data.searcharide(search).then(res => {
             this.setState({
@@ -99,13 +105,28 @@ class MyComponent extends Component {
         }`;
 
         data.bookaride(booking).then(res => {
-            alert("Ride booked successfully");
+            this.OpenAlert("Ride booked successfully");
+            this.searchRide();
         });
     }
+
+    OpenAlert = (message) => {
+        this.setState({
+            message: message,
+            open: true
+        });
+    };
+
+    handleClose = () => {
+        this.setState({
+            open: false
+        });
+    };
 
     render() {
         return (
             <div>
+                <SnackBar open={this.state.open} handleClose={this.handleClose} message={this.state.message}/>
                 <Section>
                     <div>
                         <NavBarCommon/>
