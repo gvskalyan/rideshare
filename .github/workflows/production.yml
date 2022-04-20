@@ -29,11 +29,11 @@ jobs:
 
       # queries database with postgres client
       - name: Query database
-        run: psql -h postgres -d postgres_db -U postgres_user
+        run: psql -h postgres -d postride -U postgres
         env:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
-          PGPASSWORD: postgres_password
+          PGPASSWORD: postgres
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Use Golang 17.x
