@@ -16,6 +16,7 @@ jobs:
         with:
           go-version: '^1.13.1'
       - run: cd backend
+      - run: ls
       - run: go run main.go
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
