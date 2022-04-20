@@ -1,4 +1,5 @@
-const SERVER_URL = 'http://localhost:8080'
+//const SERVER_URL = ''
+const SERVER_URL = 'https://rideshare-se.herokuapp.com'
 const VERSION = '/v1'
 
 const ENDPOINTS = {
@@ -44,43 +45,43 @@ const postRequest = (url, data, resolve, reject) => {
 
 const data = {
     login: (loginData) => new Promise((resolve, reject) => {
-        const url = `${ENDPOINTS.login()}`
+        const url = `${SERVER_URL}${ENDPOINTS.login()}`
         console.log(url);
         postRequest(url, loginData, resolve, reject)
     }),
 
     signup: (signupData) => new Promise((resolve, reject) => {
-        const url = `${ENDPOINTS.signup()}`
+        const url = `${SERVER_URL}${ENDPOINTS.signup()}`
         postRequest(url, signupData, resolve, reject)
     }),
 
     postaride: (ride) => new Promise((resolve,reject) => {
-        const url = `${ENDPOINTS.postaride()}`
+        const url = `${SERVER_URL}${ENDPOINTS.postaride()}`
         postRequest(url, ride, resolve, reject)
     }),
 
     getUser: () => new Promise((resolve,reject) => {
-        const url = `${ENDPOINTS.getUser()}`
+        const url = `${SERVER_URL}${ENDPOINTS.getUser()}`
         getRequest(url, resolve, reject)
     }),
 
     logout: () => new Promise((resolve,reject) =>{
-        const url = `${ENDPOINTS.logout()}`
+        const url = `${SERVER_URL}${ENDPOINTS.logout()}`
         postRequest(url, resolve, reject)
     }),
 
     userDetails: (token) => new Promise((resolve,reject) => {
-        const url = `${ENDPOINTS.user()}`
+        const url = `${SERVER_URL}${ENDPOINTS.user()}`
         getRequest(url, token, resolve, reject)
     }),
 
     searcharide: (searchData) => new Promise((resolve,reject) => {
-        const url = `${ENDPOINTS.searcharide()}`
+        const url = `${SERVER_URL}${ENDPOINTS.searcharide()}`
         postRequest(url, searchData, resolve, reject)
     }),
 
     bookaride: (bookRideData) => new Promise((resolve,reject) => {
-        const url = `${ENDPOINTS.bookaride()}`
+        const url = `${SERVER_URL}${ENDPOINTS.bookaride()}`
         postRequest(url, bookRideData, resolve, reject)
     }),
 }
