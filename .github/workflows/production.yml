@@ -1,0 +1,26 @@
+name: Production workflow
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Use Golang 17.x
+        uses: actions/setup-go@v3
+        with:
+          go-version: '^1.13.1'
+      - run: cd backend
+      - run: go run main.go
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          args: deploy --dir=build --prod
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: 'rideshare-se'
+          heroku_email: 'gvskalyan2@gmail.com'
