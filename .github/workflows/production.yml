@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    types: [opened, reopened]
 
 jobs:
   deploy:
@@ -21,8 +23,7 @@ jobs:
           POSTGRES_USER: postgres
     steps:
       - name: Install PostgreSQL client
-        run: |
-          apt-get update
+        run: sudo apt-get update
           apt-get install --yes postgresql-client
 
       # queries database with postgres client
