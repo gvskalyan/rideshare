@@ -50,7 +50,7 @@ function Login() {
       data.getUser().then(response => {
         setUserDetails(response);
         setTimeout(() => {
-          navigate("/UserWelcome");
+          navigate("/home");
         }, 3000);
       })
     });

@@ -20,7 +20,7 @@ function NavBarCommon() {
                 </NavLink>
                 <ul className="nav-menu">
                     <li className="nav-item">
-                        <NavLink exact to="/UserWelcome" activeClassName="active" className="nav-links">
+                        <NavLink exact to="/home" activeClassName="active" className="nav-links">
                             Home
                         </NavLink>
                     </li>

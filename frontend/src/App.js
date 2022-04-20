@@ -27,7 +27,7 @@ function App() {
                 path="/"
                 element={
                     <RequireAuth>
-                        <About />
+                        <UserWelcome />
                     </RequireAuth>
                 }
             />
@@ -35,7 +35,7 @@ function App() {
                 path="/home"
                 element={
                     <RequireAuth>
-                        <Home />
+                        <UserWelcome />
                     </RequireAuth>
                 }
             />

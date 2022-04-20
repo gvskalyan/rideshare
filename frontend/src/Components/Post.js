@@ -179,7 +179,7 @@ class MyComponent extends Component{
       }`;
       data.postaride(ride).then(res => {
         alert("Posted Successfully");
-        window.location = 'UserWelcome';
+        window.location = 'home';
 
     });
   }
