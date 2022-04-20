@@ -15,10 +15,7 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: '^1.13.1'
-      - run: ls
-      - run: cd backend && ls
-      - run: ls
-      - run: go run main.go
+      - run: cd backend && go install && go run main.go
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
