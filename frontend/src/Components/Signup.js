@@ -22,6 +22,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import data from './data/Apis'
 import SnackBar from "./SnackBar";
 import NavBar_Login from "./NavBar_Login";
+import gettingin from "./assets/gettingin.jpg"
+import styled from "styled-components"
 
 const theme = createTheme();
 
@@ -83,6 +85,11 @@ export default function SignUp() {
   return (
       <div>
         <NavBar_Login />
+        <Section id="hero">
+        <div className = "background">
+          <img src={gettingin} />
+        </div>
+        <div className="content">
         <br/>
         <LocalizationProvider dateAdapter={DateAdapter}>
           <ThemeProvider theme={theme}>
@@ -114,6 +121,10 @@ export default function SignUp() {
                           value={firstName}
                           onChange={(e) => setFirstName(e.target.value)}
                           label="First Name"
+                          sx={{ input: { color: 'white' } }}
+                          InputLabelProps={{
+                            style: { color: '#fff' },
+                          }}
                           autoFocus
                       />
                     </Grid>
@@ -127,6 +138,10 @@ export default function SignUp() {
                           value={lastName}
                           onChange={(e) => setLastName(e.target.value)}
                           label="Last Name"
+                          sx={{ input: { color: 'white' } }}
+                          InputLabelProps={{
+                            style: { color: '#fff' },
+                          }}
                           autoFocus
                           
                       />
@@ -167,6 +182,10 @@ export default function SignUp() {
                           value={city}
                           onChange={(e) => setCity(e.target.value)}
                           autoComplete="city"
+                          sx={{ input: { color: 'white' } }}
+                          InputLabelProps={{
+                            style: { color: '#fff' },
+                          }}
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -179,6 +198,10 @@ export default function SignUp() {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           autoComplete="email"
+                          sx={{ input: { color: 'white' } }}
+                          InputLabelProps={{
+                            style: { color: '#fff' },
+                          }}
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -191,6 +214,10 @@ export default function SignUp() {
                           label="Phone number"
                           name="phone"
                           autoComplete="phone"
+                          sx={{ input: { color: 'white' } }}
+                          InputLabelProps={{
+                            style: { color: '#fff' },
+                          }}
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -204,6 +231,10 @@ export default function SignUp() {
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           autoComplete="new-password"
+                          sx={{ input: { color: 'white' } }}
+                          InputLabelProps={{
+                            style: { color: '#fff' },
+                          }}
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -215,6 +246,10 @@ export default function SignUp() {
                           type="password"
                           id="rpassword"
                           autoComplete="new-password"
+                          sx={{ input: { color: 'white' } }}
+                          InputLabelProps={{
+                            style: { color: '#fff' },
+                          }}
                       />
                     </Grid>
                   </Grid>
@@ -239,6 +274,40 @@ export default function SignUp() {
             </Container>
           </ThemeProvider>
         </LocalizationProvider>
+        </div>
+        </Section>
       </div>
   );
 }
+
+const Section = styled.section`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  .background {
+    img {
+      height: 100%;
+      filter: brightness(60%);
+    }
+  }
+  .content {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 3;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+  }
+`;
+
+const styles = theme => ({
+  multilineColor:{
+      color:'red'
+  }
+});
