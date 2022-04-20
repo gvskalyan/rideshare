@@ -29,19 +29,19 @@ jobs:
       - name: start database
         run: sudo /etc/init.d/postgresql restart
       # queries database with postgres client
-      - name: Query database
-        run: psql -h localhost -d postride -U postgres
-        env:
-          # postgress password is required; alternatively, you can run:
-          # `PGPASSWORD=postgres_password psql ...`
-          PGPASSWORD: postgres
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Use Golang 17.x
-        uses: actions/setup-go@v3
-        with:
-          go-version: '^1.13.1'
-      - run: cd backend && go install && go run main.go
+      # - name: Query database
+      #   run: psql -h localhost -d postride -U postgres
+      #   env:
+      #     # postgress password is required; alternatively, you can run:
+      #     # `PGPASSWORD=postgres_password psql ...`
+      #     PGPASSWORD: postgres
+      # - name: Checkout code
+      #   uses: actions/checkout@v3
+      # - name: Use Golang 17.x
+      #   uses: actions/setup-go@v3
+      #   with:
+      #     go-version: '^1.13.1'
+      - run: cd backend && go install # && go run main.go
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
