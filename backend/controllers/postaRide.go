@@ -13,8 +13,6 @@ import (
 	jwt "github.com/golang-jwt/jwt"
 )
 
-//var db1 = utils.ConnectDB()
-
 func PostARide(w http.ResponseWriter, r *http.Request) {
 
 	header, _ := r.Cookie("jwt")
