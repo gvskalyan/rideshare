@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/bwmarrin/snowflake"
 	jwt "github.com/golang-jwt/jwt"
 )
 
@@ -41,6 +42,12 @@ func PostARide(w http.ResponseWriter, r *http.Request) {
 	// }
 	rideDetails.ToStartTime = startTime
 	rideDetails.ToEndTime = endTime
+
+	node, err := snowflake.NewNode(1)
+	// Generate a snowflake ID.
+	id := node.Generate()
+	rideDetails.RideId = fmt.Sprint(id)
+
 	json.Unmarshal([]byte(string(body)), &rideDetails)
 	createdDetails := db.Create(rideDetails)
 	var errMessage = createdDetails.Error

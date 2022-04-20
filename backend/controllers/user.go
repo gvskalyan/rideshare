@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/bwmarrin/snowflake"
 	jwt "github.com/golang-jwt/jwt"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -24,6 +25,7 @@ type error interface {
 }
 
 var db = utils.ConnectDB()
+var node, _ = snowflake.NewNode(1)
 
 func TestAPI(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("API live and kicking"))

@@ -26,4 +26,5 @@ type RideDetails struct {
 	ToStartTime time.Time
 	ToEndTime   time.Time
 	RideId      string
+	Status      int
 }
