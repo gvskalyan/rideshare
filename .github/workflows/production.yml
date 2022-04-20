@@ -26,7 +26,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install --yes postgresql-client
-
+      - name: start database
+        run: sudo /etc/init.d/postgresql restart
       # queries database with postgres client
       - name: Query database
         run: psql -h localhost -d postride -U postgres
