@@ -4,10 +4,9 @@ const VERSION = '/v1'
 const ENDPOINTS = {
     signup: () => '/signup',
     login: () => '/login',
-    register: () => '/users/register',
-    getPostById: (postId) => `/posts/getOne/${postId}`,
     postaride: () => '/postaride',
     searcharide: () => '/searcharide',
+    bookaride: () => '/bookride',
     getUser: () => '/auth/user',
     logout: () => '/logout'
 }
@@ -44,31 +43,6 @@ const postRequest = (url, data, resolve, reject) => {
 }
 
 const data = {
-    getPosts: (userId) => new Promise((resolve, reject) => {
-        const url = `${SERVER_URL}${VERSION}${ENDPOINTS.getAllPostsOfUser(userId)}`
-        getRequest(url, resolve, reject)
-    }),
-
-    getPostById: (postId) => new Promise((resolve, reject) => {
-        const url = `${SERVER_URL}${VERSION}${ENDPOINTS.getPostById(postId)}`
-        getRequest(url, resolve, reject)
-    }),
-
-    createPost: (postData) => new Promise((resolve, reject) => {
-        const url = `${SERVER_URL}${VERSION}${ENDPOINTS.createPost()}`
-        postRequest(url, postData, resolve, reject)
-    }),
-
-    getCommentsOfPost: (postId) => new Promise((resolve, reject) => {
-        const url = `${SERVER_URL}${VERSION}${ENDPOINTS.getCommentsOfPost(postId)}`
-        getRequest(url, resolve, reject)
-    }),
-
-    createComment: (commentData) => new Promise((resolve, reject) => {
-        const url = `${SERVER_URL}${VERSION}${ENDPOINTS.createComment()}`
-        postRequest(url, commentData, resolve, reject)
-    }),
-
     login: (loginData) => new Promise((resolve, reject) => {
         const url = `${ENDPOINTS.login()}`
         console.log(url);
@@ -103,6 +77,11 @@ const data = {
     searcharide: (searchData) => new Promise((resolve,reject) => {
         const url = `${ENDPOINTS.searcharide()}`
         postRequest(url, searchData, resolve, reject)
+    }),
+
+    bookaride: (bookRideData) => new Promise((resolve,reject) => {
+        const url = `${ENDPOINTS.bookaride()}`
+        postRequest(url, bookRideData, resolve, reject)
     }),
 }
 
