@@ -105,8 +105,10 @@ class MyComponent extends Component {
         }`;
 
         data.bookaride(booking).then(res => {
-            this.OpenAlert("Ride booked successfully");
-            this.searchRide();
+            this.OpenAlert("Ride booked successfully. Details can be seen in Ride History section of homepage");
+            setTimeout(() => {
+                window.location = 'userwelcome';
+            }, 3000);
         });
     }
 
