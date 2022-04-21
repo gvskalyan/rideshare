@@ -6,10 +6,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from "styled-components"
 import NavBarCommon from "./NavBar_Common";
 import data from "./data/Apis";
-import {Divider, IconButton, List, ListItem, ListItemAvatar, ListItemText, ListSubheader} from "@mui/material";
-import Avatar from "@mui/material/Avatar";
+import {CardActions, CardContent, IconButton} from "@mui/material";
 import Button from "@mui/material/Button";
 import {getKeyUser} from "./session/SessionHandler";
+import Typography from "@mui/material/Typography";
+import {Card, CardHeader} from "reactstrap";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import SnackBar from "./SnackBar";
 
 const options = [
     {value: 'gainesville', label: 'Gainesville'},
@@ -33,7 +39,9 @@ class MyComponent extends Component {
             from: '',
             to: '',
             date: '',
-            rides: []
+            rides: [],
+            open: false,
+            message: '',
         };
     }
 
@@ -58,12 +66,15 @@ class MyComponent extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        this.searchRide();
+    }
 
+    searchRide = () => {
         const search = `{
         "FromCity": "${this.state.from.value}",
         "ToCity": "${this.state.to.value}",
         "StartTime": "${this.state.date}"
-    }`;
+        }`;
 
         data.searcharide(search).then(res => {
             this.setState({
@@ -85,20 +96,39 @@ class MyComponent extends Component {
         return strTime;
     }
 
-    bookRide =  (ride) => {
+    bookRide = (ride) => {
         const user = JSON.parse(getKeyUser());
         const booking = `{
             "RideID": "${ride.ID}",
             "UserMail": "${user.Email}",
             "Phone": "${user.PhoneNumber}"
         }`;
-        alert("Ride booked");
+
+        data.bookaride(booking).then(res => {
+            this.OpenAlert("Ride booked successfully. Details can be seen in Ride History section of homepage");
+            setTimeout(() => {
+                window.location = 'home';
+            }, 3000);
+        });
     }
 
-    render() {
+    OpenAlert = (message) => {
+        this.setState({
+            message: message,
+            open: true
+        });
+    };
 
+    handleClose = () => {
+        this.setState({
+            open: false
+        });
+    };
+
+    render() {
         return (
             <div>
+                <SnackBar open={this.state.open} handleClose={this.handleClose} message={this.state.message}/>
                 <Section>
                     <div>
                         <NavBarCommon/>
@@ -131,46 +161,49 @@ class MyComponent extends Component {
                         </form>
                     </div>
                 </Section>
-                <List align="center" sx={{width: '100%', bgcolor: 'background.paper'}}>
-                    <ListSubheader
-                        inset
-                    >
-                        <h2> Search Results: </h2>
-                    </ListSubheader>
+                <Container maxWidth="md">
+                    <h2> Search Results: </h2>
+                    <br/>
                     {this.state.rides.map((ride) => (
-                        <div key={ride.ID}>
-                            <ListItem alignItems="center"
-                                      secondaryAction={
-                                          <IconButton edge="end">
-                                              <CommentIcon/>
-                                          </IconButton>
-                                      }>
-                                <ListItemAvatar>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg"/>
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary={ride.Name}
-                                    secondary={
-                                        <React.Fragment>
-                                            Start Time - {this.getTime(ride.ToStartTime)}
-                                            <br/>
-                                            End Time - {this.getTime(ride.ToEndTime)}
-                                            <br/>
-                                            Seats Left - {ride.seatsAvailable}
-                                            <br/>
-                                            Price Per Seat - {ride.priceperseat}$
-                                            <br/>
-                                            <Button variant="outlined" align="right" onClick={() => this.bookRide(ride)}>Book Ride</Button>
-                                        </React.Fragment>
+                        <Box mb={1} key={ride.ID}>
+                            <Card sx={{ maxWidth: 345 }}>
+                                <CardHeader
+                                    avatar={
+                                        <Avatar aria-label="recipe">
+                                            R
+                                        </Avatar>
                                     }
+                                    action={
+                                        <IconButton aria-label="settings">
+                                            <MoreVertIcon />
+                                        </IconButton>
+                                    }
+                                    title="Shrimp and Chorizo Paella"
+                                    subheader="September 14, 2016"
                                 />
-                            </ListItem>
-                            <Divider variant="inset" component="li"/>
-                        </div>
+                                <CardContent>
+                                    <Typography variant="h5" component="div">
+                                        {ride.Name}
+                                    </Typography>
+                                    <Typography sx={{mb: 1}} color="text.secondary">
+                                        ${ride.priceperseat}
+                                    </Typography>
+                                    <Typography variant="body2">
+                                        Start Time - {this.getTime(ride.ToStartTime)}
+                                        <br/>
+                                        End Time - {this.getTime(ride.ToEndTime)}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Button variant="outlined" sx={{marginLeft: "auto"}}
+                                            onClick={() => this.bookRide(ride)}>Book Ride</Button>
+                                </CardActions>
+                            </Card>
+                        </Box>
                     ))}
 
-
-                </List>
+                </Container>
+                <br/>
             </div>
         );
     }

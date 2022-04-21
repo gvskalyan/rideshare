@@ -66,7 +66,7 @@
       cy.contains('Sign In').click()
       
       cy.contains('Home').click()
-      cy.url().should('include', '/UserWelcome')
+      cy.url().should('include', '/home')
 
       cy.contains('Find a Ride').click()
       cy.url().should('include', '/Find')

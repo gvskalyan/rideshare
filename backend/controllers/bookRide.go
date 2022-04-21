@@ -9,10 +9,7 @@ import (
 	"strconv"
 
 	jwt "github.com/golang-jwt/jwt"
-	//"golang.org/x/crypto/bcrypt"
 )
-
-//var db2 = utils.ConnectDB()
 
 func BookRide(w http.ResponseWriter, r *http.Request) {
 
@@ -40,16 +37,8 @@ func BookRide(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(errMessage)
 	}
 
-	//var bookedrides []models.BookingDetails
-	//updateStatus := db.Update("Status = 1 where name = "kalyan" ", data["RideID"]).Find(&bookedrides)
-
-	//	var erMessage = updateStatus.Error
-	//	if updateStatus.Error != nil {
-	//		fmt.Println(erMessage)
-	//	}
-	//var usr models.RideDetails
-	//int st1 := 1
-	//db.Where("set status = ? where id = ?", st1 , data["ToCity"]).First(&usr)
+	var usr models.RideDetails
+	db.Model(usr).Where("id = ?", data["RideID"]).Update("status", "1")
 
 	var usr models.RideDetails
 	db.Model(usr).Where("ride_id = ?", data["RideID"]).Update("status", "1")

@@ -171,7 +171,6 @@ class MyComponent extends Component{
         "StartTime": "${formatTime(this.state.sTime)}",
         "EndTime" : "${formatTime(this.state.dTime)}",
         "RideDuration" : "${this.state.duration}",
-        "SeatAvailable": "${this.state.capacity.value}",
         "PetsAllowed": "${this.state.pets.value}",
         "carModel": "${this.state.cmodel}",
         "carType": "${this.state.ctype}",
@@ -180,7 +179,7 @@ class MyComponent extends Component{
       }`;
       data.postaride(ride).then(res => {
         alert("Posted Successfully");
-        window.location = 'About';
+        window.location = 'home';
 
     });
   }
@@ -202,47 +201,43 @@ class MyComponent extends Component{
           <form class="posting" onSubmit={this.handleSubmit}>
 
             <label class="la"> Name: <br/>
-              <input type="text" name="name" id="name" value={this.state.name} onChange={this.handleNameChange}></input>
+              <input type="text" name="name" id="name" value={this.state.name} onChange={this.handleNameChange} required></input>
             </label><br/>
 
             <label class="la"> Starting Location:
-              <input type="text" name="fromLoc" id="fromLoc" value={this.state.sLoc} onChange={this.handlesLocChange}></input>
+              <input type="text" name="fromLoc" id="fromLoc" value={this.state.sLoc} onChange={this.handlesLocChange} required></input>
             </label><br/>
 
             <label class="la"> From:</label><br/>
-              <Select class="opt" name="from" options={options} value={this.state.from} onChange={this.handleFromChange} />
+              <Select class="opt" name="from" options={options} value={this.state.from} onChange={this.handleFromChange} required />
             <br/>
             
             <label class="la"> To: </label><br/>
-              <Select name="to" options={options} value={this.state.to} onChange={this.handleToChange} />
+              <Select name="to" options={options} value={this.state.to} onChange={this.handleToChange} required/>
             <br/>
 
             <label class="la"> Destination Location:
-              <input type="text" name="destLoc" id="destLoc" value={this.state.dLoc} onChange={this.handledLocChange}></input>
+              <input type="text" name="destLoc" id="destLoc" value={this.state.dLoc} onChange={this.handledLocChange} required></input>
             </label><br/>
 
             <label class="la"> Price of a seat:
-              <input type="number" name="price" id="price" value={this.state.price} onChange={this.handlePriceChange}></input>
+              <input type="number" min="5" name="price" id="price" value={this.state.price} onChange={this.handlePriceChange} required></input>
             </label><br/>
 
             <label class="la"> Start Time:
-              <input type="datetime-local" name="startTime" id="startTime" value={this.state.sTime} onChange={this.handlesTimeChange}></input>
+              <input type="datetime-local" name="startTime" id="startTime" value={this.state.sTime} onChange={this.handlesTimeChange} required></input>
             </label><br/>
 
             <label class="la"> End Time:
-              <input type="datetime-local" name="endTime" id="endTime" value={this.state.dTime} onChange={this.handledTimeChange}></input>
+              <input type="datetime-local" name="endTime" id="endTime" value={this.state.dTime} onChange={this.handledTimeChange} required></input>
             </label><br/>
 
-            <label class="la"> Duration:
-              <input type="number" name="duration" id="duration" value={this.state.duration} onChange={this.handlesDurationChange}></input>
+            <label class="la"> Duration (in Hours):
+              <input type="number" min="0" name="duration" id="duration" value={this.state.duration} onChange={this.handlesDurationChange} required></input>
             </label><br/>
-
-            <label class="la"> Capacity: </label><br/>
-              <Select name="Capacity" options={capAvail} value={this.state.cap} onChange={this.handleCapChange}/>
-            <br/>
 
             <label class="la"> Pets Allowed?: </label><br/>
-              <Select name="pets" options={petsAllow} value={this.state.pets} onChange={this.handlePetsChange}/>
+              <Select name="pets" options={petsAllow} value={this.state.pets} onChange={this.handlePetsChange} required/>
             <br/>
 
             <label class="la"> Car Model:
@@ -278,12 +273,13 @@ const Section = styled.section`
   position: relative;
   width: 100%;
   height: 100%;
+  overflow-y: hidden;
   .background {
     img {
       margin-top: 0.01rem;
-      height: 100%;
       width: 245%;
       filter: brightness(60%);
+      overflow-y: hidden;
     }
   }
   .FindPageContent {
