@@ -96,9 +96,12 @@ Backend API documentation is available in the [link](backend/backend_doc.md)
 Backend is deployed using Heroku and can be accesed using https://rideshare-se.herokuapp.com/
 
 ### Backend Test Video
-<img width="1420" alt="Screen Shot 2022-04-20 at 11 55 50 PM" src="https://user-images.githubusercontent.com/42022935/164369176-8edde6e4-a186-428b-8b64-f3bdd0d52b63.png">
 
-- 
+
+
+https://user-images.githubusercontent.com/42022935/164538675-6b142d6b-dcf2-436f-9a72-bc63514e75a2.mp4
+
+
 
 ## To Do/ Roadmap
 
