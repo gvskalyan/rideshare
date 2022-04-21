@@ -18,7 +18,6 @@ func BookRide(w http.ResponseWriter, r *http.Request) {
 	tk := &models.Token{}
 	token, _ := jwt.ParseWithClaims(header.Value, tk, nil)
 	claims := token.Claims.(*models.Token)
-	fmt.Println(claims.Issuer)
 
 	bookDetails := &models.BookingDetails{}
 	bookDetails.UserId, _ = strconv.Atoi(claims.Issuer)
@@ -29,7 +28,6 @@ func BookRide(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-
 	json.Unmarshal([]byte(string(body)), &bookDetails)
 	createdDetails := db.Create(bookDetails)
 	var errMessage = createdDetails.Error
@@ -38,8 +36,16 @@ func BookRide(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var usr models.RideDetails
-	db.Model(usr).Where("id = ?", data["RideID"]).Update("status", "1")
+	db.Model(usr).Where("ride_id = ?", data["RideID"]).Update("status", "1")
 
+	if data["UsereMail"] == nil {
+		user, _ := GetUserRow(w, r)
+		// to run the method in background
+		go ConfirmationEmailHandler(user.Email, data["RideID"].(string))
+	} else {
+		go ConfirmationEmailHandler(data["UsereMail"].(string), data["RideID"].(string))
+	}
 	var resp = map[string]interface{}{"message": "Ride has been successfully booked"}
 	json.NewEncoder(w).Encode(resp)
+
 }

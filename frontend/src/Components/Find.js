@@ -18,13 +18,13 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SnackBar from "./SnackBar";
 
 const options = [
-    {value: 'gainesville', label: 'Gainesville'},
-    {value: 'orlando', label: 'Orlando'},
-    {value: 'jacksonville', label: 'Jacksonville'},
-    {value: 'tampa', label: 'Tampa'},
-    {value: 'miami', label: 'Miami'},
-    {value: 'orlando', label: 'Orlando'},
-    {value: 'tallahassee', label: 'Tallahassee'}
+    {value: 'Gainesville', label: 'Gainesville'},
+    {value: 'Orlando', label: 'Orlando'},
+    {value: 'Jacksonville', label: 'Jacksonville'},
+    {value: 'Tampa', label: 'Tampa'},
+    {value: 'Miami', label: 'Miami'},
+    {value: 'Orlando', label: 'Orlando'},
+    {value: 'Tallahassee', label: 'Tallahassee'}
 ]
 
 function CommentIcon() {

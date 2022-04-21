@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/bwmarrin/snowflake"
 	jwt "github.com/golang-jwt/jwt"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -24,24 +25,25 @@ type error interface {
 }
 
 var db = utils.ConnectDB()
+var node, _ = snowflake.NewNode(1)
 
 func TestAPI(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("API live and kicking"))
 }
 
 //This method is refactored to login.go in controllers
-func Signin(w http.ResponseWriter, r *http.Request) {
-	user := &models.User{}
-	err := json.NewDecoder(r.Body).Decode(user)
-	if err != nil {
-		var resp = map[string]interface{}{"status": "false", "message": "Invalid request"}
-		json.NewEncoder(w).Encode(resp)
-		// w.WriteHeader(http.StatusForbidden)
-		return
-	}
-	resp := FindOne(user.Email, user.Password, w)
-	json.NewEncoder(w).Encode(resp)
-}
+// func Signin(w http.ResponseWriter, r *http.Request) {
+// 	user := &models.User{}
+// 	err := json.NewDecoder(r.Body).Decode(user)
+// 	if err != nil {
+// 		var resp = map[string]interface{}{"status": "false", "message": "Invalid request"}
+// 		json.NewEncoder(w).Encode(resp)
+// 		// w.WriteHeader(http.StatusForbidden)
+// 		return
+// 	}
+// 	resp := FindOne(user.Email, user.Password, w)
+// 	json.NewEncoder(w).Encode(resp)
+// }
 
 func FindOne(email, password string, w http.ResponseWriter) map[string]interface{} {
 	user := &models.User{}
@@ -54,7 +56,8 @@ func FindOne(email, password string, w http.ResponseWriter) map[string]interface
 	expires := time.Now().Add(time.Hour * 24)
 
 	errf := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
-	if errf != nil && errf == bcrypt.ErrMismatchedHashAndPassword { //Password does not match!
+	if errf != nil && errf == bcrypt.ErrMismatchedHashAndPassword {
+		//Password does not match!
 		var resp = map[string]interface{}{"status": false, "message": "Invalid login credentials. Please try again"}
 		return resp
 	}
@@ -84,35 +87,34 @@ func FindOne(email, password string, w http.ResponseWriter) map[string]interface
 }
 
 //CreateUser function -- create a new user d-method
-func CreatedUser(w http.ResponseWriter, r *http.Request) {
+// func CreatedUser(w http.ResponseWriter, r *http.Request) {
 
-	user := &models.User{}
+// 	user := &models.User{}
 
-	json.NewDecoder(r.Body).Decode(user)
-	pass, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
-	if err != nil {
-		fmt.Println(err)
-		err := ErrorResponse{
-			Err: "Password Encryption  failed",
-		}
-		json.NewEncoder(w).Encode(err)
-	}
+// 	json.NewDecoder(r.Body).Decode(user)
+// 	pass, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+// 	if err != nil {
+// 		fmt.Println(err)
+// 		err := ErrorResponse{
+// 			Err: "Password Encryption  failed",
+// 		}
+// 		json.NewEncoder(w).Encode(err)
+// 	}
 
-	user.Password = string(pass)
-	createdUser := db.Create(user)
-	var errMessage = createdUser.Error
+// 	user.Password = string(pass)
+// 	createdUser := db.Create(user)
+// 	var errMessage = createdUser.Error
 
-	if createdUser.Error != nil {
-		fmt.Println(errMessage)
-	}
-	json.NewEncoder(w).Encode(createdUser)
-}
+// 	if createdUser.Error != nil {
+// 		fmt.Println(errMessage)
+// 	}
+// 	json.NewEncoder(w).Encode(createdUser)
+// }
 
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	user, err := GetUserRow(w, r)
 	if err == nil {
 		json.NewDecoder(r.Body).Decode(&user)
-		fmt.Println(r.Body, user)
 		db.Save(&user)
 		json.NewEncoder(w).Encode(&user)
 	}
@@ -196,16 +198,16 @@ func SearchRides(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(searchDetails)
 }
 
-func SendConfirmationMail(w http.ResponseWriter, r *http.Request) {
+// func SendConfirmationMail(w http.ResponseWriter, r *http.Request) {
 
-	user, err := GetUserRow(w, r)
+// 	user, err := GetUserRow(w, r)
 
-	ConfirmationEmailHandler(user.Email)
+// 	ConfirmationEmailHandler(user.Email)
 
-	if err == nil {
-		var resp = map[string]interface{}{"message": "Ride message has been successfully sent"}
-		json.NewEncoder(w).Encode(resp)
-		// json.NewEncoder(w).Encode(&user)
-	}
+// 	if err == nil {
+// 		var resp = map[string]interface{}{"message": "Ride message has been successfully sent"}
+// 		json.NewEncoder(w).Encode(resp)
+// 		// json.NewEncoder(w).Encode(&user)
+// 	}
 
-}
+// }

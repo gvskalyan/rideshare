@@ -9,10 +9,9 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/bwmarrin/snowflake"
 	jwt "github.com/golang-jwt/jwt"
 )
-
-//var db1 = utils.ConnectDB()
 
 func PostARide(w http.ResponseWriter, r *http.Request) {
 
@@ -21,7 +20,6 @@ func PostARide(w http.ResponseWriter, r *http.Request) {
 	tk := &models.Token{}
 	token, _ := jwt.ParseWithClaims(header.Value, tk, nil)
 	claims := token.Claims.(*models.Token)
-	fmt.Println(claims.Issuer)
 
 	rideDetails := &models.RideDetails{}
 	rideDetails.UserId, _ = strconv.Atoi(claims.Issuer)
@@ -32,6 +30,8 @@ func PostARide(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
+	// fmt.Println(data["StartTime"])
+	// fmt.Println(data["FromCity"])
 
 	startTime, _ := time.Parse("2006-01-02 15:04:05", data["StartTime"].(string))
 	endTime, _ := time.Parse("2006-01-02 15:04:05", data["EndTime"].(string))
@@ -41,6 +41,12 @@ func PostARide(w http.ResponseWriter, r *http.Request) {
 	// }
 	rideDetails.ToStartTime = startTime
 	rideDetails.ToEndTime = endTime
+
+	node, err := snowflake.NewNode(1)
+	// Generate a snowflake ID.
+	id := node.Generate()
+	rideDetails.RideId = fmt.Sprint(id)
+
 	json.Unmarshal([]byte(string(body)), &rideDetails)
 	createdDetails := db.Create(rideDetails)
 	var errMessage = createdDetails.Error
