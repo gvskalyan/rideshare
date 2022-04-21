@@ -7,7 +7,7 @@ import Login from "./Components/Login_2"
 import SignUp from "./Components/Signup"
 import About from "./Components/About"
 import Home from './Components/Home'
-import Profile from './Components/Profile'
+import Profile from './Components/Profile2'
 import UserWelcome from './Components/UserWelcome'
 import {isUserLoggedIn} from "./Components/session/SessionHandler";
 
@@ -27,7 +27,7 @@ function App() {
                 path="/"
                 element={
                     <RequireAuth>
-                        <About />
+                        <UserWelcome />
                     </RequireAuth>
                 }
             />
@@ -35,7 +35,7 @@ function App() {
                 path="/home"
                 element={
                     <RequireAuth>
-                        <Home />
+                        <UserWelcome />
                     </RequireAuth>
                 }
             />

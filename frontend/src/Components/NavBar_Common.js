@@ -1,8 +1,17 @@
 import React from "react"
 import {NavLink} from "react-router-dom"
 import "./NavBar.css"
+import {userLogOut} from "./session/SessionHandler";
 
 function NavBarCommon() {
+
+    const loggingOut = (event) => {
+        event.preventDefault();
+        userLogOut();
+        alert("Log out successfully");
+        window.location = 'Login'
+    }
+
     return <>
         <nav className="navbar">
             <div className="nav-container">
@@ -11,7 +20,7 @@ function NavBarCommon() {
                 </NavLink>
                 <ul className="nav-menu">
                     <li className="nav-item">
-                        <NavLink exact to="/UserWelcome" activeClassName="active" className="nav-links">
+                        <NavLink exact to="/home" activeClassName="active" className="nav-links">
                             Home
                         </NavLink>
                     </li>
@@ -28,6 +37,11 @@ function NavBarCommon() {
                     <li className="nav-item">
                         <NavLink exact to="/Profile" activeClassName="active" className="nav-links">
                             Profile
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink exact to="/login" activeClassName="active" className="nav-links" onClick={loggingOut}>
+                            Logout
                         </NavLink>
                     </li>
                 </ul>
