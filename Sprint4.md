@@ -22,11 +22,11 @@ After logging into the account, the user can choose to either search a ride or p
 A backend search engine will match the need of the rider to all the ride providers.
 <br/>
 
-
-
 ## Deployment Link
 
 The Application is deployed at 
+
+## [Sprint 4 Project Board](https://github.com/gvskalyan/rideshare/projects/4)
 
 ## Work Done / Deliverables
 
