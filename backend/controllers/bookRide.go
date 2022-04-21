@@ -28,7 +28,6 @@ func BookRide(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("data received by book ride is", data)
 	json.Unmarshal([]byte(string(body)), &bookDetails)
 	createdDetails := db.Create(bookDetails)
 	var errMessage = createdDetails.Error
@@ -39,6 +38,14 @@ func BookRide(w http.ResponseWriter, r *http.Request) {
 	var usr models.RideDetails
 	db.Model(usr).Where("ride_id = ?", data["RideID"]).Update("status", "1")
 
+	if data["UsereMail"] == "null" {
+		user, _ := GetUserRow(w, r)
+		// to run the method in background
+		go ConfirmationEmailHandler(user.Email, data["RideID"].(string))
+	} else {
+		go ConfirmationEmailHandler(data["UsereMail"].(string), data["RideID"].(string))
+	}
 	var resp = map[string]interface{}{"message": "Ride has been successfully booked"}
 	json.NewEncoder(w).Encode(resp)
+
 }

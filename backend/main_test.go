@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -115,9 +114,9 @@ func test_user_login_fail(t *testing.T) {
 	}
 	var m map[string]string
 	json.Unmarshal(data, &m)
-	// if m["status"] != "false" {
-	// 	t.Errorf("Expected the 'error' key of the response to be set to 'false'. Got '%s'", m["error"])
-	// }
+	if m["message"] != "Email address not found" {
+		t.Errorf(" \t Method : test_user_login_fail Expected the 'message' key of the response to be set to 'Email address not found' Please check if the user already exists. Got '%s'", m["error"])
+	}
 }
 
 func test_post_a_ride(t *testing.T) {
@@ -184,7 +183,6 @@ func test_search_rides(t *testing.T) {
 	controllers.SearchARide(w, req)
 	res := w.Result()
 	defer res.Body.Close()
-	// fmt.Println(res, w.Body.String())
 	_, err := ioutil.ReadAll(res.Body)
 
 	if err != nil {
@@ -194,9 +192,36 @@ func test_search_rides(t *testing.T) {
 }
 
 func test_booking_mail_confirmation(t *testing.T) {
-	returnValue := controllers.ConfirmationEmailHandler("ridesharemail@yahoo.com")
+
+	w := httptest.NewRecorder()
+
+	var jsonStr = []byte(`{	        
+		"FromCity":      "Gainesville",
+		"ToCity":      "Orlando",
+		"StartTime"      : "2022-02-01 08:10:00"}`)
+
+	cookie := &http.Cookie{
+		Name:     "jwt",
+		Value:    token,
+		Expires:  time.Now().Add(time.Hour),
+		HttpOnly: true,
+	}
+	req, _ := http.NewRequest(http.MethodPost, "/searcharide", bytes.NewBuffer(jsonStr))
+	req.Header.Set("X-Custom-Header", "myvalue")
+	req.Header.Set("Content-Type", "application/json")
+	req.AddCookie(cookie)
+
+	controllers.SearchARide(w, req)
+	res := w.Result()
+	defer res.Body.Close()
+	data, _ := ioutil.ReadAll(res.Body)
+
+	var m []models.RideDetails
+	json.Unmarshal(data, &m)
+
+	returnValue := controllers.ConfirmationEmailHandler("ridesharemail@yahoo.com", m[len(m)-1].RideId)
 	if strings.Contains(returnValue, "error") {
-		t.Log("Check the password in .env file or set it in the environment")
+		t.Errorf("Check the password in .env file or set it in the environment")
 	}
 }
 
@@ -223,12 +248,10 @@ func test_booking_ride(t *testing.T) {
 	controllers.SearchARide(w, req)
 	res := w.Result()
 	defer res.Body.Close()
-	// fmt.Println(res, w.Body.String())
 	data, err := ioutil.ReadAll(res.Body)
 
 	var m []models.RideDetails
 	json.Unmarshal(data, &m)
-	// fmt.Println(m)
 
 	w = httptest.NewRecorder()
 
@@ -236,7 +259,6 @@ func test_booking_ride(t *testing.T) {
 		RideID string `json:"RideID"`
 	}
 
-	fmt.Println(m[len(m)-1].RideId)
 	pb := &MyPostBody{RideID: m[len(m)-1].RideId}
 	jsonStr, err = json.Marshal(pb)
 
@@ -257,9 +279,7 @@ func test_booking_ride(t *testing.T) {
 	controllers.BookRide(w, req)
 	res = w.Result()
 	defer res.Body.Close()
-	// fmt.Println(res, w.Body.String())
 	data, err = ioutil.ReadAll(res.Body)
-	// fmt.Println("data is", data)
 
 	if err != nil {
 		t.Errorf("expected error to be nil got %v", err)
@@ -287,7 +307,6 @@ func test_booking_history(t *testing.T) {
 	controllers.SearchARide(w, req)
 	res := w.Result()
 	defer res.Body.Close()
-	// fmt.Println(res, w.Body.String())
 	_, err := ioutil.ReadAll(res.Body)
 
 	if err != nil {
@@ -299,12 +318,11 @@ func test_booking_history(t *testing.T) {
 func TestAllcases(t *testing.T) {
 
 	testdb_setup("test.db")
-
-	// test_user_registration(t)
-	// test_user_login(t)
-	// test_user_login_fail(t)
-	// test_post_a_ride(t)
-	// test_search_rides(t)
+	test_user_registration(t)
+	test_user_login(t)
+	test_user_login_fail(t)
+	test_post_a_ride(t)
+	test_search_rides(t)
 	test_booking_mail_confirmation(t)
-	// test_booking_ride(t)
+	test_booking_ride(t)
 }
