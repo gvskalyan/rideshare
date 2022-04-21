@@ -10,12 +10,12 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Use Golang 17.x
-      uses: actions/setup-go@v3 
-    - run: cd backend && go test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Use Golang 17.x
+        uses: actions/setup-go@v3 
+      - run: cd backend && go test
 
 # jobs:
 #   deploy:
