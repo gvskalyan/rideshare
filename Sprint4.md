@@ -40,7 +40,12 @@ The Application is deployed at
 - Cypress tests for frontend code.
 - Modify backend code so that it is compatible with frontend request and response values.
 
-## [Demo Video](https://drive.google.com/file/d/1-dKBz2kEySqbyRz7fC-M88qT-VuBJqeg)
+## Demo Video
+
+https://user-images.githubusercontent.com/97773629/164513405-637430ad-c706-44b0-9cc4-4a19e803a2ca.mp4
+
+
+
 
 ## Frontend
 
@@ -61,7 +66,7 @@ Screenshots of the Frontend UI can be found [here](frontend/Sprint4Frontend.md)
 
 ### Cypress Test Video
 
-- https://user-images.githubusercontent.com/34689959/164372511-a3dbfd37-d9a5-42f3-abf4-0eceaf1d235a.mp4
+https://user-images.githubusercontent.com/34689959/164372511-a3dbfd37-d9a5-42f3-abf4-0eceaf1d235a.mp4
 
 
 ## Backend
