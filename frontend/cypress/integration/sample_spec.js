@@ -1,6 +1,7 @@
 
+  
   describe('LoginToSignUp', () => {
-    it('Login/Logout', () => {
+    it.skip('Login/Logout', () => {
       //Don't have an acccount
       cy.visit('http://localhost:3000/login')    
       cy.contains('Don\'t have an account? Sign Up').click()
@@ -10,7 +11,7 @@
 
 
 
-    it('SignUp', () => {    
+    it.skip('SignUp', () => {    
       cy.visit('http://localhost:3000/signup')
       //SignUp
       cy.get('input[name=firstName]')
@@ -44,7 +45,7 @@
 
 
 
-    it('Login', () => {
+    it.skip('Login', () => {
       cy.visit('http://localhost:3000/login')
       cy.get('input[name=email]')
         .type('{selectall}{backspace}test@gmail.com')
@@ -57,7 +58,7 @@
       cy.url().should('include', '/About')
     })
 
-    it('NavBar', () => {
+    it.skip('NavBar', () => {
       cy.visit('http://localhost:3000/login')
       cy.get('input[name=email]')
         .type('{selectall}{backspace}test@gmail.com')
@@ -87,12 +88,14 @@
         .type('{selectall}{backspace}password')
       cy.contains('Sign In').click()
       cy.contains('Find a Ride').click()
-      cy.get('select[name="from"]').select('Gainesville').should('have.value', 'Gainesville')
-      cy.get('select[name="to"]').select('Gainesville').should('have.value', 'Gainesville')
+      cy.get('[id=from]').click().contains("Gainesville").click({force: true})
+      cy.get('[id=to]').click().contains("Orlando").click({force: true})
+      cy.get('[name=date]').type('2022-05-04T11:00')
+      cy.contains('Find').click()
     })
 
 
-    it('PostingaRide', () => {
+    it.skip('PostingaRide', () => {
       cy.visit('http://localhost:3000/login')
       cy.get('input[name=email]')
         .type('{selectall}{backspace}test@gmail.com')
