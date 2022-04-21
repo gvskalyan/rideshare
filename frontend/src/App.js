@@ -6,7 +6,6 @@ import "./Components/Home.css"
 import Login from "./Components/Login_2"
 import SignUp from "./Components/Signup"
 import About from "./Components/About"
-import Home from './Components/Home'
 import Profile from './Components/Profile2'
 import UserWelcome from './Components/UserWelcome'
 import {isUserLoggedIn} from "./Components/session/SessionHandler";
