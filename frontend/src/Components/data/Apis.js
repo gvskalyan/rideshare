@@ -1,6 +1,5 @@
 //const SERVER_URL = ''
 const SERVER_URL = 'https://rideshare-se.herokuapp.com'
-const VERSION = '/v1'
 
 const ENDPOINTS = {
     signup: () => '/signup',

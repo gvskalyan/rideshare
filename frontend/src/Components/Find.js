@@ -82,7 +82,7 @@ class MyComponent extends Component {
             });
             console.log(this.state.rides);
         });
-    }
+    };
 
     getTime = (dateString) => {
         let date = new Date(dateString);
@@ -94,7 +94,7 @@ class MyComponent extends Component {
         minutes = minutes < 10 ? '0' + minutes : minutes;
         let strTime = hours + ':' + minutes + ' ' + ampm;
         return strTime;
-    }
+    };
 
     bookRide = (ride) => {
         const user = JSON.parse(getKeyUser());
@@ -110,7 +110,7 @@ class MyComponent extends Component {
                 window.location = 'home';
             }, 3000);
         });
-    }
+    };
 
     OpenAlert = (message) => {
         this.setState({
