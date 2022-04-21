@@ -45,6 +45,10 @@ func ConnectDB() *gorm.DB {
 
 	db.AutoMigrate(
 		&models.RideDetails{})
+
+	db.AutoMigrate(
+		&models.BookingDetails{})
+
 	fmt.Println("Database successfully connected", db)
 	return db
 }

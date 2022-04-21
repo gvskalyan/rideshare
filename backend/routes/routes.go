@@ -31,7 +31,7 @@ func Handlers() *mux.Router {
 	r.HandleFunc("/postaride", controllers.PostARide).Methods("POST")
 	r.HandleFunc("/searcharide", controllers.SearchARide).Methods("POST")
 
-	//r.HandleFunc("/bookride", controllers.BookRide).Methods("POST")
+	r.HandleFunc("/bookride", controllers.BookRide).Methods("POST")
 
 	// Auth route
 	s := r.PathPrefix("/auth").Subrouter()
