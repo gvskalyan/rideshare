@@ -20,7 +20,7 @@ func SearchARide(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	searchDetails := db.Where("from_city = ? AND to_city = ?", data["FromCity"], data["ToCity"]).Order("to_start_time desc").Find(&rides)
+	searchDetails := db.Where("from_city = ? AND to_city = ?", data["FromCity"], data["ToCity"]).Not("status = 1").Order("to_start_time desc").Find(&rides)
 	//searchDetails := db.Where("from_city = ? AND to_city = ?", data["FromCity"], data["ToCity"]).Order("to_start_time desc").Find(&rides)
 
 	var errMessage = searchDetails.Error
