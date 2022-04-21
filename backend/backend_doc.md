@@ -149,7 +149,8 @@ parameters aren’t specified.
 
 - Method: POST
 - Using this API, users can book a ride from the list of available rides.
-- Users can get the list of available rides between specified cities from searchaRide API response
+- Users can get the list of available rides between specified cities from searchaRide API response.
+- On successful booking a confirmation mail including all the ride details will be sent to the user registered email.
 
 
 #### Acceptance Criteria:
@@ -160,6 +161,8 @@ parameters aren’t specified.
 
 #### Sample Request and Response:
 ![bookride](https://user-images.githubusercontent.com/97773629/164409590-995be31e-064e-4e3f-bfb5-f1d50e1590aa.PNG)
+![booking details](https://user-images.githubusercontent.com/97773629/164527020-dbd5beb1-1460-4185-b5bd-fcd5b84f85fa.PNG)
+
 
 
 
