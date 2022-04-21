@@ -1,4 +1,4 @@
-# Sprint 3 Outline and Documentation
+# Sprint 2 Outline and Documentation
 
 ## Frontend
 
