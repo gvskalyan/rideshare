@@ -89,7 +89,7 @@ Password, DOB, Gender, PhoneNumber, City. </em>
  ![userdetails](https://user-images.githubusercontent.com/97773629/164363812-9d061c1b-9231-465b-ac19-d34368bf502c.PNG)
 
 
-### 5) delete
+### 5) deleteUser
 
 #### Description:
 
@@ -98,8 +98,9 @@ Password, DOB, Gender, PhoneNumber, City. </em>
 - This action is performed using JSONWebToken
 
 #### Sample Request and Response:
+![deleteUser](https://user-images.githubusercontent.com/97773629/164390439-7c750c04-11a7-4832-a770-ae6f837e1328.PNG)
 
-- 
+
 
 ### 6) postaRide
 #### Description:
@@ -110,14 +111,14 @@ Password, DOB, Gender, PhoneNumber, City. </em>
 
 #### Acceptance Criteria:
 
--  For Posting a ride the following fields must be provided by the user: <em>name, startLocation, fromCity, toCity, destLocation, priceperSeat, duration, seatsAvailable, petsAllowed, carModel, carType, addlNotes, phoneNumber.</em>
-- Once all the inputs are properly entered by the user, the API throws a confirmation message: <em>“Ride has been Successfully Posted.”</em>
+-  For Posting a ride the following fields must be provided by the user: <em>name, startLocation, fromCity, toCity, destLocation, priceperSeat, duration, seatsAvailable, addlNotes, phoneNumber, startTime, endTime</em>
+- Once all the required inputs are properly given by the user, the API gives a confirmation message: <em>“Ride has been Successfully Posted.”</em>
 
 #### Sample Request and Response:
+![postaRide](https://user-images.githubusercontent.com/97773629/164401412-0cea772b-914f-4f9f-831a-c8f4772c7558.PNG)
 
-- 
 
-### 7) searchRides
+### 7) searchaRide
 #### Description:
 
 - Method: POST
@@ -129,10 +130,16 @@ Password, DOB, Gender, PhoneNumber, City. </em>
 
 - The API should throw an error message whenever any of the above mentioned required
 parameters aren’t specified.
-- Whenever a request is sent the API should send a response with the list of available rides in the specified routes with details : name, startLocation, fromCity, toCity, destLocation, priceperSeat, duration, seatsAvailable, petsAllowed, carModel, carType, addlNotes, phoneNumber.
+- Whenever a request is sent the API should send a response with the list of available rides in the specified routes with details : name, startLocation, fromCity, toCity, destLocation, priceperSeat, duration, seatsAvailable, addlNotes, phoneNumber, rideID, startTime.
 
 
 #### Sample Request and Response:
 
-- 
+![searchaRide1](https://user-images.githubusercontent.com/97773629/164404959-a3274642-ac1b-42b9-8b00-65ce43a9ad02.PNG)
+
+![searchaRide2](https://user-images.githubusercontent.com/97773629/164404916-d15335fd-558b-4fc2-bed3-389ed39df912.PNG)
+
+![searchaRide3](https://user-images.githubusercontent.com/97773629/164404863-bbb14384-72dd-43d7-9f6d-4b71a7817499.PNG)
+
+![searchaRide4](https://user-images.githubusercontent.com/97773629/164404801-a5f5903d-d1ad-4063-87be-fbc115dbd695.PNG)
 
