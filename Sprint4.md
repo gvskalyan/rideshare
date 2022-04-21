@@ -24,7 +24,7 @@ The Application is deployed at
 
 ## Demo Video
 
-Video of entire application - https://user-images.githubusercontent.com/34689959/164372511-a3dbfd37-d9a5-42f3-abf4-0eceaf1d235a.mp4
+Video of entire application -
 
 ## Frontend
 
@@ -45,7 +45,7 @@ Screenshots of the Frontend UI can be found [here](frontend/Sprint4Frontend.md)
 
 ### Cypress Test Video
 
-- 
+- https://user-images.githubusercontent.com/34689959/164372511-a3dbfd37-d9a5-42f3-abf4-0eceaf1d235a.mp4
 
 
 ## Backend
