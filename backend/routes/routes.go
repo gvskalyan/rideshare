@@ -13,7 +13,7 @@ func Handlers() *mux.Router {
 	// r.Use(CommonMiddleware)
 
 	cors := h.CORS(
-		h.AllowedOrigins([]string{"http://localhost:3000"}),
+		h.AllowedOrigins([]string{"*"}),
 
 		h.AllowedHeaders([]string{"accept", "origin", "X-Requested-With", "x-access-token", "Content-Type", "Authorization"}),
 
