@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"reflect"
 )
 
 func SearchARide(w http.ResponseWriter, r *http.Request) {
@@ -18,12 +19,11 @@ func SearchARide(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	searchDetails := db.Where("from_city = ? AND to_city = ?", data["FromCity"], data["ToCity"]).Not("status = 1").Order("to_start_time desc").Find(&rides)
-	//searchDetails := db.Where("from_city = ? AND to_city = ?", data["FromCity"], data["ToCity"]).Order("to_start_time desc").Find(&rides)
+	fmt.Println(data["FromCity"])
+	fmt.Println("data received by search a ride is", data["FromCity"], data["ToCity"])
 
-	var errMessage = searchDetails.Error
-	if searchDetails.Error != nil {
-		fmt.Println(errMessage)
-	}
+	var searchDetails []models.RideDetails
+	db.Where("from_city = ? AND to_city = ?", data["FromCity"], data["ToCity"]).Not("status = 1").Order("to_start_time desc").Find(&rides).Scan(&searchDetails)
+	fmt.Println("var1 = ", reflect.TypeOf(searchDetails))
 	json.NewEncoder(w).Encode(searchDetails)
 }

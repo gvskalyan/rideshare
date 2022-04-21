@@ -18,7 +18,6 @@ func BookRide(w http.ResponseWriter, r *http.Request) {
 	tk := &models.Token{}
 	token, _ := jwt.ParseWithClaims(header.Value, tk, nil)
 	claims := token.Claims.(*models.Token)
-	fmt.Println(claims.Issuer)
 
 	bookDetails := &models.BookingDetails{}
 	bookDetails.UserId, _ = strconv.Atoi(claims.Issuer)
@@ -29,7 +28,7 @@ func BookRide(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-
+	fmt.Println("data received by book ride is", data)
 	json.Unmarshal([]byte(string(body)), &bookDetails)
 	createdDetails := db.Create(bookDetails)
 	var errMessage = createdDetails.Error

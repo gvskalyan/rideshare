@@ -30,6 +30,8 @@ func PostARide(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
+	// fmt.Println(data["StartTime"])
+	// fmt.Println(data["FromCity"])
 
 	startTime, _ := time.Parse("2006-01-02 15:04:05", data["StartTime"].(string))
 	endTime, _ := time.Parse("2006-01-02 15:04:05", data["EndTime"].(string))

@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -21,10 +20,13 @@ func ConfirmationEmailHandler(mailid string) string {
 	msg.SetBody("text/html", "Greetings from Rideshare team <br /> Your ride ID is: "+" and the ride details are <br /> Hope you have a great and pleasant ride. <br />")
 
 	n := gomail.NewDialer("smtp.mail.yahoo.com", 587, fromMail, os.Getenv("SMTPPassword"))
-	if err := n.DialAndSend(msg); err != nil {
-		fmt.Println("error:", err)
+	s, err := n.Dial()
+	if err != nil {
+		// fmt.Println("error:", err)
 		return "error"
 	} else {
+		err = gomail.Send(s, msg)
+		msg.Reset()
 		return "mail sent successfully"
 	}
 }
