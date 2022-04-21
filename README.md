@@ -22,8 +22,8 @@ The project aims to provide a web application for people to better share rides b
   - Venkata Sai Kalyan Guntupalli &nbsp; - &nbsp; [gvskalyan](https://github.com/gvskalyan)
 
  ### Frontend Developers
-  - Pramod Kumar Varma Manthena   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;  - &emsp; [pkvarma222](https://github.com/pkvarma222)
-  - Ruiyang Li &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp; - &emsp; [ruiyangl](https://github.com/ruiyangl)
+  - Pramod Kumar Varma Manthena   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;  - &emsp; [pkvarma222](https://github.com/pkvarma222)
+  - Ruiyang Li &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp; - &emsp; [ruiyangl](https://github.com/ruiyangl)
   - Riyaz Basha Shaik (From 24th March, 2022) &emsp; - &emsp; [skriyaz95](https://github.com/skriyaz95)
 
   
