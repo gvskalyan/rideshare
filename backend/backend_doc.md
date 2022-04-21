@@ -30,15 +30,17 @@ and password as login credentials.
 #### Acceptance Criteria:
 
 - For registering, the following fields are required to be entered by the user: <em>Name, Email,
-Password, Gender, City, DateofBirth, PhoneNumber. </em>
+Password, DOB, Gender, PhoneNumber, City. </em>
  - If any/all of these fields weren’t entered, the API throws an error message.
- - Once all the inputs are properly entered by the user, all these details are updated to the users table
-in the database.
- -  If an user tries registering again using the same email, the API throws an error message: <em>“User already registered”</em>
+ - Once all the inputs are properly entered by the user, all these details are updated to the users table in the database and API gives a message:<em>"Hi username your rideshare account has been successfully created"</em>
+ -  If an user tries registering again using the same email, the API throws an error message: <em>"Error creating your account. There exists some account associated with your email. Please try with different email.”</em>
 
 #### Sample Request and Response:
 
-- 
+- signup success
+![signup_success](https://user-images.githubusercontent.com/97773629/164362041-4dfd321d-3056-4049-b895-9e70262596cf.PNG)
+- signup failure
+![signup_failure](https://user-images.githubusercontent.com/97773629/164362080-3fc14093-c673-4c20-b8d5-575d27eec938.PNG)
 
 
 
@@ -55,13 +57,25 @@ in the database.
 
 - During signup user provides the details including email ID and the password.
 - To login user needs to provide correct login credentials ie emailID and password.
-- This API validates the credentails entered by the user and redirects to the Homepage if they are correct. Else throws an error message : <em>"Incorrect Login Credentials"</em>
+- This API validates the credentails entered by the user and redirects to the Homepage if they are correct. Else throws an error message : <em>"Invalid login credentials. Please try again"</em>
 
 #### Sample Request and Response:
 
- - 
+- login success
+![login_success](https://user-images.githubusercontent.com/97773629/164362582-2261059e-9739-4faf-ba5c-0cb6ab78fdc8.PNG)
+- login failure
+![login_failure](https://user-images.githubusercontent.com/97773629/164362599-f27b75c3-304c-41f6-8c8a-4402d9062008.PNG)
+
+
 
 ### 3) logout
+
+#### Description:
+
+- Method: POST
+- When the user login is successful an active JSONWebToken is generated. Using this JSONWebToken this API ends the user session thus logging out of application 
+#### Sample Request and Response:
+![logout](https://user-images.githubusercontent.com/97773629/164363347-a20e4f7f-632f-4d37-baf2-dc5af748e095.PNG)
 
 
 ### 4) user
@@ -72,8 +86,8 @@ in the database.
 - Once the user is logged in successfully an active JSONWebToken is generated. This API retrieves the user details such as Name, Email, Password(encrypted format), Gender, City, DateofBirth, PhoneNumber using the web token.
 
 #### Sample Request and Response:
+ ![userdetails](https://user-images.githubusercontent.com/97773629/164363812-9d061c1b-9231-465b-ac19-d34368bf502c.PNG)
 
-- 
 
 ### 5) delete
 

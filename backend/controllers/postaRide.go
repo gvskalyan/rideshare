@@ -20,7 +20,6 @@ func PostARide(w http.ResponseWriter, r *http.Request) {
 	tk := &models.Token{}
 	token, _ := jwt.ParseWithClaims(header.Value, tk, nil)
 	claims := token.Claims.(*models.Token)
-	fmt.Println(claims.Issuer)
 
 	rideDetails := &models.RideDetails{}
 	rideDetails.UserId, _ = strconv.Atoi(claims.Issuer)

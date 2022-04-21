@@ -8,8 +8,6 @@ import (
 	"net/http"
 )
 
-//var db2 = utils.ConnectDB()
-
 func SearchARide(w http.ResponseWriter, r *http.Request) {
 
 	var rides []models.RideDetails
