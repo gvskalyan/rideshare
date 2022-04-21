@@ -38,7 +38,7 @@ func BookRide(w http.ResponseWriter, r *http.Request) {
 	var usr models.RideDetails
 	db.Model(usr).Where("ride_id = ?", data["RideID"]).Update("status", "1")
 
-	if data["UsereMail"] == "null" {
+	if data["UsereMail"] == nil {
 		user, _ := GetUserRow(w, r)
 		// to run the method in background
 		go ConfirmationEmailHandler(user.Email, data["RideID"].(string))
