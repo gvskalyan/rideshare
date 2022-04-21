@@ -221,7 +221,7 @@ func test_booking_mail_confirmation(t *testing.T) {
 
 	returnValue := controllers.ConfirmationEmailHandler("ridesharemail@yahoo.com", m[len(m)-1].RideId)
 	if strings.Contains(returnValue, "error") {
-		t.Errorf("Check the password in .env file or set it in the environment")
+		t.Logf("Check the password in .env file or set it in the environment")
 	}
 }
 
@@ -231,7 +231,7 @@ func test_booking_ride(t *testing.T) {
 
 	var jsonStr = []byte(`{	        
 	"FromCity":      "Gainesville",
-	"ToCity":      "Guntur",
+	"ToCity":      "Orlando",
 	"StartTime"      : "2022-02-01 08:10:00"}`)
 
 	cookie := &http.Cookie{
