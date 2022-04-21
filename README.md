@@ -15,34 +15,6 @@ The project aims to provide a web application for people to better share rides b
 - [Sprint2](./Sprint2.md)
 - [Sprint1](./Sprint1.md)
 
-## Frontend
-### MUI setup
-
-MUI is one of the most adopted ReactJs development framwork.
-To install MUI in your working environment:
-
-```bash
-npm install @mui/material @emotion/react @emotion/styled @mui/styled-engine-sc styled-components @mui/icons-material
-```
-
-This will automatically update your package.json dependencies.
-More information related to this can be found at https://mui.com/getting-started/installation/
-
-### To run react
-
-```bash
-cd frontend
-npm start
-```
-
-## Backend
-
-### To start backend server
-
-```bash
-gin -i  --appPort 8081 --port 8080
-```
-
  ## Team Members
  
  ### Backend Developers
