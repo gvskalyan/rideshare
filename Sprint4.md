@@ -103,8 +103,15 @@ https://user-images.githubusercontent.com/42022935/164538675-6b142d6b-dcf2-436f-
 
 
 
+#### Note
+
+- Though Backend accepts few variables the frontend might not send all those since they are first written anticipating bigger features.
+- The error messages and codes might not exactly be indicative of actual error that occured.
+- SMTP password should be set in .env file in backend to send confirmation mail (with ride details) after booking.
 ## To Do/ Roadmap
 
-- 
-- 
+- Add no of seats available to the application
+- Focus on optimizing the application
+- Improving UI and adding accessibility features
+- Integrating features like maps and payments to the application
 

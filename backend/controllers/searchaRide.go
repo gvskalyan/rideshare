@@ -3,7 +3,6 @@ package controllers
 import (
 	"backend/models"
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 )
@@ -18,12 +17,8 @@ func SearchARide(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	searchDetails := db.Where("from_city = ? AND to_city = ?", data["FromCity"], data["ToCity"]).Not("status = 1").Order("to_start_time desc").Find(&rides)
-	//searchDetails := db.Where("from_city = ? AND to_city = ?", data["FromCity"], data["ToCity"]).Order("to_start_time desc").Find(&rides)
 
-	var errMessage = searchDetails.Error
-	if searchDetails.Error != nil {
-		fmt.Println(errMessage)
-	}
+	var searchDetails []models.RideDetails
+	db.Where("from_city = ? AND to_city = ?", data["FromCity"], data["ToCity"]).Not("status = 1").Order("to_start_time desc").Find(&rides).Scan(&searchDetails)
 	json.NewEncoder(w).Encode(searchDetails)
 }
