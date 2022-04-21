@@ -10,11 +10,11 @@
 - [login](#2-login)
 - [logout](#3-logout)
 - [user](#4-user)
-- [delete](#5-delete)
-- [postaRide](#6-postaride)
-- [searchRides](#7-searchrides)
-- [bookaRide]
-- [rideHistory]
+- [deleteUser](#5-deleteUser)
+- [postaRide](#6-postaRide)
+- [searchaRide](#7-searchaRide)
+- [bookRide](#8-bookRide)
+- [history](#9-history)
 
 
 
@@ -142,4 +142,44 @@ parameters aren’t specified.
 ![searchaRide3](https://user-images.githubusercontent.com/97773629/164404863-bbb14384-72dd-43d7-9f6d-4b71a7817499.PNG)
 
 ![searchaRide4](https://user-images.githubusercontent.com/97773629/164404801-a5f5903d-d1ad-4063-87be-fbc115dbd695.PNG)
+
+
+### 7) bookaRide
+#### Description:
+
+- Method: POST
+- Using this API, users can book a ride from the list of available rides.
+- Users can get the list of available rides between specified cities from searchaRide API response
+
+
+#### Acceptance Criteria:
+
+- Once the Ride is sucessfully booked by the user a success message is diplayed:<em>"Ride has been successfully booked"</em> .
+- only a valid RideID is given as the request to the API.
+
+
+#### Sample Request and Response:
+![bookride](https://user-images.githubusercontent.com/97773629/164409590-995be31e-064e-4e3f-bfb5-f1d50e1590aa.PNG)
+
+
+
+
+
+
+### 7) history
+#### Description:
+
+- Method: POST
+- Using this API, users can retrive their past and future rides history.
+
+#### Acceptance Criteria:
+
+- Once the user is loggedin an active JSON token is generated. 
+- This API fetches the userId from the active JSONToken and fetches the booking history from the database that are available on that userId.
+- If no bookings are found it shows a message:<em>"No rides found"</em>
+
+#### Sample Request and Response:
+![ridehistory](https://user-images.githubusercontent.com/97773629/164411074-720acf3f-6b62-4549-b7e6-e47e77be0872.PNG)
+
+
 
