@@ -115,7 +115,6 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	user, err := GetUserRow(w, r)
 	if err == nil {
 		json.NewDecoder(r.Body).Decode(&user)
-		fmt.Println(r.Body, user)
 		db.Save(&user)
 		json.NewEncoder(w).Encode(&user)
 	}

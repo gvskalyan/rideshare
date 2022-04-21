@@ -3,7 +3,6 @@ package controllers
 import (
 	"backend/models"
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	jwt "github.com/golang-jwt/jwt"
@@ -16,7 +15,6 @@ func RideHistory(w http.ResponseWriter, r *http.Request) {
 	tk := &models.Token{}
 	token, _ := jwt.ParseWithClaims(header.Value, tk, nil)
 	claims := token.Claims.(*models.Token)
-	fmt.Println(claims.Issuer)
 
 	rows, _ := db.Raw(`SELECT 
 	ride_id 
@@ -34,15 +32,8 @@ func RideHistory(w http.ResponseWriter, r *http.Request) {
 		rides = append(rides, ride_id)
 	}
 
-	var resp = map[string]interface{}{"Ride Ids": rides}
-	fmt.Println(resp)
-	// fmt.Println(reflect.TypeOf(rides), rides[0])
-
 	var ridedetails []models.RideDetails
-	fmt.Println(ridedetails)
-
 	if len(rides) > 0 {
-		fmt.Println("yes")
 		db.Table("ride_details").Where("ride_id IN (?)", rides).Find(&ridedetails)
 		json.NewEncoder(w).Encode(ridedetails)
 	} else {
