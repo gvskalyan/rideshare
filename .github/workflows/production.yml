@@ -19,9 +19,10 @@ jobs:
 
   deploy:
     steps:
+      - name: Checkout code
         - uses: actions/checkout@v1
-        - name: Push to Heroku
-          run: git push -f https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_APP_STAGING }}.git origin/master:master
+      - name: Push to Heroku
+        run: git push -f https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_APP_STAGING }}.git origin/master:master
 
 # jobs:
 #   deploy:
