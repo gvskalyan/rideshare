@@ -115,3 +115,14 @@ https://user-images.githubusercontent.com/42022935/164538675-6b142d6b-dcf2-436f-
 - Improving UI and adding accessibility features
 - Integrating features like maps and payments to the application
 
+
+ ## Team Members
+ 
+ ### Backend Developers
+  - Dheeraj Kumar Mamillapalli   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - &nbsp; [DheeruRao](https://github.com/DheeruRao)
+  - Venkata Sai Kalyan Guntupalli &nbsp; - &nbsp; [gvskalyan](https://github.com/gvskalyan)
+
+ ### Frontend Developers
+  - Pramod Kumar Varma Manthena   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  - &emsp; [pkvarma222](https://github.com/pkvarma222)
+  - Ruiyang Li &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; - &emsp; [ruiyangl](https://github.com/ruiyangl)
+  - Riyaz Basha Shaik (From 24th March, 2022) &emsp;&nbsp; - &emsp; [skriyaz95](https://github.com/skriyaz95)
