@@ -1,7 +1,9 @@
 ![CI/CD](https://github.com/gvskalyan/rideshare/actions/workflows/production.yml/badge.svg)
-[![Go](https://badges.aleen42.com/src/golang.svg)](https://golang.org/)
+[![Go Site](https://badges.aleen42.com/src/golang.svg)](https://golang.org/)
 [![React](https://badges.aleen42.com/src/react.svg)](https://reactjs.org/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/97a17c2e-672a-4d79-a753-a255a72bc8ef/deploy-status)](https://app.netlify.com/sites/rideshare-se/deploys)
 [![Website cv.lbesson.qc.to](https://img.shields.io/website-up-down-green-red/http/cv.lbesson.qc.to.svg)](https://rideshare-se.netlify.app/)
+
 
 # Rideshare
 
