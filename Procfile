@@ -1,0 +1,1 @@
+web: sh -c 'cd backend && ls && cp .env bin/ && bin/backend'

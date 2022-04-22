@@ -4,45 +4,65 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
-    # service containers to run with `postgres-job`
-    services:
-      # label used to access the service container
-      postgres:
-        # Docker Hub image
-        image: postgres:latest
-        env:
-          POSTGRES_DB: postride
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_PORT: 5432
-          POSTGRES_USER: postgres
     steps:
-      - name: Install PostgreSQL client
-        run: |
-          apt-get update
-          apt-get install --yes postgresql-client
-
-      # queries database with postgres client
-      - name: Query database
-        run: psql -h postgres -d postgres_db -U postgres_user
-        env:
-          # postgress password is required; alternatively, you can run:
-          # `PGPASSWORD=postgres_password psql ...`
-          PGPASSWORD: postgres_password
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Use Golang 17.x
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v3 
+      - run: cd backend && go test
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
-          go-version: '^1.13.1'
-      - run: cd backend && go install && go run main.go
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          args: deploy --dir=build --prod
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: 'rideshare-se'
-          heroku_email: 'gvskalyan2@gmail.com'
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "rideshare-se" #Must be unique in Heroku
+          heroku_email: "gvskalyan2@gmail.com"
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     # service containers to run with `postgres-job`
+#     services:
+#       # label used to access the service container
+#       postgres:
+#         # Docker Hub image
+#         image: postgres:latest
+#         env:
+#           POSTGRES_DB: postride
+#           POSTGRES_PASSWORD: postgres
+#           POSTGRES_PORT: 5432
+#           POSTGRES_USER: postgres
+#     steps:
+#       - name: Install PostgreSQL client
+#         run: |
+#           apt-get update
+#           apt-get install --yes postgresql-client
+
+#       # queries database with postgres client
+#       - name: Query database
+#         run: psql -h postgres -d postgres_db -U postgres_user
+#         env:
+#           # postgress password is required; alternatively, you can run:
+#           # `PGPASSWORD=postgres_password psql ...`
+#           PGPASSWORD: postgres_password
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+#       - name: Use Golang 17.x
+#         uses: actions/setup-go@v3
+#         with:
+#           go-version: '^1.13.1'
+#       - run: cd backend && go install && go run main.go
+#       - name: Deploy to Heroku
+#         uses: akhileshns/heroku-deploy@v3.12.12
+#         with:
+#           args: deploy --dir=build --prod
+#           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+#           heroku_app_name: 'rideshare-se'
+#           heroku_email: 'gvskalyan2@gmail.com'
