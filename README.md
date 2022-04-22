@@ -1,3 +1,6 @@
+![CI/CD](https://github.com/gvskalyan/rideshare/actions/workflows/production.yml/badge.svg)
+[![Go](https://img.shields.io/badge/--00ADD8?logo=go&logoColor=ffffff)](https://golang.org/)
+
 # Rideshare
 
 ## Description
