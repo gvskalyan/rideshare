@@ -24,7 +24,7 @@ A backend search engine will match the need of the rider to all the ride provide
 
 ## Deployment Link
 
-The Application is deployed at - https://rideshare-se.netlify.app/
+The Application is deployed at - https://rideshare-se.netlify.app/  (**Work in progress**)
 
 ## [Sprint 4 Project Board](https://github.com/gvskalyan/rideshare/projects/4)
 
