@@ -15,6 +15,6 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	}
 
 	http.SetCookie(w, cookie)
-	var resp = map[string]interface{}{"message": "logged out success"}
+	var resp = map[string]interface{}{"message": "You have been successfully Logged out"}
 	json.NewEncoder(w).Encode(resp)
 }
