@@ -16,12 +16,11 @@ jobs:
       - name: Use Golang 17.x
         uses: actions/setup-go@v3 
       - run: cd backend && go test
-
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        - uses: actions/checkout@v1
+        uses: actions/checkout@v1
       - name: Push to Heroku
         run: git push -f https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_APP_STAGING }}.git origin/master:master
 
