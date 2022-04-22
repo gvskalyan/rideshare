@@ -1,12 +1,13 @@
 ![CI/CD](https://github.com/gvskalyan/rideshare/actions/workflows/production.yml/badge.svg)
-[![Go](https://img.shields.io/badge/--00ADD8?logo=go&logoColor=ffffff)](https://golang.org/)
-[![Heroku](https://heroku-badge.herokuapp.com/?app=rideshare-se)]
+[![Go](https://badges.aleen42.com/src/golang.svg)](https://golang.org/)
+[![React](https://badges.aleen42.com/src/react.svg)](https://reactjs.org/)
 
 # Rideshare
 
 ## Description
 
-The project aims to provide a web application for people to better share rides between major cities. As the popularity of rideshare raises, it is paramount to have suitable platforms for both the rideshare seekers and providers to connect. Our goal is to build a web application that allows such connection to be formed seamlessly and instantaneously. Our website will be fitted with features such as a signup page, a user login, and a search engine. Both the riders and the drivers will sign up for the same type of account. Afterwards they can login to their account and choose to either post a ride or signup for a ride. Drivers will need to provide information such as the time and route of the ride and the price per person for the riders. These data will then be entered into our database. Riders will be able to search rides posted on our website based on one or more of the following criteria: date, time, departure point, and destination. They can also use filters to narrow down their selections. Our Front-End development will utilize React, and our Back-End and database will be encoded using Golang. 
+The project aims to provide a web application for people to better share rides between major cities. As the popularity of rideshare raises, it is paramount to have suitable platforms for both the rideshare seekers and providers to connect. Our goal is to build a web application that allows such connection to be formed seamlessly and instantaneously. Our website will be fitted with features such as a signup page, a user login, and a search engine. Both the riders and the drivers will sign up for the same type of account. Afterwards they can login to their account and choose to either post a ride or signup for a ride.
+Drivers will need to provide information such as the time and route of the ride and the price per person for the riders. These data will then be entered into our database. Riders will be able to search rides posted on our website based on one or more of the following criteria: date, time, departure point, and destination. They can also use filters to narrow down their selections. Our Front-End development will utilize React, and our Back-End and database will be encoded using Golang. 
 
  ## Technologies Involved
   - [React](https://reactjs.org/)
@@ -18,6 +19,8 @@ The project aims to provide a web application for people to better share rides b
 - [Sprint3](./Sprint3.md)
 - [Sprint2](./Sprint2.md)
 - [Sprint1](./Sprint1.md)
+
+The sprint task board is available at - https://github.com/gvskalyan/rideshare/projects
 
  ## Team Members
  
