@@ -31,7 +31,7 @@ The sprint task board is available at - https://github.com/gvskalyan/rideshare/p
 
  ### Frontend Developers
   - Pramod Kumar Varma Manthena   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  - &emsp; [pkvarma222](https://github.com/pkvarma222)
-  - Ruiyang Li &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; - &emsp; [ruiyangl](https://github.com/ruiyangl)
+  - Ruiyang Li &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; - &emsp; [ruiyangl](https://github.com/ruiyangl)
   - Riyaz Basha Shaik (From 24th March, 2022) &emsp;&nbsp; - &emsp; [skriyaz95](https://github.com/skriyaz95)
 
   
