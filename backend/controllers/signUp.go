@@ -27,8 +27,28 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	createdUser := db.Create(user)
 	var errMessage = createdUser.Error
 
+	//
+	//if the user is creation is not successful
+	// then we throw an error message
+	// it might be due to creating an account
+	// with the existing mail
+	//
+	//
 	if createdUser.Error != nil {
 		fmt.Println(errMessage)
+		var resp1= map[string]interface{}{"message": "Error creating your account. There exists some account associated with your email. Please try with different email."}
+		json.NewEncoder(w).Encode(resp1)
+
 	}
-	json.NewEncoder(w).Encode(createdUser)
+	// if the user creation is successful then we show a message 
+	// user is successfully created
+
+
+
+
+	if createdUser.Error==nil{
+	var resp = map[string]interface{}{"message": "Hi  "+ user.Name +"  your rideshare account has been successfully created"}
+	json.NewEncoder(w).Encode(resp)
+	}
+	
 }

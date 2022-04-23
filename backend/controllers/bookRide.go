@@ -36,6 +36,9 @@ func BookRide(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var usr models.RideDetails
+
+	// var usr1 models.RideDetails
+	// db.Model(usr1).Where("ride_id = ?", data["RideID"]).Update("status", "1")
 	db.Model(usr).Where("ride_id = ?", data["RideID"]).Update("status", "1")
 
 	if data["UsereMail"] == nil {
