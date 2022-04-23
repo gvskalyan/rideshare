@@ -1,4 +1,4 @@
-//const SERVER_URL = ''
+//const SERVER_URL = 'http://localhost:8080'
 const SERVER_URL = 'https://rideshare-se.herokuapp.com'
 
 const ENDPOINTS = {
