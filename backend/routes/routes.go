@@ -15,7 +15,7 @@ func Controller() {
 	// r.Use(CommonMiddleware)
 
 	cors := h.CORS(
-		h.AllowedOrigins([]string{"*"}),
+		h.AllowedOrigins([]string{"http://localhost:3000", "https://rideshare-se.netlify.app"}),
 		h.AllowedHeaders([]string{"accept", "origin", "Content-Type", "Authorization"}),
 		h.AllowedMethods([]string{"GET", "HEAD", "POST", "PUT", "OPTIONS"}),
 		h.AllowCredentials(),
@@ -31,7 +31,7 @@ func Controller() {
 	r.HandleFunc("/searcharide", controllers.SearchARide).Methods("POST")
 
 	r.HandleFunc("/bookride", controllers.BookRide).Methods("POST")
-	r.HandleFunc("/history", controllers.RideHistory).Methods("POST")
+	r.HandleFunc("/history", controllers.RideHistory).Methods("GET")
 
 	// Auth route
 	s := r.PathPrefix("/auth").Subrouter()

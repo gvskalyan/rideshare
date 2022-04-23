@@ -73,19 +73,13 @@ class MyComponent extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.searchRide();
+        this.rideHistory();
     }
 
-    searchRide = () => {
-        const search = `{
-        "FromCity": "Gainesville",
-        "ToCity": "Orlando",
-        "StartTime": ""
-        }`;
-
-        data.searcharide(search).then(res => {
+    rideHistory = () => {
+        data.rideHistory().then(res => {
             this.setState({
-                rides: res.Value
+                rides: res
             });
             console.log(this.state.rides);
         });
@@ -165,6 +159,8 @@ class MyComponent extends Component {
                     </div>
                 </Section>
                 <Container maxWidth="md">
+                    <h2> Ride History: </h2>
+                    <br/>
                     {this.state.rides.map((ride) => (
                         <Box mb={1} key={ride.ID}>
                             <Card sx={{ maxWidth: 345 }}>
@@ -189,9 +185,6 @@ class MyComponent extends Component {
                                         From: {ride.fromCity}
                                         &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
                                         To: {ride.toCity}
-                                    </Typography>
-                                    <Typography sx={{mb: 1}} color="text.secondary">
-                                        RideID - {ride.RideID}
                                     </Typography>
                                     <Typography variant="body2">
                                         Price - ${ride.priceperseat}

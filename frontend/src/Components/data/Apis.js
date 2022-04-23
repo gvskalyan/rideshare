@@ -8,11 +8,14 @@ const ENDPOINTS = {
     searcharide: () => '/searcharide',
     bookaride: () => '/bookride',
     getUser: () => '/auth/user',
-    logout: () => '/logout'
+    logout: () => '/logout',
+    rideHistory: () => '/history'
 }
 
 const getRequest = (url, resolve, reject) => {
-    fetch(url).then(response => {
+    fetch(url, {
+        credentials: 'include'
+    }).then(response => {
         if (response.status >= 200 && response.status <= 299) {
             response.json().then(result => {
                 resolve(result)
@@ -30,7 +33,8 @@ const postRequest = (url, data, resolve, reject) => {
             'Content-Type': 'application/json'
         },
         method: 'POST',
-        body: data
+        body: data,
+        credentials: 'include'
     }).then(response => {
         if (response.status >= 200 && response.status <= 299) {
             response.json().then(result => {
@@ -82,6 +86,11 @@ const data = {
     bookaride: (bookRideData) => new Promise((resolve,reject) => {
         const url = `${SERVER_URL}${ENDPOINTS.bookaride()}`
         postRequest(url, bookRideData, resolve, reject)
+    }),
+
+    rideHistory: () => new Promise((resolve,reject) => {
+        const url = `${SERVER_URL}${ENDPOINTS.rideHistory()}`
+        getRequest(url, resolve, reject)
     }),
 }
 
