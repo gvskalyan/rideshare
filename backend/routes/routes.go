@@ -2,23 +2,22 @@ package routes
 
 import (
 	"backend/controllers"
-
 	h "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+	"log"
+	"net/http"
+	"os"
 )
 
-func Handlers() *mux.Router {
+func Controller() {
 
 	r := mux.NewRouter().StrictSlash(true)
 	// r.Use(CommonMiddleware)
 
 	cors := h.CORS(
-		h.AllowedOrigins([]string{"*"}),
-
-		h.AllowedHeaders([]string{"accept", "origin", "X-Requested-With", "x-access-token", "Content-Type", "Authorization"}),
-
+		h.AllowedOrigins([]string{"http://localhost:3000", "https://rideshare-se.netlify.app"}),
+		h.AllowedHeaders([]string{"accept", "origin", "Content-Type", "Authorization"}),
 		h.AllowedMethods([]string{"GET", "HEAD", "POST", "PUT", "OPTIONS"}),
-		h.OptionStatusCode(204),
 		h.AllowCredentials(),
 	)
 
@@ -32,12 +31,15 @@ func Handlers() *mux.Router {
 	r.HandleFunc("/searcharide", controllers.SearchARide).Methods("POST")
 
 	r.HandleFunc("/bookride", controllers.BookRide).Methods("POST")
-	r.HandleFunc("/history", controllers.RideHistory).Methods("POST")
+	r.HandleFunc("/history", controllers.RideHistory).Methods("GET")
 
 	// Auth route
 	s := r.PathPrefix("/auth").Subrouter()
 	s.HandleFunc("/user", controllers.GetUser).Methods("GET")
 	s.HandleFunc("/user", controllers.UpdateUser).Methods("PUT")
+
 	cors(r)
-	return r
+	port := os.Getenv("PORT")
+	log.Printf("Server up on port '%s'", port)
+	log.Fatal(http.ListenAndServe(":"+port, cors(r)))
 }

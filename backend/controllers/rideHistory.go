@@ -34,7 +34,7 @@ func RideHistory(w http.ResponseWriter, r *http.Request) {
 
 	var ridedetails []models.RideDetails
 	if len(rides) > 0 {
-		db.Table("ride_details").Where("ride_id IN (?)", rides).Find(&ridedetails)
+		db.Table("ride_details").Where("id IN (?)", rides).Find(&ridedetails)
 		json.NewEncoder(w).Encode(ridedetails)
 	} else {
 		var resp = map[string]interface{}{"message": "No rides found :)"}

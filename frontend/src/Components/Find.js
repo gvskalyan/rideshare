@@ -78,7 +78,7 @@ class MyComponent extends Component {
 
         data.searcharide(search).then(res => {
             this.setState({
-                rides: res.Value
+                rides: res
             });
             console.log(this.state.rides);
         });
@@ -105,7 +105,7 @@ class MyComponent extends Component {
         }`;
 
         data.bookaride(booking).then(res => {
-            this.OpenAlert("Ride booked successfully. Details can be seen in Ride History section of homepage");
+            this.OpenAlert("Ride booked successfully. Details can be seen in Profile Page");
             setTimeout(() => {
                 window.location = 'home';
             }, 3000);
