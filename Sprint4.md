@@ -22,10 +22,6 @@ After logging into the account, the user can choose to either search a ride or p
 A backend search engine will match the need of the rider to all the ride providers.
 <br/>
 
-## Deployment Link
-
-The Application is deployed at - https://rideshare-se.netlify.app/  (**Work in progress**)
-
 ## [Sprint 4 Project Board](https://github.com/gvskalyan/rideshare/projects/4)
 
 ## Work Done / Deliverables
@@ -108,6 +104,8 @@ https://user-images.githubusercontent.com/42022935/164538675-6b142d6b-dcf2-436f-
 - Though Backend accepts few variables the frontend might not send all those since they are first written anticipating bigger features.
 - The error messages and codes might not exactly be indicative of actual error that occured.
 - SMTP password should be set in .env file in backend to send confirmation mail (with ride details) after booking.
+
+
 ## To Do/ Roadmap
 
 - Add no of seats available to the application
